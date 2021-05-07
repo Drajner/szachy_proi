@@ -3,8 +3,9 @@
 #include <vector>
 #include <string>
 #include "position.h"
+#include "Chessboard.h"
 
-#define Chessboard int // Placeholder so there aren't any arrors
+//#define Chessboard int // Placeholder so there aren't any arrors
 
 // Abstract representation of a chess piece
 class Piece {
