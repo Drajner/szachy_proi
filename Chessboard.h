@@ -4,8 +4,7 @@
 #include<memory>
 #include<iostream>
 #include "piece.h"
-
-#define Player int
+#include "Player.h"
 
 class Chessboard
 {
