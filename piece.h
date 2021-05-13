@@ -5,7 +5,7 @@
 #include "position.h"
 #include "Chessboard.h"
 
-//#define Chessboard int // Placeholder so there aren't any arrors
+class Chessboard;
 
 // Abstract representation of a chess piece
 class Piece {
@@ -15,6 +15,7 @@ private:
 	// Color of the piece. 1 is white, 0 is black
 	bool color;
 
+	// TODO: change to virtual methods
 	// Full piece name, to be set in the constructor of an inheriting piece
 	std::string fullName;
 	// Short, 1 char representation (for display purposes in the << operator), to be set in the constructor of an inheriting piece
@@ -54,7 +55,7 @@ public:
 	 * @param chessboard Chessboard the piece will move on. 
 	 * @param newPosition New position for this piece
 	 */
-	void move_to(const Chessboard& chessboard, Position newPosition);
+	void move_to(Chessboard& chessboard, Position newPosition);
 
 	/**
 	 * Compares two chess pieces by name, color and position

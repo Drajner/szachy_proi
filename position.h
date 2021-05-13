@@ -10,13 +10,13 @@ public:
 	Position(int posX, int posY);
 
 	// Sets the horizontal position. Will clamp it in the 1-8 range
-	void set_x(int newX);
+	void x(int newX);
 	// Sets the vertical position. Will clamp it in the 1-8 range
-	void set_y(int newY);
+	void y(int newY);
 	// Gets the horizontal position in int form
-	int get_x() const;
+	int x() const;
 	// Gets the vertical position in int form
-	int get_y() const;
+	int y() const;
 
 	// Compares two positions by x and y
 	bool operator==(const Position& other) const;

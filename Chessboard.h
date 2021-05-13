@@ -1,11 +1,13 @@
 #pragma once
 
-#include<vector>
-#include<memory>
-#include<iostream>
+#include <vector>
+#include <memory>
+#include <iostream>
 #include "piece.h"
 #include "Player.h"
 
+
+// TODO: change first and second to colors
 class Chessboard
 {
 private:

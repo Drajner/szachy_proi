@@ -9,6 +9,8 @@ class Player
 private:
 	bool color; // 0 for black, 1 for white
 	std::string name;
+
+	// TODO: Change to game/chessboard reference?
 	std::vector<std::unique_ptr<Piece>> pieces;
 public:
 	// Player class constructor

@@ -1,14 +1,14 @@
 #pragma once
 #include "Chessboard.h"
 #include "Player.h"
-
+#include <memory>
 
 class Game
 {
 private:
 	Chessboard chessboard_;
-	Player firstPlayer_;
-	Player secondPlayer_;
+	std::unique_ptr<Player> firstPlayer_;
+	std::unique_ptr<Player> secondPlayer_;
 	Player& currentPlayer_;
 
 	//Starts a player versus player game
