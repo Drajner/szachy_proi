@@ -6,7 +6,6 @@
 #include "piece.h"
 #include "Player.h"
 
-
 // TODO: change first and second to colors
 class Chessboard
 {
@@ -22,10 +21,10 @@ public:
 	Chessboard(std::vector<std::unique_ptr<Piece>> firstPlayerPieces, std::vector<std::unique_ptr<Piece>> secondPlayerPieces);
 
 	//Getter to first player pieces vector
-	std::vector<std::unique_ptr<Piece>> firstPlayerPieces();
+	std::vector<std::unique_ptr<Piece>> firstPlayerPieces() const;
 
 	//Getter to first player pieces vector
-	std::vector<std::unique_ptr<Piece>> secondPlayerPieces();
+	std::vector<std::unique_ptr<Piece>> secondPlayerPieces() const;
 
 	//Removes given piece from chessboard
 	void removePiece(Piece& piece, Player& player);

@@ -140,11 +140,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="piece.cpp" />
+    <ClCompile Include="piece_types.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Chessboard.h" />
+    <ClInclude Include="color.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="piece.h" />
+    <ClInclude Include="piece_types.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="position.h" />
   </ItemGroup>

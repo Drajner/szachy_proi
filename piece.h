@@ -3,23 +3,18 @@
 #include <vector>
 #include <string>
 #include "position.h"
+#include "color.h"
 #include "Chessboard.h"
 
 class Chessboard;
 
 // Abstract representation of a chess piece
 class Piece {
-private:
+protected:
 	// Position on the chessboard
-	Position position;
-	// Color of the piece. 1 is white, 0 is black
-	bool color;
-
-	// TODO: change to virtual methods
-	// Full piece name, to be set in the constructor of an inheriting piece
-	std::string fullName;
-	// Short, 1 char representation (for display purposes in the << operator), to be set in the constructor of an inheriting piece
-	char chessboardRepresentation;
+	Position position_;
+	// Color of the piece
+	Color color_;
 public:
 	/**
 	 * Creates a new chess piece
@@ -27,19 +22,18 @@ public:
 	 * @param startPosition Starting position
 	 * @param isWhite Is the piece part of the white team? 
 	 */
-	Piece(Position startPosition, bool isWhite);
+	Piece(Position startPosition, Color color);
 
 	// Checks if this piece is part of the white team
-	bool is_white() const;
+	Color color() const;
 
-	// Checks if this piece is part of the black team
-	bool is_black() const;
+	Position position() const;
 
-	// Gets the full name of this piece
-	std::string get_full_name() const;
+	// Full piece name, to be set in the constructor of an inheriting piece
+	virtual std::string full_name() const = 0;
 
-	// Gets the short representation
-	char get_char_representation() const;
+	// Short, 1 char representation (for display purposes in the << operator), to be set in the constructor of an inheriting piece
+	virtual char chessboard_representation() const = 0;
 
 	/**
 	 * Gets the possible moves of this piece on a chessboard

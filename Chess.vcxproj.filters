@@ -13,10 +13,22 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Pliki nagłówkowe\pieces">
+      <UniqueIdentifier>{e72d9717-cc84-4cc8-ae36-89dbade01968}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\pieces">
+      <UniqueIdentifier>{ab092e69-44d1-497c-ac4a-134e1e40633c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="piece.cpp">
+      <Filter>Pliki źródłowe\pieces</Filter>
+    </ClCompile>
+    <ClCompile Include="piece_types.cpp">
+      <Filter>Pliki źródłowe\pieces</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -34,6 +46,12 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="color.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="piece_types.h">
+      <Filter>Pliki nagłówkowe\pieces</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
