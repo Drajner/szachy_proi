@@ -10,8 +10,8 @@
 class Chessboard
 {
 private:
-	std::vector<std::unique_ptr<Piece>> firstPlayerPieces_;
-	std::vector<std::unique_ptr<Piece>> secondPlayerPieces_;
+	std::vector<std::unique_ptr<Piece>> whitePieces_;
+	std::vector<std::unique_ptr<Piece>> blackPieces_;
 public:
 
 	//Creates a new chessboard with default Pieces setup
@@ -21,13 +21,15 @@ public:
 	Chessboard(std::vector<std::unique_ptr<Piece>> firstPlayerPieces, std::vector<std::unique_ptr<Piece>> secondPlayerPieces);
 
 	//Getter to first player pieces vector
-	std::vector<std::unique_ptr<Piece>> firstPlayerPieces() const;
+	std::vector<std::unique_ptr<Piece>> whitePieces() const;
 
 	//Getter to first player pieces vector
-	std::vector<std::unique_ptr<Piece>> secondPlayerPieces() const;
+	std::vector<std::unique_ptr<Piece>> blackPieces() const;
 
 	//Removes given piece from chessboard
 	void removePiece(Piece& piece, Player& player);
+
+	Piece& getPiece(const Position& position);
 
 	friend std::ostream& operator<<(std::ostream& os, const Chessboard& chessboard);
 
