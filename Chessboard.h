@@ -33,6 +33,4 @@ public:
 	Piece& getPiece(const Position& position);
 
 	friend std::ostream& operator<<(std::ostream& os, const Chessboard& chessboard);
-
-	~Chessboard();
 };
