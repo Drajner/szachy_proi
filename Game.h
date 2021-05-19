@@ -9,7 +9,7 @@ private:
 	Chessboard chessboard_;
 	std::unique_ptr<Player> firstPlayer_;
 	std::unique_ptr<Player> secondPlayer_;
-	Player& currentPlayer_;
+	Player* currentPlayer_ = nullptr;
 	int round_;
 
 	//Starts a player versus player game
@@ -19,10 +19,10 @@ private:
 	void playPvB();
 public:
 	//Creates game object with given players and chessboard
-	Game(Chessboard chessboard, Player firstPlayer, Player secondPlayer);
+	Game(Chessboard chessboard, Player* firstPlayer, Player* secondPlayer);
 
 	//Chooses who will start the game
-	Player& rollOrder();
+	void rollOrder();
 	
 	int round();
 

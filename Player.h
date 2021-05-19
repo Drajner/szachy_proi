@@ -24,7 +24,8 @@ public:
 
 	// gets all possible movements from individual pieces
 	std::vector<Position> allPossibleMoves();
-	
 
+	bool operator==(const Player& player);
+	
 };
 
