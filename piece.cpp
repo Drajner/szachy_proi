@@ -16,7 +16,7 @@ Position Piece::position() const {
 void Piece::move_to(Chessboard& chessboard, Position newPosition) {
 	position_ = newPosition;
 
-	std::vector<std::unique_ptr<Piece>> enemyPieces = color() == White ? chessboard.blackPieces() : chessboard.whitePieces();
+	std::vector<std::shared_ptr<Piece>> enemyPieces = color() == White ? chessboard.blackPieces() : chessboard.whitePieces();
 
 	for (auto piece = enemyPieces.begin(); piece != enemyPieces.end(); piece++) // TODO: Change to getting the pieces by color
 	{

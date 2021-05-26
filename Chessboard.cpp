@@ -6,22 +6,22 @@
 
 Chessboard::Chessboard()
 {
-	std::unique_ptr<Piece> rook1b = std::unique_ptr<Piece>(new Rook(Position(1, 1), Black));
-	std::unique_ptr<Piece> knight1b = std::unique_ptr<Piece>(new Knight(Position(1, 2), Black));
-	std::unique_ptr<Piece> bishop1b = std::unique_ptr<Piece>(new Bishop(Position(1, 3), Black));
-	std::unique_ptr<Piece> queen1b = std::unique_ptr<Piece>(new Queen(Position(1, 4), Black));
-	std::unique_ptr<Piece> king1b = std::unique_ptr<Piece>(new King(Position(1, 5), Black));
-	std::unique_ptr<Piece> bishop2b = std::unique_ptr<Piece>(new Bishop(Position(1, 6), Black));
-	std::unique_ptr<Piece> knight2b = std::unique_ptr<Piece>(new Knight(Position(1, 7), Black));
-	std::unique_ptr<Piece> rook2b = std::unique_ptr<Piece>(new Rook(Position(1, 8), Black));
-	std::unique_ptr<Piece> pawn1b = std::unique_ptr<Piece>(new Pawn(Position(2, 1), Black));
-	std::unique_ptr<Piece> pawn2b = std::unique_ptr<Piece>(new Pawn(Position(2, 2), Black));
-	std::unique_ptr<Piece> pawn3b = std::unique_ptr<Piece>(new Pawn(Position(2, 3), Black));
-	std::unique_ptr<Piece> pawn4b = std::unique_ptr<Piece>(new Pawn(Position(2, 4), Black));
-	std::unique_ptr<Piece> pawn5b = std::unique_ptr<Piece>(new Pawn(Position(2, 5), Black));
-	std::unique_ptr<Piece> pawn6b = std::unique_ptr<Piece>(new Pawn(Position(2, 6), Black));
-	std::unique_ptr<Piece> pawn7b = std::unique_ptr<Piece>(new Pawn(Position(2, 7), Black));
-	std::unique_ptr<Piece> pawn8b = std::unique_ptr<Piece>(new Pawn(Position(2, 8), Black));
+	std::shared_ptr<Piece> rook1b = std::shared_ptr<Piece>(new Rook(Position(1, 1), Black));
+	std::shared_ptr<Piece> knight1b = std::shared_ptr<Piece>(new Knight(Position(1, 2), Black));
+	std::shared_ptr<Piece> bishop1b = std::shared_ptr<Piece>(new Bishop(Position(1, 3), Black));
+	std::shared_ptr<Piece> queen1b = std::shared_ptr<Piece>(new Queen(Position(1, 4), Black));
+	std::shared_ptr<Piece> king1b = std::shared_ptr<Piece>(new King(Position(1, 5), Black));
+	std::shared_ptr<Piece> bishop2b = std::shared_ptr<Piece>(new Bishop(Position(1, 6), Black));
+	std::shared_ptr<Piece> knight2b = std::shared_ptr<Piece>(new Knight(Position(1, 7), Black));
+	std::shared_ptr<Piece> rook2b = std::shared_ptr<Piece>(new Rook(Position(1, 8), Black));
+	std::shared_ptr<Piece> pawn1b = std::shared_ptr<Piece>(new Pawn(Position(2, 1), Black));
+	std::shared_ptr<Piece> pawn2b = std::shared_ptr<Piece>(new Pawn(Position(2, 2), Black));
+	std::shared_ptr<Piece> pawn3b = std::shared_ptr<Piece>(new Pawn(Position(2, 3), Black));
+	std::shared_ptr<Piece> pawn4b = std::shared_ptr<Piece>(new Pawn(Position(2, 4), Black));
+	std::shared_ptr<Piece> pawn5b = std::shared_ptr<Piece>(new Pawn(Position(2, 5), Black));
+	std::shared_ptr<Piece> pawn6b = std::shared_ptr<Piece>(new Pawn(Position(2, 6), Black));
+	std::shared_ptr<Piece> pawn7b = std::shared_ptr<Piece>(new Pawn(Position(2, 7), Black));
+	std::shared_ptr<Piece> pawn8b = std::shared_ptr<Piece>(new Pawn(Position(2, 8), Black));
 
 	blackPieces_.push_back(std::move(rook1b));
 	blackPieces_.push_back(std::move(knight1b));
@@ -40,22 +40,22 @@ Chessboard::Chessboard()
 	blackPieces_.push_back(std::move(pawn7b));
 	blackPieces_.push_back(std::move(pawn8b));
 
-	std::unique_ptr<Piece> rook1w = std::unique_ptr<Piece>(new Rook(Position(8, 1), White));
-	std::unique_ptr<Piece> knight1w = std::unique_ptr<Piece>(new Knight(Position(8, 2), White));
-	std::unique_ptr<Piece> bishop1w = std::unique_ptr<Piece>(new Bishop(Position(8, 3), White));
-	std::unique_ptr<Piece> queen1w = std::unique_ptr<Piece>(new Queen(Position(8, 4), White));
-	std::unique_ptr<Piece> king1w = std::unique_ptr<Piece>(new King(Position(8, 5), White));
-	std::unique_ptr<Piece> bishop2w = std::unique_ptr<Piece>(new Bishop(Position(8, 6), White));
-	std::unique_ptr<Piece> knight2w = std::unique_ptr<Piece>(new Knight(Position(8, 7), White));
-	std::unique_ptr<Piece> rook2w = std::unique_ptr<Piece>(new Rook(Position(8, 8), White));
-	std::unique_ptr<Piece> pawn1w = std::unique_ptr<Piece>(new Pawn(Position(7, 1), White));
-	std::unique_ptr<Piece> pawn2w = std::unique_ptr<Piece>(new Pawn(Position(7, 2), White));
-	std::unique_ptr<Piece> pawn3w = std::unique_ptr<Piece>(new Pawn(Position(7, 3), White));
-	std::unique_ptr<Piece> pawn4w = std::unique_ptr<Piece>(new Pawn(Position(7, 4), White));
-	std::unique_ptr<Piece> pawn5w = std::unique_ptr<Piece>(new Pawn(Position(7, 5), White));
-	std::unique_ptr<Piece> pawn6w = std::unique_ptr<Piece>(new Pawn(Position(7, 6), White));
-	std::unique_ptr<Piece> pawn7w = std::unique_ptr<Piece>(new Pawn(Position(7, 7), White));
-	std::unique_ptr<Piece> pawn8w = std::unique_ptr<Piece>(new Pawn(Position(7, 8), White));
+	std::shared_ptr<Piece> rook1w = std::shared_ptr<Piece>(new Rook(Position(8, 1), White));
+	std::shared_ptr<Piece> knight1w = std::shared_ptr<Piece>(new Knight(Position(8, 2), White));
+	std::shared_ptr<Piece> bishop1w = std::shared_ptr<Piece>(new Bishop(Position(8, 3), White));
+	std::shared_ptr<Piece> queen1w = std::shared_ptr<Piece>(new Queen(Position(8, 4), White));
+	std::shared_ptr<Piece> king1w = std::shared_ptr<Piece>(new King(Position(8, 5), White));
+	std::shared_ptr<Piece> bishop2w = std::shared_ptr<Piece>(new Bishop(Position(8, 6), White));
+	std::shared_ptr<Piece> knight2w = std::shared_ptr<Piece>(new Knight(Position(8, 7), White));
+	std::shared_ptr<Piece> rook2w = std::shared_ptr<Piece>(new Rook(Position(8, 8), White));
+	std::shared_ptr<Piece> pawn1w = std::shared_ptr<Piece>(new Pawn(Position(7, 1), White));
+	std::shared_ptr<Piece> pawn2w = std::shared_ptr<Piece>(new Pawn(Position(7, 2), White));
+	std::shared_ptr<Piece> pawn3w = std::shared_ptr<Piece>(new Pawn(Position(7, 3), White));
+	std::shared_ptr<Piece> pawn4w = std::shared_ptr<Piece>(new Pawn(Position(7, 4), White));
+	std::shared_ptr<Piece> pawn5w = std::shared_ptr<Piece>(new Pawn(Position(7, 5), White));
+	std::shared_ptr<Piece> pawn6w = std::shared_ptr<Piece>(new Pawn(Position(7, 6), White));
+	std::shared_ptr<Piece> pawn7w = std::shared_ptr<Piece>(new Pawn(Position(7, 7), White));
+	std::shared_ptr<Piece> pawn8w = std::shared_ptr<Piece>(new Pawn(Position(7, 8), White));
 
 	whitePieces_.push_back(std::move(rook1w));
 	whitePieces_.push_back(std::move(knight1w));
@@ -75,18 +75,18 @@ Chessboard::Chessboard()
 	whitePieces_.push_back(std::move(pawn8w));
 }
 
-Chessboard::Chessboard(std::vector<std::unique_ptr<Piece>> whitePieces, std::vector<std::unique_ptr<Piece>> blackPieces)
+Chessboard::Chessboard(std::vector<std::shared_ptr<Piece>> whitePieces, std::vector<std::shared_ptr<Piece>> blackPieces)
 {
 	whitePieces_ = std::move(whitePieces);
 	blackPieces_ = std::move(blackPieces);
 }
 
-std::vector<std::unique_ptr<Piece>> const& Chessboard::whitePieces() const
+std::vector<std::shared_ptr<Piece>> const& Chessboard::whitePieces() const
 {
 	return whitePieces_;
 }
 
-std::vector<std::unique_ptr<Piece>> const& Chessboard::blackPieces() const
+std::vector<std::shared_ptr<Piece>> const& Chessboard::blackPieces() const
 {
 	return blackPieces_;
 }

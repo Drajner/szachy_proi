@@ -12,8 +12,8 @@
 class Chessboard
 {
 private:
-	std::vector<std::unique_ptr<Piece>> whitePieces_;
-	std::vector<std::unique_ptr<Piece>> blackPieces_;
+	std::vector<std::shared_ptr<Piece>> whitePieces_;
+	std::vector<std::shared_ptr<Piece>> blackPieces_;
 	int round_;
 public:
 
@@ -21,13 +21,13 @@ public:
 	Chessboard();
 
 	//Creates a new chessboard with custom Pieces setup
-	Chessboard(std::vector<std::unique_ptr<Piece>> firstPlayerPieces, std::vector<std::unique_ptr<Piece>> secondPlayerPieces);
+	Chessboard(std::vector<std::shared_ptr<Piece>> firstPlayerPieces, std::vector<std::shared_ptr<Piece>> secondPlayerPieces);
 
 	//Getter to first player pieces vector
-	std::vector<std::unique_ptr<Piece>> const& whitePieces() const;
+	std::vector<std::shared_ptr<Piece>> const& whitePieces() const;
 
 	//Getter to first player pieces vector
-	std::vector<std::unique_ptr<Piece>> const& blackPieces() const;
+	std::vector<std::shared_ptr<Piece>> const& blackPieces() const;
 
 	//Removes given piece from chessboard
 	void removePiece(Piece& piece, Color& color);
