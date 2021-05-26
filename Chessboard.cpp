@@ -2,7 +2,7 @@
 
 Chessboard::Chessboard()
 {
-	//inheriting classes needed
+	
 }
 
 Chessboard::Chessboard(std::vector<std::unique_ptr<Piece>> whitePieces, std::vector<std::unique_ptr<Piece>> blackPieces)

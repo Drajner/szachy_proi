@@ -10,7 +10,6 @@ private:
 	std::unique_ptr<Player> firstPlayer_;
 	std::unique_ptr<Player> secondPlayer_;
 	Player* currentPlayer_ = nullptr;
-	int round_;
 
 	//Starts a player versus player game
 	void playPvP();
@@ -23,8 +22,6 @@ public:
 
 	//Chooses who will start the game
 	void rollOrder();
-	
-	int round();
 
 	//Swaps current player
 	void swap();

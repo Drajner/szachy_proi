@@ -22,11 +22,6 @@ void Game::rollOrder()
 	}
 }
 
-int Game::round()
-{
-	return round_;
-}
-
 void Game::swap()
 {
 	if (*currentPlayer_ == *firstPlayer_)

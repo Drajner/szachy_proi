@@ -5,6 +5,7 @@
 #include <iostream>
 #include "piece.h"
 #include "Player.h"
+#include "piece_types.h"
 #include "color.h"
 
 // TODO: change first and second to colors
@@ -13,6 +14,7 @@ class Chessboard
 private:
 	std::vector<std::unique_ptr<Piece>> whitePieces_;
 	std::vector<std::unique_ptr<Piece>> blackPieces_;
+	int round_;
 public:
 
 	//Creates a new chessboard with default Pieces setup
@@ -31,6 +33,8 @@ public:
 	void removePiece(Piece& piece, Color& color);
 
 	Piece& getPiece(const Position& position);
+
+	int round();
 
 	friend std::ostream& operator<<(std::ostream& os, const Chessboard& chessboard);
 };
