@@ -18,7 +18,8 @@ private:
 	void playPvB();
 public:
 	//Creates game object with given players and chessboard
-	Game(Chessboard chessboard, Player* firstPlayer, Player* secondPlayer);
+	//Game(Chessboard chessboard, Player* firstPlayer, Player* secondPlayer);
+	Game();
 
 	//Chooses who will start the game
 	void rollOrder();

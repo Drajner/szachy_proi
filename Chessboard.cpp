@@ -1,5 +1,9 @@
 #include "Chessboard.h"
 
+#define BLACK_SQ 0xFF
+#define WHITE_SQ 0xDB
+
+
 Chessboard::Chessboard()
 {
 	std::unique_ptr<Piece> rook1b = std::unique_ptr<Piece>(new Rook(Position(1, 1), Black));
@@ -147,5 +151,70 @@ void Chessboard::removePiece(Piece& piece, Color& color)
 		auto it = std::find(blackPieces_.begin(), blackPieces_.end(), piece);
 		blackPieces_.erase(it);
 		return;
+	}
+}
+
+
+void Chessboard::printLine(int lineNumber, int firstColor, int secondColor, std::ostream& os) const
+{
+	int squareWidth = 6;
+
+	for (int i = 0; i < squareWidth / 2; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			for (int k = 0; k < squareWidth; k++)
+			{
+				if (i == 1 && k == 3)
+				{
+					if (pieceExists(Position(lineNumber, j * 2)))
+					{
+						os << getPiece(Position(lineNumber, j * 2));
+					}
+					else
+					{
+						os << firstColor;
+					}
+				}
+				else
+				{
+					os << firstColor;
+				}
+			}
+			for (int k = 0; k < squareWidth; k++)
+			{
+				if (i == 1 && k == 3)
+				{
+					if (pieceExists(Position(lineNumber, j * 2+1)))
+					{
+						os << getPiece(Position(lineNumber, j * 2+1));
+					}
+					else
+					{
+						os << secondColor;
+					}
+				}
+				else
+				{
+					os << secondColor;
+				}
+			}
+		}
+	}
+}
+
+std::ostream& operator<<(std::ostream& os, const Chessboard& chessboard)
+{
+	os << "   1     2     3     4     5     6     7     8\n\n";
+	for (int i = 1; i <= 8; i++)
+	{
+		if (i % 2 == 0)
+		{
+			chessboard.printLine(i, BLACK_SQ, WHITE_SQ, os);
+		}
+		else
+		{
+			chessboard.printLine(i, WHITE_SQ, BLACK_SQ, os);
+		}
 	}
 }

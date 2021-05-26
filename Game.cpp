@@ -1,11 +1,15 @@
 #include "Game.h"
 #include <memory>
 
-Game::Game(Chessboard chessboard, Player* firstPlayer, Player* secondPlayer)
+//Game::Game(Chessboard chessboard, Player* firstPlayer, Player* secondPlayer)
+//{
+//	chessboard_ = chessboard;
+//	firstPlayer_ = std::unique_ptr<Player>(firstPlayer);
+//	secondPlayer_ = std::unique_ptr<Player>(secondPlayer);
+//}
+Game::Game()
 {
-	chessboard_ = chessboard;
-	firstPlayer_ = std::unique_ptr<Player>(firstPlayer);
-	secondPlayer_ = std::unique_ptr<Player>(secondPlayer);
+
 }
 
 void Game::rollOrder()
@@ -25,10 +29,10 @@ void Game::swap()
 {
 	if (*currentPlayer_ == *firstPlayer_)
 	{
-		currentPlayer_ == secondPlayer_.get();
+		currentPlayer_ = secondPlayer_.get();
 	}
 	if (*currentPlayer_ == *secondPlayer_)
 	{
-		currentPlayer_ == firstPlayer_.get();
+		currentPlayer_ = firstPlayer_.get();
 	}
 }

@@ -40,5 +40,7 @@ public:
 
 	void incRound();
 
+	void printLine(int lineNumber, int firstColor, int secondColor, std::ostream& os) const; 
+
 	friend std::ostream& operator<<(std::ostream& os, const Chessboard& chessboard);
 };
