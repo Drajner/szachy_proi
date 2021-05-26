@@ -74,4 +74,6 @@ public:
 
 	// Appends the short char representation to the stream
 	friend std::ostream& operator<<(std::ostream& out, const Piece& piece);
+protected:
+	void try_add_movement_option(Position pos, std::vector<Position>& positions, const Chessboard& chessboard) const;
 };

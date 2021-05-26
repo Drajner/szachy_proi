@@ -16,13 +16,21 @@ Position Piece::position() const {
 void Piece::move_to(Chessboard& chessboard, Position newPosition) {
 	position_ = newPosition;
 
-	std::vector<std::unique_ptr<Piece>> enemyPieces = chessboard.firstPlayerPieces();
+	std::vector<std::unique_ptr<Piece>> enemyPieces = color() == White ? chessboard.blackPieces() : chessboard.whitePieces();
 
 	for (auto piece = enemyPieces.begin(); piece != enemyPieces.end(); piece++) // TODO: Change to getting the pieces by color
 	{
 		if ((**piece).position_ == position_)
 		{
 			//chessboard.removePiece((**piece), ); // How do i get the player exactly?
+		}
+	}
+}
+
+void Piece::try_add_movement_option(Position pos, std::vector<Position>& positions, const Chessboard& chessboard) const {
+	if (pos.x() > 0 && pos.x() <= 8 && pos.y() > 0 && pos.y() <= 8) {
+		if (!chessboard.pieceExists(pos) || chessboard.getPiece(pos).color() != color()) {
+			positions.push_back(pos);
 		}
 	}
 }

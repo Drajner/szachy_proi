@@ -8,7 +8,7 @@ std::string Pawn::full_name() const {
 }
 
 char Pawn::chessboard_representation() const {
-	return 'i';
+	return color() == White ? 'p' : 'P';
 }
 
 std::vector<Position> Pawn::possible_moves(const Chessboard& chessboard) const {
@@ -16,7 +16,6 @@ std::vector<Position> Pawn::possible_moves(const Chessboard& chessboard) const {
 	Position pos = position();
 
 	if (color() == White) {
-		
 		if (pos.y() < 8) {
 			possible.push_back(pos + Position(1, 0));
 		}
@@ -26,13 +25,13 @@ std::vector<Position> Pawn::possible_moves(const Chessboard& chessboard) const {
 		}
 
 		auto tryPos = pos + Position(1, -1);
-		if (chessboard.getPiece(tryPos).color() == Black) {
-			possible.push_back(tryPos);
+		if (chessboard.pieceExists(tryPos)) {
+			try_add_movement_option(tryPos, possible, chessboard);
 		}
 
 		tryPos = pos + Position(1, 1);
-		if (chessboard.getPiece(tryPos).color() == Black) {
-			possible.push_back(tryPos);
+		if (chessboard.pieceExists(tryPos)) {
+			try_add_movement_option(tryPos, possible, chessboard);
 		}
 	}
 	else {
@@ -47,17 +46,39 @@ std::vector<Position> Pawn::possible_moves(const Chessboard& chessboard) const {
 
 		auto tryPos = pos + Position(-1, -1);
 
-		if (chessboard.getPiece(tryPos).color() == White) {
-			possible.push_back(tryPos);
+		if (chessboard.pieceExists(tryPos)) {
+			try_add_movement_option(tryPos, possible, chessboard);
 		}
 
 		tryPos = pos + Position(-1, 1);
-		if (chessboard.getPiece(tryPos).color() == White) {
-			possible.push_back(tryPos);
+		if (chessboard.pieceExists(tryPos)) {
+			try_add_movement_option(tryPos, possible, chessboard);
 		}
 	}
+
+	return possible;
 }
 
 void Pawn::on_moved(Position newPosition) {
 	firstMove_ = false;
+}
+
+std::string Knight::full_name() const {
+	return "Knight";
+}
+
+char Knight::chessboard_representation() const {
+	return color() == White ? 'n' : 'N';
+}
+
+std::vector<Position> Knight::possible_moves(const Chessboard& chessboard) const {
+	std::vector<Position> possible;
+	for (int x = -1; x < 1; x += 1) {
+		for (int y = -2; y < 2; y += 4) {
+			try_add_movement_option(position() + Position(x, y), possible, chessboard);
+			try_add_movement_option(position() + Position(y, x), possible, chessboard);
+		}
+	}
+
+	return possible;
 }

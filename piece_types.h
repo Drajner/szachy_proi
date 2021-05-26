@@ -17,6 +17,7 @@ public:
 };
 
 class Knight : public Piece {
+public:
 	Knight(Position startPosition, Color color) : Piece(startPosition, color) {}
 
 	std::string full_name() const override;
@@ -27,6 +28,7 @@ class Knight : public Piece {
 };
 
 class Bishop : public Piece {
+public:
 	Bishop(Position startPosition, Color color) : Piece(startPosition, color) {}
 
 	std::string full_name() const override;
@@ -37,6 +39,7 @@ class Bishop : public Piece {
 };
 
 class Rook : public Piece {
+public:
 	Rook(Position startPosition, Color color) : Piece(startPosition, color) {}
 
 	std::string full_name() const override;
@@ -47,6 +50,7 @@ class Rook : public Piece {
 };
 
 class Queen : public Piece {
+public:
 	Queen(Position startPosition, Color color) : Piece(startPosition, color) {}
 
 	std::string full_name() const override;
@@ -57,6 +61,7 @@ class Queen : public Piece {
 };
 
 class King : public Piece {
+public:
 	King(Position startPosition, Color color) : Piece(startPosition, color) {}
 
 	std::string full_name() const override;
