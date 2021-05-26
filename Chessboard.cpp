@@ -58,6 +58,16 @@ bool Chessboard::pieceExists(const Position& position) const
 	return false;
 }
 
+int Chessboard::round()
+{
+	return round_;
+}
+
+void Chessboard::incRound()
+{
+	round_++;
+}
+
 void Chessboard::removePiece(Piece& piece, Color& color)
 {
 	if (color == White)

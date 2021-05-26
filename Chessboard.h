@@ -38,5 +38,7 @@ public:
 
 	int round();
 
+	void incRound();
+
 	friend std::ostream& operator<<(std::ostream& os, const Chessboard& chessboard);
 };
