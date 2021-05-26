@@ -178,7 +178,7 @@ void Chessboard::removePiece(Piece& piece, Color& color)
 void Chessboard::printLine(int lineNumber, int firstColor, int secondColor, std::ostream& os) const
 {
 	int squareWidth = 6;
-
+	int letters[8] = { 1,2,3,4,5,6,7,8 };
 	for (int i = 0; i < squareWidth / 2; i++)
 	{
 		for (int j = 1; j < 5; j++)
@@ -193,12 +193,12 @@ void Chessboard::printLine(int lineNumber, int firstColor, int secondColor, std:
 					}
 					else
 					{
-						os << firstColor;
+						os << char(firstColor);
 					}
 				}
 				else
 				{
-					os << firstColor;
+					os << char(firstColor);
 				}
 			}
 			for (int k = 0; k < squareWidth; k++)
@@ -211,21 +211,26 @@ void Chessboard::printLine(int lineNumber, int firstColor, int secondColor, std:
 					}
 					else
 					{
-						os << secondColor;
+						os << char(secondColor);
 					}
 				}
 				else
 				{
-					os << secondColor;
+					os << char(secondColor);
 				}
 			}
 		}
+		if (i == 1)
+		{
+			os << "    " << letters[lineNumber - 1];
+		}
+		os << "\n";
 	}
 }
 
 std::ostream& operator<<(std::ostream& os, const Chessboard& chessboard)
 {
-	os << "   1     2     3     4     5     6     7     8\n\n";
+	os << "   A     B     C     D     E     F     G     H\n";
 	for (int i = 1; i <= 8; i++)
 	{
 		if (i % 2 == 0)

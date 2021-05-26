@@ -1,6 +1,6 @@
 #include "Game.h"
+#include "Chessboard.h"
 #include <iostream>
-
 void printLine(std::ostream& os)
 {
 	for (int i = 1; i <= 8; i++)
@@ -15,9 +15,10 @@ void printLine(std::ostream& os)
 		}
 	}
 }
-
 int main()
 {
-	printLine(std::cout);
+	//printLine(std::cout);
+	Chessboard chess = Chessboard();
+	std::cout << chess;
 	return 0;
 }
