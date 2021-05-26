@@ -44,6 +44,13 @@ public:
 	virtual std::vector<Position> possible_moves(const Chessboard& chessboard) const = 0;
 
 	/**
+	 * Executed when the piece moves
+	 *
+	 * @param newPosition The new piece position
+	 */
+	virtual void on_moved(Position newPosition) {}
+
+	/**
 	 * Moves this piece to a new position on the chessboard. If move will cause an enemy piece to be captured, it will be removed from the chessboard
 	 *
 	 * @param chessboard Chessboard the piece will move on. 
