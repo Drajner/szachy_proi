@@ -7,6 +7,8 @@
 
 class Piece;
 
+class Chessboard;
+
 class Player
 {
 private:

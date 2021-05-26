@@ -14,9 +14,9 @@ Player::Player(Color color, std::string playerName)
 std::vector<std::pair<std::shared_ptr<Piece>, Position>> Player::allPossibleMoves(const Chessboard& chessboard)
 {
 	std::vector<std::pair<std::shared_ptr<Piece>, Position>> moves;
-	for (auto piece : pieces_)
+	for (auto& piece : pieces_)
 	{
-		for (auto position : piece->possible_moves(chessboard))
+		for (auto& position : piece->possible_moves(chessboard))
 		{
 			moves.push_back(std::make_pair(piece, position));
 		}
