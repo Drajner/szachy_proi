@@ -24,10 +24,10 @@ public:
 	Chessboard(std::vector<std::unique_ptr<Piece>> firstPlayerPieces, std::vector<std::unique_ptr<Piece>> secondPlayerPieces);
 
 	//Getter to first player pieces vector
-	std::vector<std::unique_ptr<Piece>> whitePieces() const;
+	std::vector<std::unique_ptr<Piece>> const& whitePieces() const;
 
 	//Getter to first player pieces vector
-	std::vector<std::unique_ptr<Piece>> blackPieces() const;
+	std::vector<std::unique_ptr<Piece>> const& blackPieces() const;
 
 	//Removes given piece from chessboard
 	void removePiece(Piece& piece, Color& color);

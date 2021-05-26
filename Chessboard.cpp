@@ -23,22 +23,22 @@ Chessboard::Chessboard()
 	std::unique_ptr<Piece> pawn7b = std::unique_ptr<Piece>(new Pawn(Position(2, 7), Black));
 	std::unique_ptr<Piece> pawn8b = std::unique_ptr<Piece>(new Pawn(Position(2, 8), Black));
 
-	blackPieces_.push_back(rook1b);
-	blackPieces_.push_back(knight1b);
-	blackPieces_.push_back(bishop1b);
-	blackPieces_.push_back(queen1b);
-	blackPieces_.push_back(king1b);
-	blackPieces_.push_back(bishop2b);
-	blackPieces_.push_back(knight2b);
-	blackPieces_.push_back(rook2b);
-	blackPieces_.push_back(pawn1b);
-	blackPieces_.push_back(pawn2b);
-	blackPieces_.push_back(pawn3b);
-	blackPieces_.push_back(pawn4b);
-	blackPieces_.push_back(pawn5b);
-	blackPieces_.push_back(pawn6b);
-	blackPieces_.push_back(pawn7b);
-	blackPieces_.push_back(pawn8b);
+	blackPieces_.push_back(std::move(rook1b));
+	blackPieces_.push_back(std::move(knight1b));
+	blackPieces_.push_back(std::move(bishop1b));
+	blackPieces_.push_back(std::move(queen1b));
+	blackPieces_.push_back(std::move(king1b));
+	blackPieces_.push_back(std::move(bishop2b));
+	blackPieces_.push_back(std::move(knight2b));
+	blackPieces_.push_back(std::move(rook2b));
+	blackPieces_.push_back(std::move(pawn1b));
+	blackPieces_.push_back(std::move(pawn2b));
+	blackPieces_.push_back(std::move(pawn3b));
+	blackPieces_.push_back(std::move(pawn4b));
+	blackPieces_.push_back(std::move(pawn5b));
+	blackPieces_.push_back(std::move(pawn6b));
+	blackPieces_.push_back(std::move(pawn7b));
+	blackPieces_.push_back(std::move(pawn8b));
 
 	std::unique_ptr<Piece> rook1w = std::unique_ptr<Piece>(new Rook(Position(8, 1), White));
 	std::unique_ptr<Piece> knight1w = std::unique_ptr<Piece>(new Knight(Position(8, 2), White));
@@ -57,36 +57,36 @@ Chessboard::Chessboard()
 	std::unique_ptr<Piece> pawn7w = std::unique_ptr<Piece>(new Pawn(Position(7, 7), White));
 	std::unique_ptr<Piece> pawn8w = std::unique_ptr<Piece>(new Pawn(Position(7, 8), White));
 
-	whitePieces_.push_back(rook1w);
-	whitePieces_.push_back(knight1w);
-	whitePieces_.push_back(bishop1w);
-	whitePieces_.push_back(queen1w);
-	whitePieces_.push_back(king1w);
-	whitePieces_.push_back(bishop2w);
-	whitePieces_.push_back(knight2w);
-	whitePieces_.push_back(rook2w);
-	whitePieces_.push_back(pawn1w);
-	whitePieces_.push_back(pawn2w);
-	whitePieces_.push_back(pawn3w);
-	whitePieces_.push_back(pawn4w);
-	whitePieces_.push_back(pawn5w);
-	whitePieces_.push_back(pawn6w);
-	whitePieces_.push_back(pawn7w);
-	whitePieces_.push_back(pawn8w);
+	whitePieces_.push_back(std::move(rook1w));
+	whitePieces_.push_back(std::move(knight1w));
+	whitePieces_.push_back(std::move(bishop1w));
+	whitePieces_.push_back(std::move(queen1w));
+	whitePieces_.push_back(std::move(king1w));
+	whitePieces_.push_back(std::move(bishop2w));
+	whitePieces_.push_back(std::move(knight2w));
+	whitePieces_.push_back(std::move(rook2w));
+	whitePieces_.push_back(std::move(pawn1w));
+	whitePieces_.push_back(std::move(pawn2w));
+	whitePieces_.push_back(std::move(pawn3w));
+	whitePieces_.push_back(std::move(pawn4w));
+	whitePieces_.push_back(std::move(pawn5w));
+	whitePieces_.push_back(std::move(pawn6w));
+	whitePieces_.push_back(std::move(pawn7w));
+	whitePieces_.push_back(std::move(pawn8w));
 }
 
 Chessboard::Chessboard(std::vector<std::unique_ptr<Piece>> whitePieces, std::vector<std::unique_ptr<Piece>> blackPieces)
 {
-	whitePieces_ = whitePieces;
-	blackPieces_ = blackPieces;
+	whitePieces_ = std::move(whitePieces);
+	blackPieces_ = std::move(blackPieces);
 }
 
-std::vector<std::unique_ptr<Piece>> Chessboard::whitePieces() const
+std::vector<std::unique_ptr<Piece>> const& Chessboard::whitePieces() const
 {
 	return whitePieces_;
 }
 
-std::vector<std::unique_ptr<Piece>> Chessboard::blackPieces() const
+std::vector<std::unique_ptr<Piece>> const& Chessboard::blackPieces() const
 {
 	return blackPieces_;
 }
@@ -142,15 +142,35 @@ void Chessboard::removePiece(Piece& piece, Color& color)
 {
 	if (color == White)
 	{
-		auto it = std::find(whitePieces_.begin(), whitePieces_.end(), piece);
-		whitePieces_.erase(it);
-		return;
+		//auto it = std::find(whitePieces_.begin(), whitePieces_.end(), piece);
+		//whitePieces_.erase(it);
+		//return;
+		int i = 0;
+		for (auto& e : whitePieces_)
+		{
+			if (*e.get() == piece)
+			{
+				whitePieces_.erase(whitePieces_.begin()+i);
+				return;
+			}
+			i++;
+		}
 	}
 	if (color == Black)
 	{
-		auto it = std::find(blackPieces_.begin(), blackPieces_.end(), piece);
-		blackPieces_.erase(it);
-		return;
+		int i = 0;
+		//auto it = std::find(blackPieces_.begin(), blackPieces_.end(), piece);
+		//blackPieces_.erase(it);
+		//return;
+		for (auto& e : blackPieces_)
+		{
+			if (*e.get() == piece)
+			{
+				blackPieces_.erase(blackPieces_.begin() + i);
+				return;
+			}
+			i++;
+		}
 	}
 }
 
@@ -217,4 +237,5 @@ std::ostream& operator<<(std::ostream& os, const Chessboard& chessboard)
 			chessboard.printLine(i, WHITE_SQ, BLACK_SQ, os);
 		}
 	}
+	return os;
 }
