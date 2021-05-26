@@ -3,12 +3,12 @@
 #include <vector>
 #include <memory>
 #include <iostream>
-#include "piece.h"
+
 #include "Player.h"
 #include "piece_types.h"
 #include "color.h"
-
-// TODO: change first and second to colors
+#include "piece.h"
+#include "position.h"
 class Chessboard
 {
 private:
