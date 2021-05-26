@@ -6,7 +6,6 @@ Game::Game(Chessboard chessboard, Player* firstPlayer, Player* secondPlayer)
 	chessboard_ = chessboard;
 	firstPlayer_ = std::unique_ptr<Player>(firstPlayer);
 	secondPlayer_ = std::unique_ptr<Player>(secondPlayer);
-	round_ = 0;
 }
 
 void Game::rollOrder()
