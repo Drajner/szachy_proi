@@ -32,7 +32,9 @@ public:
 	//Removes given piece from chessboard
 	void removePiece(Piece& piece, Color& color);
 
-	Piece& getPiece(const Position& position);
+	Piece& getPiece(const Position& position) const;
+
+	bool pieceExists(const Position& position) const;
 
 	int round();
 

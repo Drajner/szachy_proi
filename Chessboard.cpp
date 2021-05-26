@@ -21,7 +21,7 @@ std::vector<std::unique_ptr<Piece>> Chessboard::blackPieces() const
 	return blackPieces_;
 }
 
-Piece& Chessboard::getPiece(const Position& position)
+Piece& Chessboard::getPiece(const Position& position) const
 {
 	for (auto& e : whitePieces_)
 	{
@@ -37,6 +37,25 @@ Piece& Chessboard::getPiece(const Position& position)
 			return *e;
 		}
 	}
+}
+
+bool Chessboard::pieceExists(const Position& position) const
+{
+	for (auto& e : whitePieces_)
+	{
+		if (e->position() == position)
+		{
+			return true;
+		}
+	}
+	for (auto& e : blackPieces_)
+	{
+		if (e->position() == position)
+		{
+			return true;
+		}
+	}
+	return false;
 }
 
 void Chessboard::removePiece(Piece& piece, Color& color)
