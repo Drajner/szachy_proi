@@ -82,3 +82,67 @@ std::vector<Position> Knight::possible_moves(const Chessboard& chessboard) const
 
 	return possible;
 }
+
+std::string Bishop::full_name() const {
+	return "Bishop";
+}
+
+char Bishop::chessboard_representation() const {
+	return color() == White ? 'b' : 'B';
+}
+
+std::vector<Position> Bishop::possible_moves(const Chessboard& chessboard) const {
+	std::vector<Position> possible;
+
+	// TODO: add movement
+
+	return possible;
+}
+
+std::string Rook::full_name() const {
+	return "Rook";
+}
+
+char Rook::chessboard_representation() const {
+	return color() == White ? 'r' : 'R';
+}
+
+std::vector<Position> Rook::possible_moves(const Chessboard& chessboard) const {
+	std::vector<Position> possible;
+
+	// TODO: add movement
+
+	return possible;
+}
+
+std::string Queen::full_name() const {
+	return "Queen";
+}
+
+char Queen::chessboard_representation() const {
+	return color() == White ? 'q' : 'Q';
+}
+
+std::vector<Position> Queen::possible_moves(const Chessboard& chessboard) const {
+	std::vector<Position> possible;
+
+	// TODO: add movement
+
+	return possible;
+}
+
+std::string King::full_name() const {
+	return "King";
+}
+
+char King::chessboard_representation() const {
+	return color() == White ? 'k' : 'K';
+}
+
+std::vector<Position> King::possible_moves(const Chessboard& chessboard) const {
+	std::vector<Position> possible;
+
+	// TODO: add movement
+
+	return possible;
+}

@@ -30,8 +30,8 @@ public:
 	Position operator-(const Position& other) const;
 	Position& operator-=(const Position& other);
 
-	// Representation in form of "yx" where y will be converted to char from range a-h, x stays as a number. If outside of range (1-8), throws exception
+	// Representation in form of "yx" where x will be converted to char from range a-h, y stays as a number. If outside of range (1-8), throws exception
 	friend std::ostream& operator<<(std::ostream& out, const Position& pos);
-	// Accepts two forms of representation, "xy" and "yx". Char part will always be the y
+	// Accepts two forms of representation, "xy" and "yx". Char part will always be the x
 	friend std::istream& operator>>(std::istream& in, Position& pos);
 };

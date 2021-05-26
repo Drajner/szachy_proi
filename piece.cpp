@@ -28,7 +28,7 @@ void Piece::move_to(Chessboard& chessboard, Position newPosition) {
 }
 
 void Piece::try_add_movement_option(Position pos, std::vector<Position>& positions, const Chessboard& chessboard) const {
-	if (pos.x() > 0 && pos.x() <= 8 && pos.y() > 0 && pos.y() <= 8) {
+	if (pos.on_chessboard()) {
 		if (!chessboard.pieceExists(pos) || chessboard.getPiece(pos).color() != color()) {
 			positions.push_back(pos);
 		}

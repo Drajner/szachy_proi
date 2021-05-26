@@ -144,6 +144,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="piece.cpp" />
     <ClCompile Include="piece_types.cpp" />
+    <ClCompile Include="position.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Chessboard.h" />
