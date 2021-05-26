@@ -185,7 +185,7 @@ void Chessboard::printLine(int lineNumber, int firstColor, int secondColor, std:
 		{
 			for (int k = 0; k < squareWidth; k++)
 			{
-				if (i == 1 && k == 3)
+				if (i == 1 && k == 2)
 				{
 					if (pieceExists(Position(lineNumber, j * 2-1)))
 					{
@@ -203,7 +203,7 @@ void Chessboard::printLine(int lineNumber, int firstColor, int secondColor, std:
 			}
 			for (int k = 0; k < squareWidth; k++)
 			{
-				if (i == 1 && k == 3)
+				if (i == 1 && k == 2)
 				{
 					if (pieceExists(Position(lineNumber, j * 2)))
 					{
