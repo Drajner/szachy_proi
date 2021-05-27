@@ -73,6 +73,8 @@ Chessboard::Chessboard()
 	whitePieces_.push_back(std::move(pawn6w));
 	whitePieces_.push_back(std::move(pawn7w));
 	whitePieces_.push_back(std::move(pawn8w));
+
+	round_ = 0;
 }
 
 Chessboard::Chessboard(std::vector<std::shared_ptr<Piece>> whitePieces, std::vector<std::shared_ptr<Piece>> blackPieces)
