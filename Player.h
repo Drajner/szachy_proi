@@ -19,10 +19,10 @@ private:
 	std::vector<std::shared_ptr<Piece>> pieces_;
 public:
 	// Player class constructor
-	Player(Color color, std::string playerName);
+	Player(Color color, std::string playerName, const Chessboard& chessboard);
 
 	// issues a move(will change depending on derivative class)
-	virtual void makeMove() = 0;
+	virtual void makeMove(const Chessboard& chessboard) = 0;
 
 	// sets color
 	void setColor(Color color);
@@ -40,4 +40,20 @@ public:
 	bool operator==(Player& player);
 
 };
+
+class Human : public Player
+{
+public:
+	Human(Color color, std::string playerName, const Chessboard& chessboard) : Player(color, playerName, chessboard) {};
+
+	void makeMove(int chosenMove,Chessboard& chessboard);
+
+};
+
+/*class RandIntBot : public Player
+{
+public:
+	RandIntBot(Color color, std::string playerName, const Chessboard& chessboard) : Player(color, playerName, chessboard) {};
+
+};*/
 
