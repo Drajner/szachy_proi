@@ -183,42 +183,38 @@ void Chessboard::printLine(int lineNumber, int firstColor, int secondColor, std:
 	int letters[8] = { 1,2,3,4,5,6,7,8 };
 	for (int i = 0; i < squareWidth / 2; i++)
 	{
-		for (int j = 1; j < 5; j++)
+		for (int j = 1; j < 9; j++)
 		{
 			for (int k = 0; k < squareWidth; k++)
 			{
 				if (i == 1 && k == 2)
 				{
-					if (pieceExists(Position(lineNumber, j * 2-1)))
+					if (pieceExists(Position(lineNumber, j)))
 					{
-						os << getPiece(Position(lineNumber, j * 2-1));
+						os << getPiece(Position(lineNumber, j));
+					}
+					else
+					{
+						if (j % 2 == 0)
+						{
+							os << char(secondColor);
+						}
+						else
+						{
+							os << char(firstColor);
+						}
+					}
+				}
+				else
+				{
+					if (j % 2 == 0)
+					{
+						os << char(secondColor);
 					}
 					else
 					{
 						os << char(firstColor);
 					}
-				}
-				else
-				{
-					os << char(firstColor);
-				}
-			}
-			for (int k = 0; k < squareWidth; k++)
-			{
-				if (i == 1 && k == 2)
-				{
-					if (pieceExists(Position(lineNumber, j * 2)))
-					{
-						os << getPiece(Position(lineNumber, j * 2));
-					}
-					else
-					{
-						os << char(secondColor);
-					}
-				}
-				else
-				{
-					os << char(secondColor);
 				}
 			}
 		}
