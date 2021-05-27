@@ -30,7 +30,7 @@ public:
 	std::vector<std::shared_ptr<Piece>> const& blackPieces() const;
 
 	//Removes given piece from chessboard
-	void removePiece(Piece& piece, Color& color);
+	void removePiece(Piece& piece, Color color);
 
 	Piece& getPiece(const Position& position) const;
 

@@ -32,6 +32,4 @@ public:
 
 	//Starts a game
 	void play();
-
-	friend std::ostream& operator<<(std::ostream& os, const Game& game);
 };

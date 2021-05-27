@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "Chessboard.h"
+#include "color.h"
 #include <iostream>
 void printLine(std::ostream& os)
 {
@@ -19,6 +20,8 @@ int main()
 {
 	//printLine(std::cout);
 	Chessboard chess = Chessboard();
+	//Piece& pawn = chess.getPiece(Position(1, 2));
+	//chess.removePiece(pawn, Black);
 	std::cout << chess;
 	return 0;
 }

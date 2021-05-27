@@ -138,7 +138,7 @@ void Chessboard::incRound()
 	round_++;
 }
 
-void Chessboard::removePiece(Piece& piece, Color& color)
+void Chessboard::removePiece(Piece& piece, Color color)
 {
 	if (color == White)
 	{
