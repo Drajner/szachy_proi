@@ -20,8 +20,11 @@ int main()
 {
 	//printLine(std::cout);
 	Chessboard chess = Chessboard();
-	Piece& pawn = chess.getPiece(Position(1, 2));
-	chess.removePiece(pawn, Black);
+	Piece& pawn = chess.getPiece(Position(2, 1));
+	//chess.removePiece(pawn, Black);
+	pawn.move_to(chess, Position(4, 7));
+	//Piece& piece = chess.getPiece(Position(7, 4));
+	//chess.removePiece(piece, White);
 	std::cout << chess;
 	return 0;
 }
