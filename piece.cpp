@@ -28,7 +28,7 @@ void Piece::move_to(Chessboard& chessboard, Position newPosition) {
 }
 
 void Piece::try_add_movement_option(Position pos, std::vector<Position>& positions, const Chessboard& chessboard) const {
-	if (pos.on_chessboard()) {
+	if (pos.on_chessboard() && pos != position_) {
 		if (!chessboard.pieceExists(pos) || chessboard.getPiece(pos).color() != color()) {
 			positions.push_back(pos);
 		}
@@ -141,7 +141,17 @@ char Bishop::chessboard_representation() const {
 std::vector<Position> Bishop::possible_moves(const Chessboard& chessboard) const {
 	std::vector<Position> possible;
 
-	// TODO: add movement
+	for (int x = -1; x < 1; x += 2) {
+		for (int y = -1; y < 1; y += 2) {
+			Position pos(position_.x(), position_.y());
+
+			while (pos.on_chessboard()) {
+				pos += Position(x, y);
+
+				try_add_movement_option(pos, possible, chessboard);
+			}
+		}
+	}
 
 	return possible;
 }
@@ -157,7 +167,10 @@ char Rook::chessboard_representation() const {
 std::vector<Position> Rook::possible_moves(const Chessboard& chessboard) const {
 	std::vector<Position> possible;
 
-	// TODO: add movement
+	for (int i = 1; i < 8; i++) {
+		try_add_movement_option(Position(i, position_.y()), possible, chessboard);
+		try_add_movement_option(Position(position_.x(), i), possible, chessboard);
+	}
 
 	return possible;
 }
@@ -173,7 +186,19 @@ char Queen::chessboard_representation() const {
 std::vector<Position> Queen::possible_moves(const Chessboard& chessboard) const {
 	std::vector<Position> possible;
 
-	// TODO: add movement
+	for (int x = -1; x < 1; x++) {
+		for (int y = -1; y < 1; y++) {
+			if (!(x == 0 && y == 0)) {
+				Position pos(position_.x(), position_.y());
+
+				while (pos.on_chessboard()) {
+					pos += Position(x, y);
+
+					try_add_movement_option(pos, possible, chessboard);
+				}
+			}
+		}
+	}
 
 	return possible;
 }
@@ -189,7 +214,12 @@ char King::chessboard_representation() const {
 std::vector<Position> King::possible_moves(const Chessboard& chessboard) const {
 	std::vector<Position> possible;
 
-	// TODO: add movement
+	for (int x = -1; x < 1; x++) {
+		for (int y = -1; y < 1; y++) {
+			Position pos(position_.x() + x, position_.y() + y);
+			try_add_movement_option(pos, possible, chessboard);
+		}
+	}
 
 	return possible;
 }
