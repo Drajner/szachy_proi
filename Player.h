@@ -22,7 +22,7 @@ public:
 	Player(Color color, std::string playerName, const Chessboard& chessboard);
 
 	// issues a move(will change depending on derivative class)
-	virtual void makeMove(const Chessboard& chessboard) = 0;
+	virtual void makeMove(int chosenMove, Chessboard& chessboard) = 0;
 
 	// sets color
 	void setColor(Color color);
@@ -46,7 +46,7 @@ class Human : public Player
 public:
 	Human(Color color, std::string playerName, const Chessboard& chessboard) : Player(color, playerName, chessboard) {};
 
-	void makeMove(int chosenMove,Chessboard& chessboard);
+	void makeMove(int chosenMove,Chessboard& chessboard) override;
 
 };
 
