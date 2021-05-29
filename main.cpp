@@ -21,18 +21,19 @@ int main()
 {
 	//printLine(std::cout);
 	Chessboard chess = Chessboard();
-	/*Piece& pawn = chess.getPiece(Position(2, 1));*/
+	//Piece& pawn = chess.getPiece(Position(4, 8));
 	//chess.removePiece(pawn, Black);
-	/*pawn.move_to(chess, Position(4, 7));*/
+	//pawn.move_to(chess, Position(1, 5));
 	//Piece& piece = chess.getPiece(Position(7, 4));
 	//chess.removePiece(piece, White);
-	std::unique_ptr<Player> pl1 = std::unique_ptr<Player>(new Human(White, "pl1", chess));
+	std::unique_ptr<Player> pl1 = std::unique_ptr<Player>(new Human(Black, "pl1", chess));
 	for (auto& e : pl1->allPossibleMoves(chess))
 	{
-		std::cout << *e.first << std::endl;
+		std::cout << *e.first << "(" << e.first->position().x() << ", "<< e.first->position().y() << ")" << std::endl;
 		std::cout << e.second.x() << ", "<< e.second.y() << std::endl;
 	}
-	pl1->makeMove(2, chess);
+	//pl1->makeMove(2, chess);
+	//(4,8) -> (1,5)
 	std::cout << chess;
 	return 0;
 }
