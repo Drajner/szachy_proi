@@ -1,11 +1,13 @@
 #pragma once
 #include "Chessboard.h"
 #include "Player.h"
+#include "color.h"
+#include "position.h"
 #include <memory>
 
 class Game
 {
-private:
+public:
 	Chessboard chessboard_;
 	std::unique_ptr<Player> firstPlayer_;
 	std::unique_ptr<Player> secondPlayer_;
@@ -29,6 +31,8 @@ public:
 
 	//Check if there is a win possibility for given player
 	bool checkWinPossibility(const Player& player);
+
+	bool checkIfCheck(Player& player, Color color);
 
 	//Starts a game
 	void play();
