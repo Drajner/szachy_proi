@@ -36,11 +36,19 @@ public:
 
 	bool pieceExists(const Position& position) const;
 
+	void upgradePiece(Piece& piece_to_upgrade, int choice);
+
+	bool checkUpgradePossibility(Color color);
+
 	int round();
 
 	void incRound();
 
 	void printLine(int lineNumber, int firstColor, int secondColor, std::ostream& os) const; 
+
+	bool checkIfCheck(Player& player, Color color);
+
+	bool checkWin(Color color);
 
 	friend std::ostream& operator<<(std::ostream& os, const Chessboard& chessboard);
 };

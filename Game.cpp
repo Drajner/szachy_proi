@@ -37,45 +37,45 @@ void Game::swap()
 	}
 }
 
-bool Game::checkIfCheck(Player& player, Color color)
-{
-	if (color == White)
-	{
-		Position kingPos = Position(0, 0);
-		for (auto e : chessboard_.whitePieces())
-		{
-			if (e->chessboard_representation() == 'k')
-			{
-				kingPos.x(e->position().x());
-				kingPos.y(e->position().y());
-			} 
-		}
-		for (auto e : player.allPossibleMoves(chessboard_))
-		{
-			if (e.second == Position(kingPos))
-			{
-				return true;
-			}
-		}
-	}
-	if (color == Black)
-	{
-		Position kingPos = Position(0, 0);
-		for (auto e : chessboard_.blackPieces())
-		{
-			if (e->chessboard_representation() == 'K')
-			{
-				kingPos.x(e->position().x());
-				kingPos.y(e->position().y());
-			}
-		}
-		for (auto e : player.allPossibleMoves(chessboard_))
-		{
-			if (e.second == Position(kingPos))
-			{
-				return true;
-			}
-		}
-	}
-	return false;
-}
+//bool Game::checkIfCheck(Player& player, Color color)
+//{
+//	if (color == White)
+//	{
+//		Position kingPos = Position(0, 0);
+//		for (auto e : chessboard_.whitePieces())
+//		{
+//			if (e->chessboard_representation() == 'k')
+//			{
+//				kingPos.x(e->position().x());
+//				kingPos.y(e->position().y());
+//			} 
+//		}
+//		for (auto e : player.allPossibleMoves(chessboard_))
+//		{
+//			if (e.second == Position(kingPos))
+//			{
+//				return true;
+//			}
+//		}
+//	}
+//	if (color == Black)
+//	{
+//		Position kingPos = Position(0, 0);
+//		for (auto e : chessboard_.blackPieces())
+//		{
+//			if (e->chessboard_representation() == 'K')
+//			{
+//				kingPos.x(e->position().x());
+//				kingPos.y(e->position().y());
+//			}
+//		}
+//		for (auto e : player.allPossibleMoves(chessboard_))
+//		{
+//			if (e.second == Position(kingPos))
+//			{
+//				return true;
+//			}
+//		}
+//	}
+//	return false;
+//}

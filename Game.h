@@ -30,9 +30,9 @@ public:
 	void swap();
 
 	//Check if there is a win possibility for given player
-	bool checkWinPossibility(const Player& player);
+	//bool checkWin(Player& player);
 
-	bool checkIfCheck(Player& player, Color color);
+	//bool checkIfCheck(Player& player, Color color);
 
 	//Starts a game
 	void play();

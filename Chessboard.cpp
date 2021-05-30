@@ -130,6 +130,65 @@ bool Chessboard::pieceExists(const Position& position) const
 	return false;
 }
 
+void Chessboard::upgradePiece(Piece& piece_to_upgrade, int choice)
+{
+	// 1 - queen
+	// 2 - knight
+	// 3 - bishop
+	// 4 - rook
+	Position upgradePos = piece_to_upgrade.position();
+	Color upgradeColor = piece_to_upgrade.color();
+	this->removePiece(piece_to_upgrade, piece_to_upgrade.color());
+	if (choice == 1)
+	{
+		std::shared_ptr<Piece> queen = std::shared_ptr<Piece>(new Queen(upgradePos, upgradeColor));
+		if (upgradeColor == White)
+		{
+			whitePieces_.push_back(std::move(queen));
+		}
+		else
+		{
+			blackPieces_.push_back(std::move(queen));
+		}
+	}
+	if (choice == 2)
+	{
+		std::shared_ptr<Piece> knight = std::shared_ptr<Piece>(new Knight(upgradePos, upgradeColor));
+		if (upgradeColor == White)
+		{
+			whitePieces_.push_back(std::move(knight));
+		}
+		else
+		{
+			blackPieces_.push_back(std::move(knight));
+		}
+	}
+	if (choice == 3)
+	{
+		std::shared_ptr<Piece> bishop = std::shared_ptr<Piece>(new Bishop(upgradePos, upgradeColor));
+		if (upgradeColor == White)
+		{
+			whitePieces_.push_back(std::move(bishop));
+		}
+		else
+		{
+			blackPieces_.push_back(std::move(bishop));
+		}
+	}
+	if (choice == 4)
+	{
+		std::shared_ptr<Piece> rook = std::shared_ptr<Piece>(new Rook(upgradePos, upgradeColor));
+		if (upgradeColor == White)
+		{
+			whitePieces_.push_back(std::move(rook));
+		}
+		else
+		{
+			blackPieces_.push_back(std::move(rook));
+		}
+	}
+}
+
 int Chessboard::round()
 {
 	return round_;
@@ -241,4 +300,73 @@ std::ostream& operator<<(std::ostream& os, const Chessboard& chessboard)
 		}
 	}
 	return os;
+}
+
+bool Chessboard::checkIfCheck(Player& player, Color color)
+{
+	if (color == White)
+	{
+		Position kingPos = Position(0, 0);
+		for (auto e : this->whitePieces())
+		{
+			if (e->chessboard_representation() == 'k')
+			{
+				kingPos.x(e->position().x());
+				kingPos.y(e->position().y());
+			}
+		}
+		for (auto e : player.allPossibleMoves(*this))
+		{
+			if (e.second == Position(kingPos))
+			{
+				return true;
+			}
+		}
+	}
+	if (color == Black)
+	{
+		Position kingPos = Position(0, 0);
+		for (auto e : this->blackPieces())
+		{
+			if (e->chessboard_representation() == 'K')
+			{
+				kingPos.x(e->position().x());
+				kingPos.y(e->position().y());
+			}
+		}
+		for (auto e : player.allPossibleMoves(*this))
+		{
+			if (e.second == Position(kingPos))
+			{
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+bool Chessboard::checkWin(Color color)
+{
+	if (color == Black)
+	{
+		for (auto e : this->whitePieces())
+		{
+			if (e->chessboard_representation() == 'k')
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+	if (color == White)
+	{
+		for (auto e : this->blackPieces())
+		{
+			if (e->chessboard_representation() == 'K')
+			{
+				return false;
+			}
+		}
+		return true;
+	}
 }
