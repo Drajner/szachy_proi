@@ -36,6 +36,10 @@ public:
 
 	bool pieceExists(const Position& position) const;
 
+	void upgradePiece(Piece& piece_to_upgrade, int choice);
+
+	bool checkUpgradePossibility(Color color);
+
 	int round();
 
 	void incRound();

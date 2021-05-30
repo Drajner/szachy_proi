@@ -35,9 +35,7 @@ int main()
 	//pl1->makeMove(2, chess);
 	//(4,8) -> (1,5)
 	std::cout << chess;
-	Game game = Game();
-	game.chessboard_ = chess;
-	bool check = game.checkIfCheck(*pl1, White);
+	bool check = chess.checkIfCheck(*pl1, White);
 	std::cout << check;
 	return 0;
 }
