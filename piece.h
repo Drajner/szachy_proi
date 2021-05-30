@@ -75,7 +75,16 @@ public:
 	// Appends the short char representation to the stream
 	friend std::ostream& operator<<(std::ostream& out, const Piece& piece);
 protected:
-	void try_add_movement_option(Position pos, std::vector<Position>& positions, const Chessboard& chessboard) const;
+	
+	/**
+	 * Tries to add move to a vector of positions. Checks if move is on the chessboard and doesn't overwrite another piece from the same team
+	 *
+	 * @param pos Position to add
+	 * @param positions Vector of moves to add to
+	 * @param chessboard Game state
+	 * @returns True if the placement of moves can continue (if the space is empty), false if not
+	 */
+	bool try_add_movement_option(Position pos, std::vector<Position>& positions, const Chessboard& chessboard) const;
 };
 
 class Pawn : public Piece {

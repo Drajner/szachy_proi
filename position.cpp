@@ -39,7 +39,7 @@ Position& Position::operator-=(const Position& other) {
 
 std::ostream& operator<<(std::ostream& out, const Position& pos) {
 	if (pos.on_chessboard()) {
-		out << ('a' + pos.y_) << pos.x_;
+		out << (char)('a' + pos.x_ - 1) << pos.y_;
 		return out;
 	}
 	else {

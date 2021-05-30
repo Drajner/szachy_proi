@@ -29,8 +29,8 @@ int main()
 	std::unique_ptr<Player> pl1 = std::unique_ptr<Player>(new Human(Black, "pl1", chess));
 	for (auto& e : pl1->allPossibleMoves(chess))
 	{
-		std::cout << *e.first << "(" << e.first->position().x() << ", "<< e.first->position().y() << ")" << std::endl;
-		std::cout << e.second.x() << ", "<< e.second.y() << std::endl;
+		std::cout << e.first->full_name() << " [" << *e.first << "] on " << e.first->position() << " can go to " << e.second << std::endl;
+		//std::cout << e.second.x() << ", "<< e.second.y() << std::endl;
 	}
 	//pl1->makeMove(2, chess);
 	//(4,8) -> (1,5)
