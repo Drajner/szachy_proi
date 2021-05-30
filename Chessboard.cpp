@@ -242,3 +242,72 @@ std::ostream& operator<<(std::ostream& os, const Chessboard& chessboard)
 	}
 	return os;
 }
+
+bool Chessboard::checkIfCheck(Player& player, Color color)
+{
+	if (color == White)
+	{
+		Position kingPos = Position(0, 0);
+		for (auto e : this->whitePieces())
+		{
+			if (e->chessboard_representation() == 'k')
+			{
+				kingPos.x(e->position().x());
+				kingPos.y(e->position().y());
+			}
+		}
+		for (auto e : player.allPossibleMoves(*this))
+		{
+			if (e.second == Position(kingPos))
+			{
+				return true;
+			}
+		}
+	}
+	if (color == Black)
+	{
+		Position kingPos = Position(0, 0);
+		for (auto e : this->blackPieces())
+		{
+			if (e->chessboard_representation() == 'K')
+			{
+				kingPos.x(e->position().x());
+				kingPos.y(e->position().y());
+			}
+		}
+		for (auto e : player.allPossibleMoves(*this))
+		{
+			if (e.second == Position(kingPos))
+			{
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+bool Chessboard::checkWin(Color color)
+{
+	if (color == Black)
+	{
+		for (auto e : this->whitePieces())
+		{
+			if (e->chessboard_representation() == 'k')
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+	if (color == White)
+	{
+		for (auto e : this->blackPieces())
+		{
+			if (e->chessboard_representation() == 'K')
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+}

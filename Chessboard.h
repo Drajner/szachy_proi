@@ -42,5 +42,9 @@ public:
 
 	void printLine(int lineNumber, int firstColor, int secondColor, std::ostream& os) const; 
 
+	bool checkIfCheck(Player& player, Color color);
+
+	bool checkWin(Color color);
+
 	friend std::ostream& operator<<(std::ostream& os, const Chessboard& chessboard);
 };
