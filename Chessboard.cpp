@@ -222,7 +222,7 @@ Piece& Chessboard::getPieceToUpgrade(Player& player)
 		{
 			if (e->chessboard_representation() == 'p' && e->position().y() == 8)
 			{
-				return *e;
+				return *e.get();
 			}
 		}
 	}
@@ -232,7 +232,7 @@ Piece& Chessboard::getPieceToUpgrade(Player& player)
 		{
 			if (e->chessboard_representation() == 'P' && e->position().y() == 1)
 			{
-				return *e;
+				return *e.get();
 			}
 		}
 	}
