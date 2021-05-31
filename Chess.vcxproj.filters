@@ -65,5 +65,8 @@
     <ClInclude Include="piece_types.h">
       <Filter>Pliki nagłówkowe\pieces</Filter>
     </ClInclude>
+    <ClInclude Include="Exceptions.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

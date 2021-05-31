@@ -1,6 +1,8 @@
 #include "position.h"
+#include "Exceptions.h"
 
 Position::Position(int posX, int posY) : x_(posX), y_(posY) {}
+Position::Position() : x_(0), y_(0) {}
 
 void Position::x(int newX) { x_ = newX; }
 void Position::y(int newY) { y_ = newY; }
@@ -43,7 +45,7 @@ std::ostream& operator<<(std::ostream& out, const Position& pos) {
 		return out;
 	}
 	else {
-		// throw exception
+		throw OutsideBoardWriteException();
 	}
 	return out;
 }
@@ -57,18 +59,21 @@ std::istream& operator>>(std::istream& in, Position& pos) {
 		b = t;
 	}
 
-	if (isdigit(b) && b <= '8') {
+	if (isdigit(b) && b >= '1' && b <= '8') {
 		if (a >= 'a' && a <= 'h') {
-			pos.y_ = b - '0';
-			pos.x_ = a - 'a';
+			pos.y_ = b - '1' + 1;
+			pos.x_ = a - 'a' + 1;
 		}
 		else if (a >= 'A' && a <= 'H') {
-			pos.y_ = b - '0';
-			pos.x_ = a - 'A';
+			pos.y_ = b - '1' + 1;
+			pos.x_ = a - 'A' + 1;
 		}
 		else {
-			// throw exception
+			throw OutsideBoardLoadException();
 		}
+	}
+	else {
+		throw OutsideBoardLoadException();
 	}
 
 	return in;

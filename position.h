@@ -7,6 +7,7 @@ private:
 	int x_;
 	int y_;
 public:
+	Position();
 	Position(int posX, int posY);
 
 	// Sets the horizontal position
