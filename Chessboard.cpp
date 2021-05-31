@@ -222,7 +222,7 @@ Piece& Chessboard::getPieceToUpgrade(Player& player)
 		{
 			if (e->chessboard_representation() == 'p' && e->position().y() == 8)
 			{
-				return *e.get();
+				return *e;
 			}
 		}
 	}
@@ -232,7 +232,7 @@ Piece& Chessboard::getPieceToUpgrade(Player& player)
 		{
 			if (e->chessboard_representation() == 'P' && e->position().y() == 1)
 			{
-				return *e.get();
+				return *e;
 			}
 		}
 	}
@@ -527,6 +527,42 @@ std::pair<std::shared_ptr<Piece>, Position> Chessboard::getLongCastle(Color colo
 				return std::make_pair(e, Position(3, 8));
 			}
 		}
+	}
+}
+
+void Chessboard::doShortCastle(Color color)
+{
+	if (color == White)
+	{
+		Piece& king = this->getPiece(Position(5, 1));
+		king.move_to(*this, Position(7, 1));
+		Piece& rook = this->getPiece(Position(8, 1));
+		rook.move_to(*this, Position(6, 1));
+	}
+	else
+	{
+		Piece& king = this->getPiece(Position(5, 8));
+		king.move_to(*this, Position(7, 8));
+		Piece& rook = this->getPiece(Position(8, 8));
+		rook.move_to(*this, Position(6, 8));
+	}
+}
+
+void Chessboard::doLongCastle(Color color)
+{
+	if (color == White)
+	{
+		Piece& king = this->getPiece(Position(5, 1));
+		king.move_to(*this, Position(3, 1));
+		Piece& rook = this->getPiece(Position(1, 1));
+		rook.move_to(*this, Position(4, 1));
+	}
+	else
+	{
+		Piece& king = this->getPiece(Position(5, 8));
+		king.move_to(*this, Position(3, 8));
+		Piece& rook = this->getPiece(Position(1, 8));
+		rook.move_to(*this, Position(4, 8));
 	}
 }
 

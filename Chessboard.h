@@ -56,6 +56,10 @@ public:
 
 	std::pair<std::shared_ptr<Piece>, Position> getLongCastle(Color color);
 
+	void doShortCastle(Color color);
+
+	void doLongCastle(Color color);
+
 	bool checkAttackPossibility(Player& player, const Position& position);
 
 	bool checkWin(Color color);
