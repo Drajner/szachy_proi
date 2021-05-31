@@ -438,6 +438,50 @@ bool Chessboard::checkShortCastlePossibility(Player& player, Color color)
 	}
 }
 
+bool Chessboard::checkLongCastlePossibility(Player& player, Color color)
+{
+	if (color == White)
+	{
+		Piece& king = this->getPiece(Position(5, 1));
+		Piece& rook = this->getPiece(Position(1, 1));
+		if (king.chessboard_representation() == 'k' && rook.chessboard_representation() == 'r')
+		{
+			if (king.moved() == false && rook.moved() == false)
+			{
+				if (this->checkIfCheck(player, color) == false)
+				{
+					if (this->pieceExists(Position(2, 1)) == false && this->pieceExists(Position(3, 1)) == false && this->pieceExists(Position(4, 1)) == false)
+					{
+						if (!this->checkAttackPossibility(player, Position(4, 1)) && !this->checkAttackPossibility(player, Position(3, 1)))
+							return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+	if (color == Black)
+	{
+		Piece& king = this->getPiece(Position(5, 8));
+		Piece& rook = this->getPiece(Position(1, 8));
+		if (king.chessboard_representation() == 'K' && rook.chessboard_representation() == 'R')
+		{
+			if (king.moved() == false && rook.moved() == false)
+			{
+				if (this->checkIfCheck(player, color) == false)
+				{
+					if (this->pieceExists(Position(2, 8)) == false && this->pieceExists(Position(3, 8)) == false && this->pieceExists(Position(4, 8)) == false)
+					{
+						if (!this->checkAttackPossibility(player, Position(4, 8)) && !this->checkAttackPossibility(player, Position(3, 8)))
+							return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+}
+
 bool Chessboard::checkAttackPossibility(Player& player, const Position& position)
 {
 	for (auto e : player.allPossibleMoves(*this))

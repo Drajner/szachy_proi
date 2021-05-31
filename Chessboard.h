@@ -52,6 +52,8 @@ public:
 
 	bool checkShortCastlePossibility(Player& player, Color color);
 
+	bool checkLongCastlePossibility(Player& player, Color color);
+
 	bool checkAttackPossibility(Player& player, const Position& position);
 
 	bool checkWin(Color color);
