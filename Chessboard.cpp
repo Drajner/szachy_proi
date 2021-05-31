@@ -351,6 +351,8 @@ std::ostream& operator<<(std::ostream& os, const Chessboard& chessboard)
 	return os;
 }
 
+// player - player whos enemy king is under check
+//color - enemy color
 bool Chessboard::checkIfCheck(Player& player, Color color)
 {
 	if (color == White)
@@ -394,10 +396,13 @@ bool Chessboard::checkIfCheck(Player& player, Color color)
 	return false;
 }
 
+// player - color's enemy
+//color - color who can made castle
 bool Chessboard::checkShortCastlePossibility(Player& player, Color color)
 {
 	if (color == White)
 	{
+		// to do - napraw to kurwa
 		Piece& king = this->getPiece(Position(5, 1));
 		Piece& rook = this->getPiece(Position(8, 1));
 		if (king.chessboard_representation() == 'k' && rook.chessboard_representation() == 'r')
@@ -418,6 +423,7 @@ bool Chessboard::checkShortCastlePossibility(Player& player, Color color)
 	}
 	if (color == Black)
 	{
+		// to do - napraw to kurwa
 		Piece& king = this->getPiece(Position(5, 8));
 		Piece& rook = this->getPiece(Position(8, 8));
 		if (king.chessboard_representation() == 'K' && rook.chessboard_representation() == 'R')
@@ -438,6 +444,8 @@ bool Chessboard::checkShortCastlePossibility(Player& player, Color color)
 	}
 }
 
+// player - color's enemy
+//color - color who can made castle
 bool Chessboard::checkLongCastlePossibility(Player& player, Color color)
 {
 	if (color == White)
