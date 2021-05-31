@@ -109,6 +109,7 @@ Piece& Chessboard::getPiece(const Position& position) const
 			return *e;
 		}
 	}
+	throw CannotFindPiece();
 }
 
 bool Chessboard::pieceExists(const Position& position) const
@@ -189,7 +190,7 @@ void Chessboard::upgradePiece(Piece& piece_to_upgrade, int choice)
 	}
 }
 
-bool Chessboard::checkUpgradePossibility(Player& player)
+bool Chessboard::checkUpgradePossibility(Player& player) const
 {
 	if (player.getColor() == White)
 	{
@@ -214,7 +215,7 @@ bool Chessboard::checkUpgradePossibility(Player& player)
 	return false;
 }
 
-Piece& Chessboard::getPieceToUpgrade(Player& player)
+Piece& Chessboard::getPieceToUpgrade(Player& player) const
 {
 	if (player.getColor() == White)
 	{
@@ -236,9 +237,10 @@ Piece& Chessboard::getPieceToUpgrade(Player& player)
 			}
 		}
 	}
+	throw CannotFindPiece();
 }
 
-int Chessboard::round()
+int Chessboard::round() const
 {
 	return round_;
 }
@@ -353,7 +355,7 @@ std::ostream& operator<<(std::ostream& os, const Chessboard& chessboard)
 
 // player - player whos enemy king is under check
 //color - enemy color
-bool Chessboard::checkIfCheck(Player& player, Color color)
+bool Chessboard::checkIfCheck(Player& player, Color color) const
 {
 	if (color == White)
 	{
@@ -398,99 +400,52 @@ bool Chessboard::checkIfCheck(Player& player, Color color)
 
 // player - color's enemy
 //color - color who can made castle
-bool Chessboard::checkShortCastlePossibility(Player& player, Color color)
+bool Chessboard::checkShortCastlePossibility(Player& player, Color color) const
 {
 	if (color == White)
 	{
 		// to do - napraw to kurwa
 		Piece& king = this->getPiece(Position(5, 1));
 		Piece& rook = this->getPiece(Position(8, 1));
-		if (king.chessboard_representation() == 'k' && rook.chessboard_representation() == 'r')
-		{
-			if (king.moved() == false && rook.moved() == false)
-			{
-				if (this->checkIfCheck(player, color) == false)
-				{
-					if (this->pieceExists(Position(6, 1)) == false && this->pieceExists(Position(7, 1)) == false)
-					{
-						if(!this->checkAttackPossibility(player, Position(6,1)) && !this->checkAttackPossibility(player, Position(7, 1)))
-							return true;
-					}
-				}
-			}
-		}
-		return false;
+		return king.chessboard_representation() == 'k' && rook.chessboard_representation() == 'r' && !king.moved() && !rook.moved() 
+				&& !this->checkIfCheck(player, color) && !this->pieceExists(Position(6, 1)) && !this->pieceExists(Position(7, 1)) 
+				&& !this->checkAttackPossibility(player, Position(6, 1)) && !this->checkAttackPossibility(player, Position(7, 1));
 	}
-	if (color == Black)
+	else
 	{
 		// to do - napraw to kurwa
 		Piece& king = this->getPiece(Position(5, 8));
 		Piece& rook = this->getPiece(Position(8, 8));
-		if (king.chessboard_representation() == 'K' && rook.chessboard_representation() == 'R')
-		{
-			if (king.moved() == false && rook.moved() == false)
-			{
-				if (this->checkIfCheck(player, color) == false)
-				{
-					if (this->pieceExists(Position(6, 8)) == false && this->pieceExists(Position(7, 8)) == false)
-					{
-						if (!this->checkAttackPossibility(player, Position(6, 8)) && !this->checkAttackPossibility(player, Position(7, 8)))
-							return true;
-					}
-				}
-			}
-		}
-		return false;
+		return king.chessboard_representation() == 'K' && rook.chessboard_representation() == 'R' && !king.moved() && !rook.moved() 
+				&& !this->checkIfCheck(player, color) && !this->pieceExists(Position(6, 8)) && !this->pieceExists(Position(7, 8)) 
+				&& !this->checkAttackPossibility(player, Position(6, 8)) && !this->checkAttackPossibility(player, Position(7, 8));
 	}
 }
 
 // player - color's enemy
 //color - color who can made castle
-bool Chessboard::checkLongCastlePossibility(Player& player, Color color)
+bool Chessboard::checkLongCastlePossibility(Player& player, Color color) const
 {
 	if (color == White)
 	{
 		Piece& king = this->getPiece(Position(5, 1));
 		Piece& rook = this->getPiece(Position(1, 1));
-		if (king.chessboard_representation() == 'k' && rook.chessboard_representation() == 'r')
-		{
-			if (king.moved() == false && rook.moved() == false)
-			{
-				if (this->checkIfCheck(player, color) == false)
-				{
-					if (this->pieceExists(Position(2, 1)) == false && this->pieceExists(Position(3, 1)) == false && this->pieceExists(Position(4, 1)) == false)
-					{
-						if (!this->checkAttackPossibility(player, Position(4, 1)) && !this->checkAttackPossibility(player, Position(3, 1)))
-							return true;
-					}
-				}
-			}
-		}
-		return false;
+		return king.chessboard_representation() == 'k' && rook.chessboard_representation() == 'r' && !king.moved() && !rook.moved() && !this->checkIfCheck(player, color)
+				&& !this->pieceExists(Position(2, 1)) && !this->pieceExists(Position(3, 1)) && !this->pieceExists(Position(4, 1)) 
+				&& !this->checkAttackPossibility(player, Position(4, 1)) && !this->checkAttackPossibility(player, Position(3, 1));
 	}
-	if (color == Black)
+	else
 	{
 		Piece& king = this->getPiece(Position(5, 8));
 		Piece& rook = this->getPiece(Position(1, 8));
-		if (king.chessboard_representation() == 'K' && rook.chessboard_representation() == 'R')
-		{
-			if (king.moved() == false && rook.moved() == false)
-			{
-				if (this->checkIfCheck(player, color) == false)
-				{
-					if (this->pieceExists(Position(2, 8)) == false && this->pieceExists(Position(3, 8)) == false && this->pieceExists(Position(4, 8)) == false)
-					{
-						if (!this->checkAttackPossibility(player, Position(4, 8)) && !this->checkAttackPossibility(player, Position(3, 8)))
-							return true;
-					}
-				}
-			}
-		}
+		return king.chessboard_representation() == 'K' && rook.chessboard_representation() == 'R' && !king.moved() && !rook.moved() 
+				&& !this->checkIfCheck(player, color) && !this->pieceExists(Position(2, 8)) && !this->pieceExists(Position(3, 8)) 
+				&& !this->pieceExists(Position(4, 8)) && !this->checkAttackPossibility(player, Position(4, 8)) && !this->checkAttackPossibility(player, Position(3, 8));
 		return false;
 	}
 }
 
-std::pair<std::shared_ptr<Piece>, Position> Chessboard::getShortCastle(Color color)
+std::pair<std::shared_ptr<Piece>, Position> Chessboard::getShortCastle(Color color) const
 {
 	if (color == White)
 	{
@@ -514,7 +469,7 @@ std::pair<std::shared_ptr<Piece>, Position> Chessboard::getShortCastle(Color col
 	}
 }
 
-std::pair<std::shared_ptr<Piece>, Position> Chessboard::getLongCastle(Color color)
+std::pair<std::shared_ptr<Piece>, Position> Chessboard::getLongCastle(Color color) const
 {
 	if (color == White)
 	{
@@ -574,7 +529,7 @@ void Chessboard::doLongCastle(Color color)
 	}
 }
 
-bool Chessboard::checkAttackPossibility(Player& player, const Position& position)
+bool Chessboard::checkAttackPossibility(Player& player, const Position& position) const
 {
 	for (auto e : player.allPossibleMoves(*this))
 	{
@@ -586,7 +541,7 @@ bool Chessboard::checkAttackPossibility(Player& player, const Position& position
 	return false;
 }
 
-bool Chessboard::checkWin(Color color)
+bool Chessboard::checkWin(Color color) const
 {
 	if (color == Black)
 	{

@@ -9,6 +9,7 @@
 #include "color.h"
 #include "piece.h"
 #include "position.h"
+#include "Exceptions.h"
 class Chessboard
 {
 private:
@@ -38,31 +39,31 @@ public:
 
 	void upgradePiece(Piece& piece_to_upgrade, int choice);
 
-	bool checkUpgradePossibility(Player& player);
+	bool checkUpgradePossibility(Player& player) const;
 
-	Piece& getPieceToUpgrade(Player& player);
+	Piece& getPieceToUpgrade(Player& player) const;
 
-	int round();
+	int round() const;
 
 	void incRound();
 
-	bool checkIfCheck(Player& player, Color color);
+	bool checkIfCheck(Player& player, Color color) const;
 
-	bool checkShortCastlePossibility(Player& player, Color color);
+	bool checkShortCastlePossibility(Player& player, Color color) const;
 
-	bool checkLongCastlePossibility(Player& player, Color color);
+	bool checkLongCastlePossibility(Player& player, Color color) const;
 
-	std::pair<std::shared_ptr<Piece>, Position> getShortCastle(Color color);
+	std::pair<std::shared_ptr<Piece>, Position> getShortCastle(Color color) const;
 
-	std::pair<std::shared_ptr<Piece>, Position> getLongCastle(Color color);
+	std::pair<std::shared_ptr<Piece>, Position> getLongCastle(Color color) const;
 
 	void doShortCastle(Color color);
 
 	void doLongCastle(Color color);
 
-	bool checkAttackPossibility(Player& player, const Position& position);
+	bool checkAttackPossibility(Player& player, const Position& position) const;
 
-	bool checkWin(Color color);
+	bool checkWin(Color color) const;
 
 	void printLine(int lineNumber, int firstColor, int secondColor, std::ostream& os) const; 
 

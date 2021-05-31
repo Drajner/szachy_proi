@@ -16,3 +16,11 @@ class OutsideBoardWriteException : public std::exception
         return "Tried to output an invalid position";
     }
 };
+
+class CannotFindPiece : public std::exception
+{
+    virtual const char* what() const throw()
+    {
+        return "Cannot find piece in chessboard";
+    }
+};
