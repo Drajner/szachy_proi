@@ -50,6 +50,8 @@ public:
 
 	bool checkIfCheck(Player& player, Color color);
 
+	bool checkCastlePossibility(Color color);
+
 	bool checkWin(Color color);
 
 	friend std::ostream& operator<<(std::ostream& os, const Chessboard& chessboard);
