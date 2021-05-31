@@ -1,7 +1,7 @@
 #include "Chessboard.h"
 #include "piece.h"
 
-Piece::Piece(Position startPosition, Color color) : position_(startPosition), color_(color) {
+Piece::Piece(Position startPosition, Color color) : position_(startPosition), color_(color), moved_(false) {
 
 }
 
@@ -13,12 +13,18 @@ Position Piece::position() const {
 	return position_;
 }
 
+bool Piece::moved() const {
+	return moved_;
+}
+
 void Piece::move_to(Chessboard& chessboard, Position newPosition) {
 	if (chessboard.pieceExists(newPosition) && chessboard.getPiece(newPosition).color() != color_) {
 		chessboard.removePiece(chessboard.getPiece(newPosition), color_ == White ? Black : White);
 	}
 
 	position_ = newPosition;
+
+	moved_ = true;
 }
 
 bool Piece::try_add_movement_option(Position pos, std::vector<Position>& positions, const Chessboard& chessboard) const {
@@ -54,7 +60,7 @@ std::ostream& operator<<(std::ostream& out, const Piece& piece) {
 	return out;
 }
 
-Pawn::Pawn(Position startPosition, Color color) : Piece(startPosition, color), firstMove_(true) {}
+Pawn::Pawn(Position startPosition, Color color) : Piece(startPosition, color) {}
 
 std::string Pawn::full_name() const {
 	return "Pawn";
@@ -71,7 +77,7 @@ std::vector<Position> Pawn::possible_moves(const Chessboard& chessboard) const {
 	if (color() == White) {
 		bool succeeded = try_add_movement_option(pos + Position(0, 1), possible, chessboard);
 
-		if (succeeded && firstMove_ && pos.y() < 7) {
+		if (succeeded && !moved_ && pos.y() < 7) {
 			try_add_movement_option(pos + Position(0, 2), possible, chessboard);
 		}
 
@@ -88,7 +94,7 @@ std::vector<Position> Pawn::possible_moves(const Chessboard& chessboard) const {
 	else {
 		bool succeeded = try_add_movement_option(pos + Position(0, -1), possible, chessboard);
 
-		if (succeeded && firstMove_ && pos.y() > 2) {
+		if (succeeded && !moved() && pos.y() > 2) {
 			try_add_movement_option(pos + Position(0, -2), possible, chessboard);
 		}
 
@@ -105,10 +111,6 @@ std::vector<Position> Pawn::possible_moves(const Chessboard& chessboard) const {
 	}
 
 	return possible;
-}
-
-void Pawn::on_moved(Position newPosition) {
-	firstMove_ = false;
 }
 
 std::string Knight::full_name() const {

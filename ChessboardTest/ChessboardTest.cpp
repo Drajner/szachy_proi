@@ -3,7 +3,7 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
-namespace ChessboardTest
+namespace ChessTest
 {
 	TEST_CLASS(ChessboardTest)
 	{
