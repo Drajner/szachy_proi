@@ -404,7 +404,6 @@ bool Chessboard::checkShortCastlePossibility(Player& player, Color color) const
 {
 	if (color == White)
 	{
-		// to do - napraw to kurwa
 		Piece& king = this->getPiece(Position(5, 1));
 		Piece& rook = this->getPiece(Position(8, 1));
 		return king.chessboard_representation() == 'k' && rook.chessboard_representation() == 'r' && !king.moved() && !rook.moved() 
@@ -413,7 +412,6 @@ bool Chessboard::checkShortCastlePossibility(Player& player, Color color) const
 	}
 	else
 	{
-		// to do - napraw to kurwa
 		Piece& king = this->getPiece(Position(5, 8));
 		Piece& rook = this->getPiece(Position(8, 8));
 		return king.chessboard_representation() == 'K' && rook.chessboard_representation() == 'R' && !king.moved() && !rook.moved() 
