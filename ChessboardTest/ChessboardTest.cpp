@@ -81,5 +81,51 @@ namespace ChessTest
 			chess.removePiece(king, White);
 			Assert::IsTrue(chess.checkWin(Black));
 		}
+		TEST_METHOD(TestCheckShortCastlePossibility1)
+		{
+			Chessboard chess = Chessboard();
+			std::unique_ptr<Player> pl1 = std::unique_ptr<Player>(new Human(Black, "pl1", chess));
+			Piece& piece1 = chess.getPiece(Position(6, 1));
+			Piece& piece2 = chess.getPiece(Position(7, 1));
+			chess.removePiece(piece1, White);
+			chess.removePiece(piece2, White);
+			Assert::IsTrue(chess.checkShortCastlePossibility(*pl1, White));
+		}
+		TEST_METHOD(TestCheckShortCastlePossibility2)
+		{
+			Chessboard chess = Chessboard();
+			std::unique_ptr<Player> pl1 = std::unique_ptr<Player>(new Human(Black, "pl1", chess));
+			Assert::IsFalse(chess.checkShortCastlePossibility(*pl1, White));
+		}
+		TEST_METHOD(TestCheckLongCastlePossibility1)
+		{
+			Chessboard chess = Chessboard();
+			std::unique_ptr<Player> pl1 = std::unique_ptr<Player>(new Human(Black, "pl1", chess));
+			Piece& piece1 = chess.getPiece(Position(2, 1));
+			Piece& piece2 = chess.getPiece(Position(3, 1));
+			Piece& piece3 = chess.getPiece(Position(4, 1));
+			chess.removePiece(piece1, White);
+			chess.removePiece(piece2, White);
+			chess.removePiece(piece3, White);
+			Assert::IsTrue(chess.checkLongCastlePossibility(*pl1, White));
+		}
+		TEST_METHOD(TestCheckLongCastlePossibility2)
+		{
+			Chessboard chess = Chessboard();
+			std::unique_ptr<Player> pl1 = std::unique_ptr<Player>(new Human(Black, "pl1", chess));
+			Assert::IsFalse(chess.checkLongCastlePossibility(*pl1, White));
+		}
+		TEST_METHOD(TestCheckAttackPossibility1)
+		{
+			Chessboard chess = Chessboard();
+			std::unique_ptr<Player> pl1 = std::unique_ptr<Player>(new Human(White, "pl1", chess));
+			Assert::IsTrue(chess.checkAttackPossibility(*pl1, Position(1, 3)));
+		}
+		TEST_METHOD(TestCheckAttackPossibility2)
+		{
+			Chessboard chess = Chessboard();
+			std::unique_ptr<Player> pl1 = std::unique_ptr<Player>(new Human(White, "pl1", chess));
+			Assert::IsFalse(chess.checkAttackPossibility(*pl1, Position(8, 8)));
+		}
 	};
 }
