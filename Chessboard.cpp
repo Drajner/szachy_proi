@@ -394,6 +394,11 @@ bool Chessboard::checkIfCheck(Player& player, Color color)
 	return false;
 }
 
+bool Chessboard::checkCastlePossibility(Color color)
+{
+	return false;
+}
+
 bool Chessboard::checkWin(Color color)
 {
 	if (color == Black)
