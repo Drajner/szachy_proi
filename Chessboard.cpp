@@ -189,6 +189,55 @@ void Chessboard::upgradePiece(Piece& piece_to_upgrade, int choice)
 	}
 }
 
+bool Chessboard::checkUpgradePossibility(Player& player)
+{
+	if (player.getColor() == White)
+	{
+		for (auto e : whitePieces_)
+		{
+			if (e->chessboard_representation() == 'p' && e->position().y() == 8)
+			{
+				return true;
+			}
+		}
+	}
+	if (player.getColor() == Black)
+	{
+		for (auto e : blackPieces_)
+		{
+			if (e->chessboard_representation() == 'P' && e->position().y() == 1)
+			{
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+Piece& Chessboard::getPieceToUpgrade(Player& player)
+{
+	if (player.getColor() == White)
+	{
+		for (auto e : whitePieces_)
+		{
+			if (e->chessboard_representation() == 'p' && e->position().y() == 8)
+			{
+				return *e;
+			}
+		}
+	}
+	if (player.getColor() == Black)
+	{
+		for (auto e : blackPieces_)
+		{
+			if (e->chessboard_representation() == 'P' && e->position().y() == 1)
+			{
+				return *e;
+			}
+		}
+	}
+}
+
 int Chessboard::round()
 {
 	return round_;

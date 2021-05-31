@@ -38,7 +38,9 @@ public:
 
 	void upgradePiece(Piece& piece_to_upgrade, int choice);
 
-	bool checkUpgradePossibility(Color color);
+	bool checkUpgradePossibility(Player& player);
+
+	Piece& getPieceToUpgrade(Player& player);
 
 	int round();
 
