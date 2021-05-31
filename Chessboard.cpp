@@ -482,6 +482,54 @@ bool Chessboard::checkLongCastlePossibility(Player& player, Color color)
 	}
 }
 
+std::pair<std::shared_ptr<Piece>, Position> Chessboard::getShortCastle(Color color)
+{
+	if (color == White)
+	{
+		for (auto& e : whitePieces_)
+		{
+			if (e->position() == Position(5,1))
+			{
+				return std::make_pair(e, Position(7, 1));
+			}
+		}
+	}
+	if (color == Black)
+	{
+		for (auto& e : blackPieces_)
+		{
+			if (e->position() == Position(5, 8))
+			{
+				return std::make_pair(e, Position(7, 8));
+			}
+		}
+	}
+}
+
+std::pair<std::shared_ptr<Piece>, Position> Chessboard::getLongCastle(Color color)
+{
+	if (color == White)
+	{
+		for (auto& e : whitePieces_)
+		{
+			if (e->position() == Position(5, 1))
+			{
+				return std::make_pair(e, Position(3, 1));
+			}
+		}
+	}
+	if (color == Black)
+	{
+		for (auto& e : blackPieces_)
+		{
+			if (e->position() == Position(5, 8))
+			{
+				return std::make_pair(e, Position(3, 8));
+			}
+		}
+	}
+}
+
 bool Chessboard::checkAttackPossibility(Player& player, const Position& position)
 {
 	for (auto e : player.allPossibleMoves(*this))

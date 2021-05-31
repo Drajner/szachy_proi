@@ -46,17 +46,21 @@ public:
 
 	void incRound();
 
-	void printLine(int lineNumber, int firstColor, int secondColor, std::ostream& os) const; 
-
 	bool checkIfCheck(Player& player, Color color);
 
 	bool checkShortCastlePossibility(Player& player, Color color);
 
 	bool checkLongCastlePossibility(Player& player, Color color);
 
+	std::pair<std::shared_ptr<Piece>, Position> getShortCastle(Color color);
+
+	std::pair<std::shared_ptr<Piece>, Position> getLongCastle(Color color);
+
 	bool checkAttackPossibility(Player& player, const Position& position);
 
 	bool checkWin(Color color);
+
+	void printLine(int lineNumber, int firstColor, int secondColor, std::ostream& os) const; 
 
 	friend std::ostream& operator<<(std::ostream& os, const Chessboard& chessboard);
 };
