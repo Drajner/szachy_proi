@@ -6,22 +6,14 @@
 
 Chessboard::Chessboard()
 {
-	std::shared_ptr<Piece> rook1b = std::shared_ptr<Piece>(new Rook(Position(1, 1), White));
-	std::shared_ptr<Piece> knight1b = std::shared_ptr<Piece>(new Knight(Position(2, 1), White));
-	std::shared_ptr<Piece> bishop1b = std::shared_ptr<Piece>(new Bishop(Position(3, 1), White));
-	std::shared_ptr<Piece> queen1b = std::shared_ptr<Piece>(new Queen(Position(4, 1), White));
-	std::shared_ptr<Piece> king1b = std::shared_ptr<Piece>(new King(Position(5, 1), White));
-	std::shared_ptr<Piece> bishop2b = std::shared_ptr<Piece>(new Bishop(Position(6, 1), White));
-	std::shared_ptr<Piece> knight2b = std::shared_ptr<Piece>(new Knight(Position(7, 1), White));
-	std::shared_ptr<Piece> rook2b = std::shared_ptr<Piece>(new Rook(Position(8, 1), White));
-	std::shared_ptr<Piece> pawn1b = std::shared_ptr<Piece>(new Pawn(Position(1, 2), White));
-	std::shared_ptr<Piece> pawn2b = std::shared_ptr<Piece>(new Pawn(Position(2, 2), White));
-	std::shared_ptr<Piece> pawn3b = std::shared_ptr<Piece>(new Pawn(Position(3, 2), White));
-	std::shared_ptr<Piece> pawn4b = std::shared_ptr<Piece>(new Pawn(Position(4, 2), White));
-	std::shared_ptr<Piece> pawn5b = std::shared_ptr<Piece>(new Pawn(Position(5, 2), White));
-	std::shared_ptr<Piece> pawn6b = std::shared_ptr<Piece>(new Pawn(Position(6, 2), White));
-	std::shared_ptr<Piece> pawn7b = std::shared_ptr<Piece>(new Pawn(Position(7, 2), White));
-	std::shared_ptr<Piece> pawn8b = std::shared_ptr<Piece>(new Pawn(Position(8, 2), White));
+	auto rook1b = std::make_shared<Rook>(Rook(Position(1, 1), White));
+	auto knight1b = std::make_shared<Knight>(Knight(Position(2, 1), White));
+	auto bishop1b = std::make_shared<Bishop>(Bishop(Position(3, 1), White));
+	auto queen1b = std::make_shared<Queen>(Queen(Position(4, 1), White));
+	auto king1b = std::make_shared<King>(King(Position(5, 1), White));
+	auto bishop2b = std::make_shared<Bishop>(Bishop(Position(6, 1), White));
+	auto knight2b = std::make_shared<Knight>(Knight(Position(7, 1), White));
+	auto rook2b = std::make_shared<Rook>(Rook(Position(8, 1), White));
 
 	whitePieces_.push_back(std::move(rook1b));
 	whitePieces_.push_back(std::move(knight1b));
@@ -31,31 +23,24 @@ Chessboard::Chessboard()
 	whitePieces_.push_back(std::move(bishop2b));
 	whitePieces_.push_back(std::move(knight2b));
 	whitePieces_.push_back(std::move(rook2b));
-	whitePieces_.push_back(std::move(pawn1b));
-	whitePieces_.push_back(std::move(pawn2b));
-	whitePieces_.push_back(std::move(pawn3b));
-	whitePieces_.push_back(std::move(pawn4b));
-	whitePieces_.push_back(std::move(pawn5b));
-	whitePieces_.push_back(std::move(pawn6b));
-	whitePieces_.push_back(std::move(pawn7b));
-	whitePieces_.push_back(std::move(pawn8b));
 
-	std::shared_ptr<Piece> rook1w = std::shared_ptr<Piece>(new Rook(Position(1, 8), Black));
-	std::shared_ptr<Piece> knight1w = std::shared_ptr<Piece>(new Knight(Position(2, 8), Black));
-	std::shared_ptr<Piece> bishop1w = std::shared_ptr<Piece>(new Bishop(Position(3, 8), Black));
-	std::shared_ptr<Piece> queen1w = std::shared_ptr<Piece>(new Queen(Position(4, 8), Black));
-	std::shared_ptr<Piece> king1w = std::shared_ptr<Piece>(new King(Position(5, 8), Black));
-	std::shared_ptr<Piece> bishop2w = std::shared_ptr<Piece>(new Bishop(Position(6, 8), Black));
-	std::shared_ptr<Piece> knight2w = std::shared_ptr<Piece>(new Knight(Position(7, 8), Black));
-	std::shared_ptr<Piece> rook2w = std::shared_ptr<Piece>(new Rook(Position(8, 8), Black));
-	std::shared_ptr<Piece> pawn1w = std::shared_ptr<Piece>(new Pawn(Position(1, 7), Black));
-	std::shared_ptr<Piece> pawn2w = std::shared_ptr<Piece>(new Pawn(Position(2, 7), Black));
-	std::shared_ptr<Piece> pawn3w = std::shared_ptr<Piece>(new Pawn(Position(3, 7), Black));
-	std::shared_ptr<Piece> pawn4w = std::shared_ptr<Piece>(new Pawn(Position(4, 7), Black));
-	std::shared_ptr<Piece> pawn5w = std::shared_ptr<Piece>(new Pawn(Position(5, 7), Black));
-	std::shared_ptr<Piece> pawn6w = std::shared_ptr<Piece>(new Pawn(Position(6, 7), Black));
-	std::shared_ptr<Piece> pawn7w = std::shared_ptr<Piece>(new Pawn(Position(7, 7), Black));
-	std::shared_ptr<Piece> pawn8w = std::shared_ptr<Piece>(new Pawn(Position(8, 7), Black));
+	// Create pawns
+	for (int i = 1; i <= 8; ++i)
+	{
+		auto pawn = std::make_shared<Pawn>(Pawn(Position(i, 2), White));
+		whitePieces_.push_back(std::move(pawn));
+	}
+
+
+
+	auto rook1w = std::make_shared<Rook>(Rook(Position(1, 8), Black));
+	auto knight1w = std::make_shared<Knight>(Knight(Position(2, 8), Black));
+	auto bishop1w = std::make_shared<Bishop>(Bishop(Position(3, 8), Black));
+	auto queen1w = std::make_shared<Queen>(Queen(Position(4, 8), Black));
+	auto king1w = std::make_shared<King>(King(Position(5, 8), Black));
+	auto bishop2w = std::make_shared<Bishop>(Bishop(Position(6, 8), Black));
+	auto knight2w = std::make_shared<Knight>(Knight(Position(7, 8), Black));
+	auto rook2w = std::make_shared<Rook>(Rook(Position(8, 8), Black));
 
 	blackPieces_.push_back(std::move(rook1w));
 	blackPieces_.push_back(std::move(knight1w));
@@ -65,14 +50,12 @@ Chessboard::Chessboard()
 	blackPieces_.push_back(std::move(bishop2w));
 	blackPieces_.push_back(std::move(knight2w));
 	blackPieces_.push_back(std::move(rook2w));
-	blackPieces_.push_back(std::move(pawn1w));
-	blackPieces_.push_back(std::move(pawn2w));
-	blackPieces_.push_back(std::move(pawn3w));
-	blackPieces_.push_back(std::move(pawn4w));
-	blackPieces_.push_back(std::move(pawn5w));
-	blackPieces_.push_back(std::move(pawn6w));
-	blackPieces_.push_back(std::move(pawn7w));
-	blackPieces_.push_back(std::move(pawn8w));
+
+	for (int i = 1; i <= 8; ++i)
+	{
+		auto pawn = std::make_shared<Pawn>(Pawn(Position(i, 7), Black));
+		blackPieces_.push_back(std::move(pawn));
+	}
 
 	round_ = 0;
 }
@@ -142,7 +125,7 @@ void Chessboard::upgradePiece(Piece& piece_to_upgrade, int choice)
 	this->removePiece(piece_to_upgrade, piece_to_upgrade.color());
 	if (choice == 1)
 	{
-		std::shared_ptr<Piece> queen = std::shared_ptr<Piece>(new Queen(upgradePos, upgradeColor));
+		auto queen = std::make_shared<Queen>(Queen(upgradePos, upgradeColor));
 		if (upgradeColor == White)
 		{
 			whitePieces_.push_back(std::move(queen));
@@ -154,7 +137,7 @@ void Chessboard::upgradePiece(Piece& piece_to_upgrade, int choice)
 	}
 	if (choice == 2)
 	{
-		std::shared_ptr<Piece> knight = std::shared_ptr<Piece>(new Knight(upgradePos, upgradeColor));
+		auto knight = std::make_shared<Knight>(Knight(upgradePos, upgradeColor));
 		if (upgradeColor == White)
 		{
 			whitePieces_.push_back(std::move(knight));
@@ -166,7 +149,7 @@ void Chessboard::upgradePiece(Piece& piece_to_upgrade, int choice)
 	}
 	if (choice == 3)
 	{
-		std::shared_ptr<Piece> bishop = std::shared_ptr<Piece>(new Bishop(upgradePos, upgradeColor));
+		auto bishop = std::make_shared<Bishop>(Bishop(upgradePos, upgradeColor));
 		if (upgradeColor == White)
 		{
 			whitePieces_.push_back(std::move(bishop));
@@ -178,7 +161,7 @@ void Chessboard::upgradePiece(Piece& piece_to_upgrade, int choice)
 	}
 	if (choice == 4)
 	{
-		std::shared_ptr<Piece> rook = std::shared_ptr<Piece>(new Rook(upgradePos, upgradeColor));
+		auto rook = std::make_shared<Rook>(Rook(upgradePos, upgradeColor));
 		if (upgradeColor == White)
 		{
 			whitePieces_.push_back(std::move(rook));
