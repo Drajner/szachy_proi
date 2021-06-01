@@ -1,7 +1,7 @@
 #include "Chessboard.h"
 #include "piece.h"
 
-Piece::Piece(Position startPosition, Color color) : position_(startPosition), color_(color) {
+Piece::Piece(Position startPosition, Color color) : position_(startPosition), color_(color), moved_(false) {
 
 }
 
@@ -13,26 +13,38 @@ Position Piece::position() const {
 	return position_;
 }
 
-void Piece::move_to(Chessboard& chessboard, Position newPosition) {
-	position_ = newPosition;
-
-	std::vector<std::shared_ptr<Piece>> enemyPieces = color() == White ? chessboard.blackPieces() : chessboard.whitePieces();
-
-	for (auto piece = enemyPieces.begin(); piece != enemyPieces.end(); piece++) // TODO: Change to getting the pieces by color
-	{
-		if ((**piece).position_ == position_)
-		{
-			//chessboard.removePiece((**piece), ); // How do i get the player exactly?
-		}
-	}
+bool Piece::moved() const {
+	return moved_;
 }
 
-void Piece::try_add_movement_option(Position pos, std::vector<Position>& positions, const Chessboard& chessboard) const {
+void Piece::move_to(Chessboard& chessboard, Position newPosition) {
+	if (chessboard.pieceExists(newPosition) && chessboard.getPiece(newPosition).color() != color_) {
+		chessboard.removePiece(chessboard.getPiece(newPosition), color_ == White ? Black : White);
+	}
+
+	position_ = newPosition;
+
+	moved_ = true;
+}
+
+bool Piece::try_add_movement_option(Position pos, std::vector<Position>& positions, const Chessboard& chessboard) const {
 	if (pos.on_chessboard() && pos != position_) {
-		if (!chessboard.pieceExists(pos) || chessboard.getPiece(pos).color() != color()) {
+		if (chessboard.pieceExists(pos))
+		{
+			if (chessboard.getPiece(pos).color() != color())
+			{
+				positions.push_back(pos);
+			}
+			return false;
+		}
+		else
+		{
 			positions.push_back(pos);
+			return true;
 		}
 	}
+
+	return false;
 }
 
 bool Piece::operator==(const Piece& other) const {
@@ -48,7 +60,7 @@ std::ostream& operator<<(std::ostream& out, const Piece& piece) {
 	return out;
 }
 
-Pawn::Pawn(Position startPosition, Color color) : Piece(startPosition, color), firstMove_(true) {}
+Pawn::Pawn(Position startPosition, Color color) : Piece(startPosition, color) {}
 
 std::string Pawn::full_name() const {
 	return "Pawn";
@@ -63,12 +75,10 @@ std::vector<Position> Pawn::possible_moves(const Chessboard& chessboard) const {
 	Position pos = position();
 
 	if (color() == White) {
-		if (pos.y() < 8) {
-			possible.push_back(pos + Position(1, 0));
-		}
+		bool succeeded = try_add_movement_option(pos + Position(0, 1), possible, chessboard);
 
-		if (firstMove_ && pos.y() < 7) {
-			possible.push_back(pos + Position(2, 0));
+		if (succeeded && !moved_ && pos.y() < 7) {
+			try_add_movement_option(pos + Position(0, 2), possible, chessboard);
 		}
 
 		auto tryPos = pos + Position(1, -1);
@@ -82,13 +92,10 @@ std::vector<Position> Pawn::possible_moves(const Chessboard& chessboard) const {
 		}
 	}
 	else {
-		Position pos = position();
-		if (pos.y() > 1) {
-			possible.push_back(pos + Position(-1, 0));
-		}
+		bool succeeded = try_add_movement_option(pos + Position(0, -1), possible, chessboard);
 
-		if (firstMove_ && pos.y() > 2) {
-			possible.push_back(pos + Position(-2, 0));
+		if (succeeded && !moved() && pos.y() > 2) {
+			try_add_movement_option(pos + Position(0, -2), possible, chessboard);
 		}
 
 		auto tryPos = pos + Position(-1, -1);
@@ -106,10 +113,6 @@ std::vector<Position> Pawn::possible_moves(const Chessboard& chessboard) const {
 	return possible;
 }
 
-void Pawn::on_moved(Position newPosition) {
-	firstMove_ = false;
-}
-
 std::string Knight::full_name() const {
 	return "Knight";
 }
@@ -120,8 +123,8 @@ char Knight::chessboard_representation() const {
 
 std::vector<Position> Knight::possible_moves(const Chessboard& chessboard) const {
 	std::vector<Position> possible;
-	for (int x = -1; x < 1; x += 1) {
-		for (int y = -2; y < 2; y += 4) {
+	for (int x = -1; x <= 1; x += 2) {
+		for (int y = -2; y <= 2; y += 4) {
 			try_add_movement_option(position() + Position(x, y), possible, chessboard);
 			try_add_movement_option(position() + Position(y, x), possible, chessboard);
 		}
@@ -141,15 +144,11 @@ char Bishop::chessboard_representation() const {
 std::vector<Position> Bishop::possible_moves(const Chessboard& chessboard) const {
 	std::vector<Position> possible;
 
-	for (int x = -1; x < 1; x += 2) {
-		for (int y = -1; y < 1; y += 2) {
-			Position pos(position_.x(), position_.y());
+	for (int x = -1; x <= 1; x += 2) {
+		for (int y = -1; y <= 1; y += 2) {
+			Position pos = position();
 
-			while (pos.on_chessboard()) {
-				pos += Position(x, y);
-
-				try_add_movement_option(pos, possible, chessboard);
-			}
+			while (try_add_movement_option(pos += Position(x, y), possible, chessboard)) {}
 		}
 	}
 
@@ -166,10 +165,13 @@ char Rook::chessboard_representation() const {
 
 std::vector<Position> Rook::possible_moves(const Chessboard& chessboard) const {
 	std::vector<Position> possible;
+	Position pos = position();
+	Position newPos = pos;
+	Position deltas[4] = { Position(1, 0), Position(0, 1), Position(-1, 0), Position(0, -1) };
 
-	for (int i = 1; i < 8; i++) {
-		try_add_movement_option(Position(i, position_.y()), possible, chessboard);
-		try_add_movement_option(Position(position_.x(), i), possible, chessboard);
+	for (auto delta : deltas) {
+		while (try_add_movement_option(newPos += delta, possible, chessboard)) {}
+		newPos = pos;
 	}
 
 	return possible;
@@ -186,16 +188,12 @@ char Queen::chessboard_representation() const {
 std::vector<Position> Queen::possible_moves(const Chessboard& chessboard) const {
 	std::vector<Position> possible;
 
-	for (int x = -1; x < 1; x++) {
-		for (int y = -1; y < 1; y++) {
+	for (int x = -1; x <= 1; x++) {
+		for (int y = -1; y <= 1; y++) {
 			if (!(x == 0 && y == 0)) {
-				Position pos(position_.x(), position_.y());
+				Position pos = position();
 
-				while (pos.on_chessboard()) {
-					pos += Position(x, y);
-
-					try_add_movement_option(pos, possible, chessboard);
-				}
+				while (try_add_movement_option(pos += Position(x, y), possible, chessboard)) {}
 			}
 		}
 	}

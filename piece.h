@@ -15,6 +15,8 @@ protected:
 	Position position_;
 	// Color of the piece
 	Color color_;
+	// Has this piece moved yet
+	bool moved_;
 public:
 	/**
 	 * Creates a new chess piece
@@ -29,6 +31,8 @@ public:
 
 	Position position() const;
 
+	bool moved() const;
+
 	// Full piece name, to be set in the constructor of an inheriting piece
 	virtual std::string full_name() const = 0;
 
@@ -42,13 +46,6 @@ public:
 	 * @return Vector of possible new positions to take
 	 */
 	virtual std::vector<Position> possible_moves(const Chessboard& chessboard) const = 0;
-
-	/**
-	 * Executed when the piece moves
-	 *
-	 * @param newPosition The new piece position
-	 */
-	virtual void on_moved(Position newPosition) {}
 
 	/**
 	 * Moves this piece to a new position on the chessboard. If move will cause an enemy piece to be captured, it will be removed from the chessboard
@@ -75,19 +72,24 @@ public:
 	// Appends the short char representation to the stream
 	friend std::ostream& operator<<(std::ostream& out, const Piece& piece);
 protected:
-	void try_add_movement_option(Position pos, std::vector<Position>& positions, const Chessboard& chessboard) const;
+	
+	/**
+	 * Tries to add move to a vector of positions. Checks if move is on the chessboard and doesn't overwrite another piece from the same team
+	 *
+	 * @param pos Position to add
+	 * @param positions Vector of moves to add to
+	 * @param chessboard Game state
+	 * @returns True if the placement of moves can continue (if the space is empty), false if not
+	 */
+	bool try_add_movement_option(Position pos, std::vector<Position>& positions, const Chessboard& chessboard) const;
 };
 
 class Pawn : public Piece {
-protected:
-	bool firstMove_;
 public:
 	Pawn(Position startPosition, Color color);
 	std::string full_name() const override;
 
 	char chessboard_representation() const override;
-
-	void on_moved(Position newPosition) override;
 
 	std::vector<Position> possible_moves(const Chessboard& chessboard) const override;
 };

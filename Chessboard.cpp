@@ -6,73 +6,56 @@
 
 Chessboard::Chessboard()
 {
-	std::shared_ptr<Piece> rook1b = std::shared_ptr<Piece>(new Rook(Position(1, 1), Black));
-	std::shared_ptr<Piece> knight1b = std::shared_ptr<Piece>(new Knight(Position(1, 2), Black));
-	std::shared_ptr<Piece> bishop1b = std::shared_ptr<Piece>(new Bishop(Position(1, 3), Black));
-	std::shared_ptr<Piece> queen1b = std::shared_ptr<Piece>(new Queen(Position(1, 4), Black));
-	std::shared_ptr<Piece> king1b = std::shared_ptr<Piece>(new King(Position(1, 5), Black));
-	std::shared_ptr<Piece> bishop2b = std::shared_ptr<Piece>(new Bishop(Position(1, 6), Black));
-	std::shared_ptr<Piece> knight2b = std::shared_ptr<Piece>(new Knight(Position(1, 7), Black));
-	std::shared_ptr<Piece> rook2b = std::shared_ptr<Piece>(new Rook(Position(1, 8), Black));
-	std::shared_ptr<Piece> pawn1b = std::shared_ptr<Piece>(new Pawn(Position(2, 1), Black));
-	std::shared_ptr<Piece> pawn2b = std::shared_ptr<Piece>(new Pawn(Position(2, 2), Black));
-	std::shared_ptr<Piece> pawn3b = std::shared_ptr<Piece>(new Pawn(Position(2, 3), Black));
-	std::shared_ptr<Piece> pawn4b = std::shared_ptr<Piece>(new Pawn(Position(2, 4), Black));
-	std::shared_ptr<Piece> pawn5b = std::shared_ptr<Piece>(new Pawn(Position(2, 5), Black));
-	std::shared_ptr<Piece> pawn6b = std::shared_ptr<Piece>(new Pawn(Position(2, 6), Black));
-	std::shared_ptr<Piece> pawn7b = std::shared_ptr<Piece>(new Pawn(Position(2, 7), Black));
-	std::shared_ptr<Piece> pawn8b = std::shared_ptr<Piece>(new Pawn(Position(2, 8), Black));
+	auto rook1b = std::make_shared<Rook>(Rook(Position(1, 1), White));
+	auto knight1b = std::make_shared<Knight>(Knight(Position(2, 1), White));
+	auto bishop1b = std::make_shared<Bishop>(Bishop(Position(3, 1), White));
+	auto queen1b = std::make_shared<Queen>(Queen(Position(4, 1), White));
+	auto king1b = std::make_shared<King>(King(Position(5, 1), White));
+	auto bishop2b = std::make_shared<Bishop>(Bishop(Position(6, 1), White));
+	auto knight2b = std::make_shared<Knight>(Knight(Position(7, 1), White));
+	auto rook2b = std::make_shared<Rook>(Rook(Position(8, 1), White));
 
-	blackPieces_.push_back(std::move(rook1b));
-	blackPieces_.push_back(std::move(knight1b));
-	blackPieces_.push_back(std::move(bishop1b));
-	blackPieces_.push_back(std::move(queen1b));
-	blackPieces_.push_back(std::move(king1b));
-	blackPieces_.push_back(std::move(bishop2b));
-	blackPieces_.push_back(std::move(knight2b));
-	blackPieces_.push_back(std::move(rook2b));
-	blackPieces_.push_back(std::move(pawn1b));
-	blackPieces_.push_back(std::move(pawn2b));
-	blackPieces_.push_back(std::move(pawn3b));
-	blackPieces_.push_back(std::move(pawn4b));
-	blackPieces_.push_back(std::move(pawn5b));
-	blackPieces_.push_back(std::move(pawn6b));
-	blackPieces_.push_back(std::move(pawn7b));
-	blackPieces_.push_back(std::move(pawn8b));
+	whitePieces_.push_back(std::move(rook1b));
+	whitePieces_.push_back(std::move(knight1b));
+	whitePieces_.push_back(std::move(bishop1b));
+	whitePieces_.push_back(std::move(queen1b));
+	whitePieces_.push_back(std::move(king1b));
+	whitePieces_.push_back(std::move(bishop2b));
+	whitePieces_.push_back(std::move(knight2b));
+	whitePieces_.push_back(std::move(rook2b));
 
-	std::shared_ptr<Piece> rook1w = std::shared_ptr<Piece>(new Rook(Position(8, 1), White));
-	std::shared_ptr<Piece> knight1w = std::shared_ptr<Piece>(new Knight(Position(8, 2), White));
-	std::shared_ptr<Piece> bishop1w = std::shared_ptr<Piece>(new Bishop(Position(8, 3), White));
-	std::shared_ptr<Piece> queen1w = std::shared_ptr<Piece>(new Queen(Position(8, 4), White));
-	std::shared_ptr<Piece> king1w = std::shared_ptr<Piece>(new King(Position(8, 5), White));
-	std::shared_ptr<Piece> bishop2w = std::shared_ptr<Piece>(new Bishop(Position(8, 6), White));
-	std::shared_ptr<Piece> knight2w = std::shared_ptr<Piece>(new Knight(Position(8, 7), White));
-	std::shared_ptr<Piece> rook2w = std::shared_ptr<Piece>(new Rook(Position(8, 8), White));
-	std::shared_ptr<Piece> pawn1w = std::shared_ptr<Piece>(new Pawn(Position(7, 1), White));
-	std::shared_ptr<Piece> pawn2w = std::shared_ptr<Piece>(new Pawn(Position(7, 2), White));
-	std::shared_ptr<Piece> pawn3w = std::shared_ptr<Piece>(new Pawn(Position(7, 3), White));
-	std::shared_ptr<Piece> pawn4w = std::shared_ptr<Piece>(new Pawn(Position(7, 4), White));
-	std::shared_ptr<Piece> pawn5w = std::shared_ptr<Piece>(new Pawn(Position(7, 5), White));
-	std::shared_ptr<Piece> pawn6w = std::shared_ptr<Piece>(new Pawn(Position(7, 6), White));
-	std::shared_ptr<Piece> pawn7w = std::shared_ptr<Piece>(new Pawn(Position(7, 7), White));
-	std::shared_ptr<Piece> pawn8w = std::shared_ptr<Piece>(new Pawn(Position(7, 8), White));
+	// Create pawns
+	for (int i = 1; i <= 8; ++i)
+	{
+		auto pawn = std::make_shared<Pawn>(Pawn(Position(i, 2), White));
+		whitePieces_.push_back(std::move(pawn));
+	}
 
-	whitePieces_.push_back(std::move(rook1w));
-	whitePieces_.push_back(std::move(knight1w));
-	whitePieces_.push_back(std::move(bishop1w));
-	whitePieces_.push_back(std::move(queen1w));
-	whitePieces_.push_back(std::move(king1w));
-	whitePieces_.push_back(std::move(bishop2w));
-	whitePieces_.push_back(std::move(knight2w));
-	whitePieces_.push_back(std::move(rook2w));
-	whitePieces_.push_back(std::move(pawn1w));
-	whitePieces_.push_back(std::move(pawn2w));
-	whitePieces_.push_back(std::move(pawn3w));
-	whitePieces_.push_back(std::move(pawn4w));
-	whitePieces_.push_back(std::move(pawn5w));
-	whitePieces_.push_back(std::move(pawn6w));
-	whitePieces_.push_back(std::move(pawn7w));
-	whitePieces_.push_back(std::move(pawn8w));
+
+
+	auto rook1w = std::make_shared<Rook>(Rook(Position(1, 8), Black));
+	auto knight1w = std::make_shared<Knight>(Knight(Position(2, 8), Black));
+	auto bishop1w = std::make_shared<Bishop>(Bishop(Position(3, 8), Black));
+	auto queen1w = std::make_shared<Queen>(Queen(Position(4, 8), Black));
+	auto king1w = std::make_shared<King>(King(Position(5, 8), Black));
+	auto bishop2w = std::make_shared<Bishop>(Bishop(Position(6, 8), Black));
+	auto knight2w = std::make_shared<Knight>(Knight(Position(7, 8), Black));
+	auto rook2w = std::make_shared<Rook>(Rook(Position(8, 8), Black));
+
+	blackPieces_.push_back(std::move(rook1w));
+	blackPieces_.push_back(std::move(knight1w));
+	blackPieces_.push_back(std::move(bishop1w));
+	blackPieces_.push_back(std::move(queen1w));
+	blackPieces_.push_back(std::move(king1w));
+	blackPieces_.push_back(std::move(bishop2w));
+	blackPieces_.push_back(std::move(knight2w));
+	blackPieces_.push_back(std::move(rook2w));
+
+	for (int i = 1; i <= 8; ++i)
+	{
+		auto pawn = std::make_shared<Pawn>(Pawn(Position(i, 7), Black));
+		blackPieces_.push_back(std::move(pawn));
+	}
 
 	round_ = 0;
 }
@@ -109,6 +92,7 @@ Piece& Chessboard::getPiece(const Position& position) const
 			return *e;
 		}
 	}
+	throw CannotFindPiece();
 }
 
 bool Chessboard::pieceExists(const Position& position) const
@@ -130,7 +114,116 @@ bool Chessboard::pieceExists(const Position& position) const
 	return false;
 }
 
-int Chessboard::round()
+void Chessboard::upgradePiece(Piece& piece_to_upgrade, int choice)
+{
+	// 1 - queen
+	// 2 - knight
+	// 3 - bishop
+	// 4 - rook
+	Position upgradePos = piece_to_upgrade.position();
+	Color upgradeColor = piece_to_upgrade.color();
+	this->removePiece(piece_to_upgrade, piece_to_upgrade.color());
+	if (choice == 1)
+	{
+		auto queen = std::make_shared<Queen>(Queen(upgradePos, upgradeColor));
+		if (upgradeColor == White)
+		{
+			whitePieces_.push_back(std::move(queen));
+		}
+		else
+		{
+			blackPieces_.push_back(std::move(queen));
+		}
+	}
+	if (choice == 2)
+	{
+		auto knight = std::make_shared<Knight>(Knight(upgradePos, upgradeColor));
+		if (upgradeColor == White)
+		{
+			whitePieces_.push_back(std::move(knight));
+		}
+		else
+		{
+			blackPieces_.push_back(std::move(knight));
+		}
+	}
+	if (choice == 3)
+	{
+		auto bishop = std::make_shared<Bishop>(Bishop(upgradePos, upgradeColor));
+		if (upgradeColor == White)
+		{
+			whitePieces_.push_back(std::move(bishop));
+		}
+		else
+		{
+			blackPieces_.push_back(std::move(bishop));
+		}
+	}
+	if (choice == 4)
+	{
+		auto rook = std::make_shared<Rook>(Rook(upgradePos, upgradeColor));
+		if (upgradeColor == White)
+		{
+			whitePieces_.push_back(std::move(rook));
+		}
+		else
+		{
+			blackPieces_.push_back(std::move(rook));
+		}
+	}
+}
+
+bool Chessboard::checkUpgradePossibility(Player& player) const
+{
+	if (player.getColor() == White)
+	{
+		for (auto e : whitePieces_)
+		{
+			if (e->chessboard_representation() == 'p' && e->position().y() == 8)
+			{
+				return true;
+			}
+		}
+	}
+	if (player.getColor() == Black)
+	{
+		for (auto e : blackPieces_)
+		{
+			if (e->chessboard_representation() == 'P' && e->position().y() == 1)
+			{
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+Piece& Chessboard::getPieceToUpgrade(Player& player) const
+{
+	if (player.getColor() == White)
+	{
+		for (auto& e : whitePieces_)
+		{
+			if (e->chessboard_representation() == 'p' && e->position().y() == 8)
+			{
+				return *e;
+			}
+		}
+	}
+	if (player.getColor() == Black)
+	{
+		for (auto& e : blackPieces_)
+		{
+			if (e->chessboard_representation() == 'P' && e->position().y() == 1)
+			{
+				return *e;
+			}
+		}
+	}
+	throw CannotFindPiece();
+}
+
+int Chessboard::round() const
 {
 	return round_;
 }
@@ -183,42 +276,38 @@ void Chessboard::printLine(int lineNumber, int firstColor, int secondColor, std:
 	int letters[8] = { 1,2,3,4,5,6,7,8 };
 	for (int i = 0; i < squareWidth / 2; i++)
 	{
-		for (int j = 1; j < 5; j++)
+		for (int j = 1; j < 9; j++)
 		{
 			for (int k = 0; k < squareWidth; k++)
 			{
 				if (i == 1 && k == 2)
 				{
-					if (pieceExists(Position(lineNumber, j * 2-1)))
+					if (pieceExists(Position(j, lineNumber)))
 					{
-						os << getPiece(Position(lineNumber, j * 2-1));
+						os << getPiece(Position(j, lineNumber));
+					}
+					else
+					{
+						if (j % 2 == 0)
+						{
+							os << char(secondColor);
+						}
+						else
+						{
+							os << char(firstColor);
+						}
+					}
+				}
+				else
+				{
+					if (j % 2 == 0)
+					{
+						os << char(secondColor);
 					}
 					else
 					{
 						os << char(firstColor);
 					}
-				}
-				else
-				{
-					os << char(firstColor);
-				}
-			}
-			for (int k = 0; k < squareWidth; k++)
-			{
-				if (i == 1 && k == 2)
-				{
-					if (pieceExists(Position(lineNumber, j * 2)))
-					{
-						os << getPiece(Position(lineNumber, j * 2));
-					}
-					else
-					{
-						os << char(secondColor);
-					}
-				}
-				else
-				{
-					os << char(secondColor);
 				}
 			}
 		}
@@ -245,4 +334,216 @@ std::ostream& operator<<(std::ostream& os, const Chessboard& chessboard)
 		}
 	}
 	return os;
+}
+
+// player - player whos enemy king is under check
+//color - enemy color
+bool Chessboard::checkIfCheck(Player& player, Color color) const
+{
+	if (color == White)
+	{
+		Position kingPos = Position(0, 0);
+		for (auto e : this->whitePieces())
+		{
+			if (e->chessboard_representation() == 'k')
+			{
+				kingPos.x(e->position().x());
+				kingPos.y(e->position().y());
+			}
+		}
+		for (auto e : player.allPossibleMoves(*this))
+		{
+			if (e.second == Position(kingPos))
+			{
+				return true;
+			}
+		}
+	}
+	if (color == Black)
+	{
+		Position kingPos = Position(0, 0);
+		for (auto e : this->blackPieces())
+		{
+			if (e->chessboard_representation() == 'K')
+			{
+				kingPos.x(e->position().x());
+				kingPos.y(e->position().y());
+			}
+		}
+		for (auto e : player.allPossibleMoves(*this))
+		{
+			if (e.second == Position(kingPos))
+			{
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+// player - color's enemy
+//color - color who can made castle
+bool Chessboard::checkShortCastlePossibility(Player& player, Color color) const
+{
+	if (color == White)
+	{
+		Piece& king = this->getPiece(Position(5, 1));
+		Piece& rook = this->getPiece(Position(8, 1));
+		return king.chessboard_representation() == 'k' && rook.chessboard_representation() == 'r' && !king.moved() && !rook.moved() 
+				&& !this->checkIfCheck(player, color) && !this->pieceExists(Position(6, 1)) && !this->pieceExists(Position(7, 1)) 
+				&& !this->checkAttackPossibility(player, Position(6, 1)) && !this->checkAttackPossibility(player, Position(7, 1));
+	}
+	else
+	{
+		Piece& king = this->getPiece(Position(5, 8));
+		Piece& rook = this->getPiece(Position(8, 8));
+		return king.chessboard_representation() == 'K' && rook.chessboard_representation() == 'R' && !king.moved() && !rook.moved() 
+				&& !this->checkIfCheck(player, color) && !this->pieceExists(Position(6, 8)) && !this->pieceExists(Position(7, 8)) 
+				&& !this->checkAttackPossibility(player, Position(6, 8)) && !this->checkAttackPossibility(player, Position(7, 8));
+	}
+}
+
+// player - color's enemy
+//color - color who can made castle
+bool Chessboard::checkLongCastlePossibility(Player& player, Color color) const
+{
+	if (color == White)
+	{
+		Piece& king = this->getPiece(Position(5, 1));
+		Piece& rook = this->getPiece(Position(1, 1));
+		return king.chessboard_representation() == 'k' && rook.chessboard_representation() == 'r' && !king.moved() && !rook.moved() && !this->checkIfCheck(player, color)
+				&& !this->pieceExists(Position(2, 1)) && !this->pieceExists(Position(3, 1)) && !this->pieceExists(Position(4, 1)) 
+				&& !this->checkAttackPossibility(player, Position(4, 1)) && !this->checkAttackPossibility(player, Position(3, 1));
+	}
+	else
+	{
+		Piece& king = this->getPiece(Position(5, 8));
+		Piece& rook = this->getPiece(Position(1, 8));
+		return king.chessboard_representation() == 'K' && rook.chessboard_representation() == 'R' && !king.moved() && !rook.moved() 
+				&& !this->checkIfCheck(player, color) && !this->pieceExists(Position(2, 8)) && !this->pieceExists(Position(3, 8)) 
+				&& !this->pieceExists(Position(4, 8)) && !this->checkAttackPossibility(player, Position(4, 8)) && !this->checkAttackPossibility(player, Position(3, 8));
+		return false;
+	}
+}
+
+std::pair<std::shared_ptr<Piece>, Position> Chessboard::getShortCastle(Color color) const
+{
+	if (color == White)
+	{
+		for (auto& e : whitePieces_)
+		{
+			if (e->position() == Position(5,1))
+			{
+				return std::make_pair(e, Position(7, 1));
+			}
+		}
+	}
+	if (color == Black)
+	{
+		for (auto& e : blackPieces_)
+		{
+			if (e->position() == Position(5, 8))
+			{
+				return std::make_pair(e, Position(7, 8));
+			}
+		}
+	}
+}
+
+std::pair<std::shared_ptr<Piece>, Position> Chessboard::getLongCastle(Color color) const
+{
+	if (color == White)
+	{
+		for (auto& e : whitePieces_)
+		{
+			if (e->position() == Position(5, 1))
+			{
+				return std::make_pair(e, Position(3, 1));
+			}
+		}
+	}
+	if (color == Black)
+	{
+		for (auto& e : blackPieces_)
+		{
+			if (e->position() == Position(5, 8))
+			{
+				return std::make_pair(e, Position(3, 8));
+			}
+		}
+	}
+}
+
+void Chessboard::doShortCastle(Color color)
+{
+	if (color == White)
+	{
+		Piece& king = this->getPiece(Position(5, 1));
+		king.move_to(*this, Position(7, 1));
+		Piece& rook = this->getPiece(Position(8, 1));
+		rook.move_to(*this, Position(6, 1));
+	}
+	else
+	{
+		Piece& king = this->getPiece(Position(5, 8));
+		king.move_to(*this, Position(7, 8));
+		Piece& rook = this->getPiece(Position(8, 8));
+		rook.move_to(*this, Position(6, 8));
+	}
+}
+
+void Chessboard::doLongCastle(Color color)
+{
+	if (color == White)
+	{
+		Piece& king = this->getPiece(Position(5, 1));
+		king.move_to(*this, Position(3, 1));
+		Piece& rook = this->getPiece(Position(1, 1));
+		rook.move_to(*this, Position(4, 1));
+	}
+	else
+	{
+		Piece& king = this->getPiece(Position(5, 8));
+		king.move_to(*this, Position(3, 8));
+		Piece& rook = this->getPiece(Position(1, 8));
+		rook.move_to(*this, Position(4, 8));
+	}
+}
+
+bool Chessboard::checkAttackPossibility(Player& player, const Position& position) const
+{
+	for (auto e : player.allPossibleMoves(*this))
+	{
+		if (e.second == position)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+bool Chessboard::checkWin(Color color) const
+{
+	if (color == Black)
+	{
+		for (auto e : this->whitePieces())
+		{
+			if (e->chessboard_representation() == 'k')
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+	if (color == White)
+	{
+		for (auto e : this->blackPieces())
+		{
+			if (e->chessboard_representation() == 'K')
+			{
+				return false;
+			}
+		}
+		return true;
+	}
 }
