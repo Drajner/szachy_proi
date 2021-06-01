@@ -9,7 +9,7 @@
 //}
 Game::Game()
 {
-
+	
 }
 
 void Game::rollOrder()
@@ -35,6 +35,11 @@ void Game::swap()
 	{
 		currentPlayer_ = firstPlayer_.get();
 	}
+}
+
+void Game::playPvP()
+{
+
 }
 
 //bool Game::checkIfCheck(Player& player, Color color)
