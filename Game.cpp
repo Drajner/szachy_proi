@@ -39,6 +39,26 @@ void Game::swap()
 
 void Game::playPvP()
 {
+	Chessboard chessboard = Chessboard();
+	std::cout << "Please enter the name for player with white pieces. \n";
+	std::string white_player_name;
+	std::cin >> white_player_name;
+	auto white_player = std::make_unique<Human>(Human(White, white_player_name, chessboard));
+	firstPlayer_ = std::move(white_player);
+	std::cout << "Please enter the name for player with black pieces. \n";
+	std::string black_player_name;
+	std::cin >> black_player_name;
+	auto black_player = std::make_unique<Human>(Human(Black, black_player_name, chessboard));
+	secondPlayer_ = std::move(black_player);
+	this->rollOrder();
+	do
+	{
+		std::cout << chessboard_ << std::endl;
+		std::cout << "It's " << currentPlayer_->getName() << " move.";
+		currentPlayer_->makeMove(chessboard_);
+		std::cout << chessboard_ << std::endl;
+		this->swap();
+	} 	while (!chessboard_.checkWin(White) && !chessboard_.checkWin(Black));
 
 }
 

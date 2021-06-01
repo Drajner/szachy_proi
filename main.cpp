@@ -19,19 +19,20 @@ void printLine(std::ostream& os)
 }
 int main()
 {
+	srand(time(NULL));
 	//printLine(std::cout);
-	Chessboard chess = Chessboard();
+	//Chessboard chess = Chessboard();
 	//Piece& pawn = chess.getPiece(Position(4, 8));
 	//chess.removePiece(pawn, Black);
 	//pawn.move_to(chess, Position(5, 2));
 	//Piece& piece = chess.getPiece(Position(7, 4));
 	//chess.removePiece(piece, White);
-	std::unique_ptr<Player> pl1 = std::unique_ptr<Player>(new Human(Black, "pl1", chess));
-	for (auto& e : pl1->allPossibleMoves(chess))
-	{
-		std::cout << e.first->full_name() << " [" << *e.first << "] on " << e.first->position() << " can go to " << e.second << std::endl;
-		//std::cout << e.second.x() << ", "<< e.second.y() << std::endl;
-	}
+	//std::unique_ptr<Player> pl1 = std::unique_ptr<Player>(new Human(Black, "pl1", chess));
+	//for (auto& e : pl1->allPossibleMoves(chess))
+	//{
+	//	std::cout << e.first->full_name() << " [" << *e.first << "] on " << e.first->position() << " can go to " << e.second << std::endl;
+	//	//std::cout << e.second.x() << ", "<< e.second.y() << std::endl;
+	//}
 	//pl1->makeMove(2, chess);
 	//(4,8) -> (1,5)
 	//Piece& piece1 = chess.getPiece(Position(2, 8));
@@ -46,8 +47,14 @@ int main()
 	//piece5.move_to(chess, Position(4, 6));
 	//bool check = chess.checkIfCheck(*pl1, White);
 	//std::cout << check << std::endl;
-	std::cout << chess.checkLongCastlePossibility(*pl1, White);
+	//std::cout << chess.checkLongCastlePossibility(*pl1, White);
 	//chess.doLongCastle(Black);
-	std::cout << chess;
+	//std::cout << chess;
+	//std::cout << std::endl;
+	//pl1->makeMove(chess);
+	//std::cout << std::endl;
+	//std::cout << chess;
+	Game game = Game();
+	game.playPvP();
 	return 0;
 }
