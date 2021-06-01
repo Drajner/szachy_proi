@@ -387,6 +387,10 @@ bool Chessboard::checkShortCastlePossibility(Player& player, Color color) const
 {
 	if (color == White)
 	{
+		if (!this->pieceExists(Position(5, 1)) || !this->pieceExists(Position(8, 1)))
+		{
+			return false;
+		}
 		Piece& king = this->getPiece(Position(5, 1));
 		Piece& rook = this->getPiece(Position(8, 1));
 		return king.chessboard_representation() == 'k' && rook.chessboard_representation() == 'r' && !king.moved() && !rook.moved() 
@@ -395,6 +399,10 @@ bool Chessboard::checkShortCastlePossibility(Player& player, Color color) const
 	}
 	else
 	{
+		if (!this->pieceExists(Position(5, 8)) || !this->pieceExists(Position(8, 8)))
+		{
+			return false;
+		}
 		Piece& king = this->getPiece(Position(5, 8));
 		Piece& rook = this->getPiece(Position(8, 8));
 		return king.chessboard_representation() == 'K' && rook.chessboard_representation() == 'R' && !king.moved() && !rook.moved() 
@@ -409,6 +417,10 @@ bool Chessboard::checkLongCastlePossibility(Player& player, Color color) const
 {
 	if (color == White)
 	{
+		if (!this->pieceExists(Position(5, 1)) || !this->pieceExists(Position(1, 1)))
+		{
+			return false;
+		}
 		Piece& king = this->getPiece(Position(5, 1));
 		Piece& rook = this->getPiece(Position(1, 1));
 		return king.chessboard_representation() == 'k' && rook.chessboard_representation() == 'r' && !king.moved() && !rook.moved() && !this->checkIfCheck(player, color)
@@ -417,6 +429,10 @@ bool Chessboard::checkLongCastlePossibility(Player& player, Color color) const
 	}
 	else
 	{
+		if (!this->pieceExists(Position(5, 8)) || !this->pieceExists(Position(1, 8)))
+		{
+			return false;
+		}
 		Piece& king = this->getPiece(Position(5, 8));
 		Piece& rook = this->getPiece(Position(1, 8));
 		return king.chessboard_representation() == 'K' && rook.chessboard_representation() == 'R' && !king.moved() && !rook.moved() 
