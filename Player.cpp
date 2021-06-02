@@ -9,11 +9,11 @@
 #include "Chessboard.h"
 #include "Player.h"
 
-Player::Player(Color color, std::string playerName, const Chessboard& chessboard, Player* enemy)
+Player::Player(Color color, std::string playerName, const Chessboard& chessboard)
 {
 	color_ = color;
 	name_ = playerName;
-	enemy_ = enemy;
+	enemy_ = nullptr;
 	if (color_ == Black)
 	{
 		pieces_ = chessboard.blackPieces();
@@ -40,6 +40,11 @@ std::vector<std::pair<std::shared_ptr<Piece>, Position>> Player::allPossibleMove
 void Player::setColor(Color color)
 {
 	color_ = color;
+}
+
+void Player::setEnemy(Player* enemy)
+{
+	enemy_ = enemy;
 }
 
 std::string Player::getName()
