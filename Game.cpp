@@ -67,11 +67,11 @@ void Game::playPvP()
 		{
 			std::cout << firstPlayer_->getName() << " is under attack! " << std::endl;
 		}
-		std::cout << "It's " << currentPlayer_->getName() << " move.";
+		std::cout << "It's " << currentPlayer_->getName() << " move. ";
 		currentPlayer_->makeMove(chessboard_);
 		if (chessboard_.checkUpgradePossibility(*currentPlayer_))
 		{
-			std::cout << currentPlayer_->getName() << " has to upgrade pawn." << std::endl;
+			std::cout << currentPlayer_->getName() << " has to upgrade pawn. " << std::endl;
 			std::cout << "Choose your upgrade: 1 - queen, 2 - knight, 3 - bishop, 4 - rook" << std::endl;
 			int choice;
 			std::cin >> choice;
@@ -79,7 +79,14 @@ void Game::playPvP()
 		}
 		this->swap();
 	} 	while (!chessboard_.checkWin(White) && !chessboard_.checkWin(Black));
-
+	if (chessboard_.checkWin(White))
+	{
+		std::cout << "White pieces wins!" << std::endl;
+	}
+	if (chessboard_.checkWin(Black))
+	{
+		std::cout << "Black pieces wins!" << std::endl;
+	}
 }
 
 //bool Game::checkIfCheck(Player& player, Color color)
