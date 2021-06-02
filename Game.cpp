@@ -52,6 +52,8 @@ void Game::playPvP()
 	std::cin >> black_player_name;
 	auto black_player = std::make_unique<Human>(Human(Black, black_player_name, chessboard_));
 	secondPlayer_ = std::move(black_player);
+	firstPlayer_->setEnemy(secondPlayer_.get());
+	secondPlayer_->setEnemy(firstPlayer_.get());
 	this->rollOrder();
 	bool check = false;
 	do
