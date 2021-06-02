@@ -58,6 +58,14 @@ void Game::playPvP()
 		std::cout << chessboard_ << std::endl;
 		std::cout << "It's " << currentPlayer_->getName() << " move.";
 		currentPlayer_->makeMove(chessboard_);
+		if (chessboard_.checkUpgradePossibility(*currentPlayer_))
+		{
+			std::cout << currentPlayer_->getName() << " has to upgrade pawn." << std::endl;
+			std::cout << "Choose your upgrade: 1 - queen, 2 - knight, 3 - bishop, 4 - rook" << std::endl;
+			int choice;
+			std::cin >> choice;
+			chessboard_.upgradePiece(chessboard_.getPieceToUpgrade(*currentPlayer_), choice);
+		}
 		this->swap();
 	} 	while (!chessboard_.checkWin(White) && !chessboard_.checkWin(Black));
 
