@@ -17,9 +17,11 @@ private:
 
 	// TODO: Change to game/chessboard reference?
 	std::vector<std::shared_ptr<Piece>> pieces_;
+
+	Player* enemy_ = nullptr;
 public:
 	// Player class constructor
-	Player(Color color, std::string playerName, const Chessboard& chessboard);
+	Player(Color color, std::string playerName, const Chessboard& chessboard, Player* enemy);
 
 	// issues a move(will change depending on derivative class)
 	virtual void makeMove(Chessboard& chessboard) = 0;
@@ -29,6 +31,8 @@ public:
 
 	// gets name
 	std::string getName();
+
+	Player* getEnemy();
 
 	// gets name
 	Color getColor();
@@ -44,7 +48,7 @@ public:
 class Human : public Player
 {
 public:
-	Human(Color color, std::string playerName, const Chessboard& chessboard) : Player(color, playerName, chessboard) {};
+	Human(Color color, std::string playerName, const Chessboard& chessboard, Player* enemy) : Player(color, playerName, chessboard, enemy) {};
 	void makeMove(Chessboard& chessboard) override;
 
 };
@@ -52,7 +56,7 @@ public:
 class RandIntBot : public Player
 {
 public:
-	RandIntBot(Color color, std::string playerName, const Chessboard& chessboard) : Player(color, playerName, chessboard) {};
+	RandIntBot(Color color, std::string playerName, const Chessboard& chessboard, Player* enemy) : Player(color, playerName, chessboard, enemy) {};
 	void makeMove(Chessboard& chessboard) override;
 
 };

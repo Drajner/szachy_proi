@@ -9,10 +9,11 @@
 #include "Chessboard.h"
 #include "Player.h"
 
-Player::Player(Color color, std::string playerName, const Chessboard& chessboard)
+Player::Player(Color color, std::string playerName, const Chessboard& chessboard, Player* enemy)
 {
 	color_ = color;
 	name_ = playerName;
+	enemy_ = enemy;
 	if (color_ == Black)
 	{
 		pieces_ = chessboard.blackPieces();
@@ -51,6 +52,11 @@ Color Player::getColor()
 	return color_;
 }
 
+Player* Player::getEnemy()
+{
+	return enemy_;
+}
+
 bool Player::operator==(Player& player)
 {
 	if (this->getColor() == player.getColor() && this->getName() == player.getName()) return true;
@@ -70,14 +76,14 @@ void Human::makeMove(Chessboard& chessboard)
 		std::cout << iterator << ". " << move.first->position() << " " <<  move.first->full_name() << " to " << move.second << std::endl;
 		iterator++;
 	}
-	if (chessboard.checkShortCastlePossibility(*this, this->getColor()))
+	if (chessboard.checkShortCastlePossibility(*this->getEnemy(), this->getColor()))
 	{
 		std::cout << iterator << ". Short Castle" << std::endl;
 		shortCastleNum = iterator;
 		iterator++;
 		numberOfMoves++;
 	}
-	if (chessboard.checkLongCastlePossibility(*this, this->getColor()))
+	if (chessboard.checkLongCastlePossibility(*this->getEnemy(), this->getColor()))
 	{
 		std::cout << iterator << ". Long Castle" << std::endl;
 		longCastleNum = iterator;
@@ -129,13 +135,13 @@ void RandIntBot::makeMove(Chessboard& chessboard)
 	{
 		iterator++;
 	}
-	if (chessboard.checkShortCastlePossibility(*this, this->getColor()))
+	if (chessboard.checkShortCastlePossibility(*this->getEnemy(), this->getColor()))
 	{
 		shortCastleNum = iterator;
 		iterator++;
 		numberOfMoves++;
 	}
-	if (chessboard.checkLongCastlePossibility(*this, this->getColor()))
+	if (chessboard.checkLongCastlePossibility(*this->getEnemy(), this->getColor()))
 	{
 		longCastleNum = iterator;
 		iterator++;
