@@ -14,11 +14,8 @@ class Player
 private:
 	Color color_; // 0 for black, 1 for white
 	std::string name_;
-
-	// TODO: Change to game/chessboard reference?
-	std::vector<std::shared_ptr<Piece>>& pieces_;
-
 	Player* enemy_ = nullptr;
+
 public:
 	// Player class constructor
 	Player(Color color, std::string playerName, const Chessboard& chessboard);
