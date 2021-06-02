@@ -9,8 +9,10 @@
 #include "Chessboard.h"
 #include "Player.h"
 
-Player::Player(Color color, std::string playerName, const Chessboard& chessboard)
-{
+Player::Player(Color color, std::string playerName, const Chessboard& chessboard): color_(color), 
+	name_(playerName),
+	pieces_(color == Black ? chessboard.blackPieces_ : chessboard.whitePieces_), enemy_(nullptr) {}
+/*{
 	color_ = color;
 	name_ = playerName;
 	enemy_ = nullptr;
@@ -22,7 +24,7 @@ Player::Player(Color color, std::string playerName, const Chessboard& chessboard
 	{
 		pieces_ = chessboard.whitePieces();
 	}
-}
+}*/
 
 std::vector<std::pair<std::shared_ptr<Piece>, Position>> Player::allPossibleMoves(const Chessboard& chessboard)
 {
@@ -84,10 +86,12 @@ void Human::makeMove(Chessboard& chessboard)
 		{
 			std::cout << std::endl;
 			std::cout << move.first->position() << " " << move.first->full_name() << " to:   ";
+			previousPiece = move.first;
 		}
 		std::cout << iterator << ". " << move.second << "  ";
 		iterator++;
 	}
+	std::cout << std::endl;
 	if (chessboard.checkShortCastlePossibility(*this->getEnemy(), this->getColor()))
 	{
 		std::cout << iterator << ". Short Castle" << std::endl;

@@ -16,7 +16,7 @@ private:
 	std::string name_;
 
 	// TODO: Change to game/chessboard reference?
-	std::vector<std::shared_ptr<Piece>> pieces_;
+	std::vector<std::shared_ptr<Piece>>& pieces_;
 
 	Player* enemy_ = nullptr;
 public:

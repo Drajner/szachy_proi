@@ -148,4 +148,10 @@ public:
 	bool checkWin(Color color) const;
 
 	friend std::ostream& operator<<(std::ostream& os, const Chessboard& chessboard);
+
+	friend Player;
+
+	friend Human;
+
+	friend RandIntBot;
 };
