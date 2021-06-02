@@ -53,9 +53,18 @@ void Game::playPvP()
 	auto black_player = std::make_unique<Human>(Human(Black, black_player_name, chessboard_));
 	secondPlayer_ = std::move(black_player);
 	this->rollOrder();
+	bool check = false;
 	do
 	{
 		std::cout << chessboard_ << std::endl;
+		if (chessboard_.checkIfCheck(*firstPlayer_, Black))
+		{
+			std::cout << secondPlayer_->getName() << " is under attack! " << std::endl;
+		}
+		if (chessboard_.checkIfCheck(*secondPlayer_, White))
+		{
+			std::cout << firstPlayer_->getName() << " is under attack! " << std::endl;
+		}
 		std::cout << "It's " << currentPlayer_->getName() << " move.";
 		currentPlayer_->makeMove(chessboard_);
 		if (chessboard_.checkUpgradePossibility(*currentPlayer_))
