@@ -68,12 +68,19 @@ void Human::makeMove(Chessboard& chessboard)
 	std::vector<std::pair<std::shared_ptr<Piece>, Position>> moveset;
 	std::string input;
 	int chosenMove = -1, iterator = 1, shortCastleNum = -1, longCastleNum = -2;
+	std::shared_ptr<Piece> previousPiece;
 	moveset = this->allPossibleMoves(chessboard);
 	int numberOfMoves = moveset.size();
 	std::cout << this->getName() << " please choose your next move." << std::endl;
+	previousPiece = nullptr;
 	for (auto move : moveset)
 	{
-		std::cout << iterator << ". " << move.first->position() << " " <<  move.first->full_name() << " to " << move.second << std::endl;
+		if (move.first != previousPiece)
+		{
+			std::cout << std::endl;
+			std::cout << move.first->position() << " " << move.first->full_name() << " to:   ";
+		}
+		std::cout << iterator << ". " << move.second << "  ";
 		iterator++;
 	}
 	if (chessboard.checkShortCastlePossibility(*this->getEnemy(), this->getColor()))
