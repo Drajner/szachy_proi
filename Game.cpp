@@ -19,7 +19,7 @@ void Game::rollOrder()
 	{
 		currentPlayer_ = firstPlayer_.get();
 	}
-	if (result == 2)
+	else if (result == 2)
 	{
 		currentPlayer_ = secondPlayer_.get();
 	}
@@ -32,7 +32,7 @@ void Game::swap()
 		currentPlayer_ = secondPlayer_.get();
 		return;
 	}
-	if (*currentPlayer_ == *secondPlayer_)
+	else if (*currentPlayer_ == *secondPlayer_)
 	{
 		currentPlayer_ = firstPlayer_.get();
 		return;
