@@ -57,7 +57,6 @@ Chessboard::Chessboard()
 		blackPieces_.push_back(std::move(pawn));
 	}
 
-	round_ = 0;
 }
 
 Chessboard::Chessboard(std::vector<std::shared_ptr<Piece>> whitePieces, std::vector<std::shared_ptr<Piece>> blackPieces)
@@ -221,16 +220,6 @@ Piece& Chessboard::getPieceToUpgrade(Player& player) const
 		}
 	}
 	throw CannotFindPiece();
-}
-
-int Chessboard::round() const
-{
-	return round_;
-}
-
-void Chessboard::incRound()
-{
-	round_++;
 }
 
 void Chessboard::removePiece(Piece& piece, Color color)

@@ -58,6 +58,7 @@ void Game::playPvP()
 	bool check = false;
 	do
 	{
+		std::cout << "-----------------------------------------------------------" << std::endl;
 		std::cout << chessboard_ << std::endl;
 		if (chessboard_.checkIfCheck(*firstPlayer_, Black))
 		{
@@ -104,6 +105,7 @@ void Game::playPvB()
 	this->rollOrder();
 	do
 	{
+		std::cout << "-----------------------------------------------------------" << std::endl;
 		std::cout << chessboard_ << std::endl;
 		if (chessboard_.checkIfCheck(*firstPlayer_, Black))
 		{
@@ -133,4 +135,19 @@ void Game::playPvB()
 	{
 		std::cout << secondPlayer_->getName() << " wins!" << std::endl;
 	}
+}
+
+void Game::play()
+{
+	int choice;
+	std::cout << "Welcome to chess game. Please choose game mode. " << std::endl;
+	std::cout << "1. Player versus player mode. \n";
+	std::cout << "2. Player versus bot mode. " << std::endl;
+	std::cin >> choice;
+	if (choice == 1)
+		this->playPvP();
+	else if (choice == 2)
+		this->playPvB();
+	else
+		system("pause");
 }

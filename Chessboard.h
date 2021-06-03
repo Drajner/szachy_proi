@@ -15,7 +15,6 @@ class Chessboard
 private:
 	std::vector<std::shared_ptr<Piece>> whitePieces_;
 	std::vector<std::shared_ptr<Piece>> blackPieces_;
-	int round_;
 	void printLine(int lineNumber, int firstColor, int secondColor, std::ostream& os) const;
 public:
 
@@ -77,15 +76,6 @@ public:
 	 */
 	Piece& getPieceToUpgrade(Player& player) const;
 
-	/*
-	 * Returns current round number
-	 */
-	int round() const;
-
-	/*
-	 * Increments round
-	 */
-	void incRound();
 
 	/*
 	 * Checks if there is check

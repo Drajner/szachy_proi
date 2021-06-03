@@ -7,7 +7,7 @@
 
 class Game
 {
-public:
+private:
 	Chessboard chessboard_;
 	std::unique_ptr<Player> firstPlayer_;
 	std::unique_ptr<Player> secondPlayer_;
