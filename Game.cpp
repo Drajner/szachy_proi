@@ -79,55 +79,58 @@ void Game::playPvP()
 		}
 		this->swap();
 	} 	while (!chessboard_.checkWin(White) && !chessboard_.checkWin(Black));
-	if (chessboard_.checkWin(White))
+	if (chessboard_.checkWin(firstPlayer_->getColor()))
 	{
-		std::cout << "White pieces wins!" << std::endl;
+		std::cout << firstPlayer_->getName() <<  " wins!" << std::endl;
 	}
-	if (chessboard_.checkWin(Black))
+	if (chessboard_.checkWin(secondPlayer_->getColor()))
 	{
-		std::cout << "Black pieces wins!" << std::endl;
+		std::cout << secondPlayer_->getName() << " wins!" << std::endl;
 	}
 }
 
-//bool Game::checkIfCheck(Player& player, Color color)
-//{
-//	if (color == White)
-//	{
-//		Position kingPos = Position(0, 0);
-//		for (auto e : chessboard_.whitePieces())
-//		{
-//			if (e->chessboard_representation() == 'k')
-//			{
-//				kingPos.x(e->position().x());
-//				kingPos.y(e->position().y());
-//			} 
-//		}
-//		for (auto e : player.allPossibleMoves(chessboard_))
-//		{
-//			if (e.second == Position(kingPos))
-//			{
-//				return true;
-//			}
-//		}
-//	}
-//	if (color == Black)
-//	{
-//		Position kingPos = Position(0, 0);
-//		for (auto e : chessboard_.blackPieces())
-//		{
-//			if (e->chessboard_representation() == 'K')
-//			{
-//				kingPos.x(e->position().x());
-//				kingPos.y(e->position().y());
-//			}
-//		}
-//		for (auto e : player.allPossibleMoves(chessboard_))
-//		{
-//			if (e.second == Position(kingPos))
-//			{
-//				return true;
-//			}
-//		}
-//	}
-//	return false;
-//}
+void Game::playPvB()
+{
+	chessboard_ = Chessboard();
+	std::cout << "Please enter your name. You will play with white pieces. \n";
+	std::string player_name;
+	std::cin >> player_name;
+	auto player = std::make_unique<Human>(Human(White, player_name, chessboard_));
+	firstPlayer_ = std::move(player);
+	auto bot = std::make_unique<RandIntBot>(RandIntBot(Black, "Bot", chessboard_));
+	secondPlayer_ = std::move(bot);
+	firstPlayer_->setEnemy(secondPlayer_.get());
+	secondPlayer_->setEnemy(firstPlayer_.get());
+	this->rollOrder();
+	do
+	{
+		std::cout << chessboard_ << std::endl;
+		if (chessboard_.checkIfCheck(*firstPlayer_, Black))
+		{
+			std::cout << secondPlayer_->getName() << " is under attack! " << std::endl;
+		}
+		if (chessboard_.checkIfCheck(*secondPlayer_, White))
+		{
+			std::cout << firstPlayer_->getName() << " is under attack! " << std::endl;
+		}
+		std::cout << "It's " << currentPlayer_->getName() << " move. ";
+		currentPlayer_->makeMove(chessboard_);
+		if (chessboard_.checkUpgradePossibility(*currentPlayer_))
+		{
+			std::cout << currentPlayer_->getName() << " has to upgrade pawn. " << std::endl;
+			std::cout << "Choose your upgrade: 1 - queen, 2 - knight, 3 - bishop, 4 - rook" << std::endl;
+			int choice;
+			std::cin >> choice;
+			chessboard_.upgradePiece(chessboard_.getPieceToUpgrade(*currentPlayer_), choice);
+		}
+		this->swap();
+	} while (!chessboard_.checkWin(White) && !chessboard_.checkWin(Black));
+	if (chessboard_.checkWin(firstPlayer_->getColor()))
+	{
+		std::cout << firstPlayer_->getName() << " wins!" << std::endl;
+	}
+	if (chessboard_.checkWin(secondPlayer_->getColor()))
+	{
+		std::cout << secondPlayer_->getName() << " wins!" << std::endl;
+	}
+}

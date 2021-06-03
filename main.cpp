@@ -55,6 +55,6 @@ int main()
 	//std::cout << std::endl;
 	//std::cout << chess;
 	Game game = Game();
-	game.playPvP();
+	game.playPvB();
 	return 0;
 }
