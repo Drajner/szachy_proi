@@ -153,6 +153,18 @@ void Human::makeMove(Chessboard& chessboard)
 
 }
 
+void Human::doAvailableUpgrades(Chessboard& chessboard)
+{
+	int input;
+	if (chessboard.checkUpgradePossibility(*this))
+	{
+		std::cout << this->getName() << " has to upgrade pawn. " << std::endl;
+		std::cout << "Choose your upgrade: 1 - queen, 2 - knight, 3 - bishop, 4 - rook" << std::endl;
+		std::cin >> input;
+		chessboard.upgradePiece(chessboard.getPieceToUpgrade(*this), input);
+	}
+}
+
 void RandIntBot::makeMove(Chessboard& chessboard)
 {
 	srand(time(0));
@@ -206,3 +218,11 @@ void RandIntBot::makeMove(Chessboard& chessboard)
 	}
 }
 
+void RandIntBot::doAvailableUpgrades(Chessboard& chessboard)
+{
+	if (chessboard.checkUpgradePossibility(*this))
+	{
+		std::cout << this->getName() << " will now upgrade pawn. " << std::endl;
+		chessboard.upgradePiece(chessboard.getPieceToUpgrade(*this), 1);
+	}
+}

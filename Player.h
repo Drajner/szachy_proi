@@ -23,6 +23,8 @@ public:
 	// issues a move(will change depending on derivative class)
 	virtual void makeMove(Chessboard& chessboard) = 0;
 
+	virtual void doAvailableUpgrades(Chessboard& chessboard) = 0;
+
 	// sets color
 	void setColor(Color color);
 
@@ -49,6 +51,7 @@ class Human : public Player
 public:
 	Human(Color color, std::string playerName, const Chessboard& chessboard) : Player(color, playerName, chessboard) {};
 	void makeMove(Chessboard& chessboard) override;
+	void doAvailableUpgrades(Chessboard& chessboard) override;
 
 };
 
@@ -57,6 +60,7 @@ class RandIntBot : public Player
 public:
 	RandIntBot(Color color, std::string playerName, const Chessboard& chessboard) : Player(color, playerName, chessboard) {};
 	void makeMove(Chessboard& chessboard) override;
+	void doAvailableUpgrades(Chessboard& chessboard) override;
 
 };
 
