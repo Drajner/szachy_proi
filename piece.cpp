@@ -75,13 +75,18 @@ std::vector<Position> Pawn::possible_moves(const Chessboard& chessboard) const {
 	Position pos = position();
 
 	if (color() == White) {
-		bool succeeded = try_add_movement_option(pos + Position(0, 1), possible, chessboard);
+		Position forwardPos = pos + Position(0, 1);
+		if (!chessboard.pieceExists(forwardPos) && forwardPos.on_chessboard())
+		{
+			try_add_movement_option(forwardPos, possible, chessboard);
 
-		if (succeeded && !moved_ && pos.y() < 7) {
-			try_add_movement_option(pos + Position(0, 2), possible, chessboard);
+			forwardPos += Position(0, 1);
+			if (!moved_ && !chessboard.pieceExists(forwardPos) && forwardPos.on_chessboard()) {
+				try_add_movement_option(forwardPos, possible, chessboard);
+			}
 		}
 
-		auto tryPos = pos + Position(1, -1);
+		auto tryPos = pos + Position(-1, 1);
 		if (chessboard.pieceExists(tryPos)) {
 			try_add_movement_option(tryPos, possible, chessboard);
 		}
@@ -92,19 +97,23 @@ std::vector<Position> Pawn::possible_moves(const Chessboard& chessboard) const {
 		}
 	}
 	else {
-		bool succeeded = try_add_movement_option(pos + Position(0, -1), possible, chessboard);
+		Position forwardPos = pos + Position(0, -1);
+		if (!chessboard.pieceExists(forwardPos) && forwardPos.on_chessboard())
+		{
+			try_add_movement_option(forwardPos, possible, chessboard);
 
-		if (succeeded && !moved() && pos.y() > 2) {
-			try_add_movement_option(pos + Position(0, -2), possible, chessboard);
+			forwardPos += Position(0, -1);
+			if (!moved_ && !chessboard.pieceExists(forwardPos) && forwardPos.on_chessboard()) {
+				try_add_movement_option(forwardPos, possible, chessboard);
+			}
 		}
 
 		auto tryPos = pos + Position(-1, -1);
-
 		if (chessboard.pieceExists(tryPos)) {
 			try_add_movement_option(tryPos, possible, chessboard);
 		}
 
-		tryPos = pos + Position(-1, 1);
+		tryPos = pos + Position(1, -1);
 		if (chessboard.pieceExists(tryPos)) {
 			try_add_movement_option(tryPos, possible, chessboard);
 		}
