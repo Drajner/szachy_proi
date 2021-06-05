@@ -99,20 +99,6 @@ public:
 	bool checkLongCastlePossibility(Player& player, Color color) const;
 
 	/*
-	 * Returns a move where king moves 2 field (doing short castle)
-	 * for Player class purposes
-	 * @param color Color of pieces which does short castle
-	 */
-	std::pair<std::shared_ptr<Piece>, Position> getShortCastle(Color color) const;
-
-	/*
-	 *Returns a move where king moves 2 field (doing long castle)
-	 * for Player class purposes
-	 * @param color Color of pieces which may do long castle
-	 */
-	std::pair<std::shared_ptr<Piece>, Position> getLongCastle(Color color) const;
-
-	/*
 	 * Does a short castle
 	 * @param color Color of pieces doing castle
 	 */

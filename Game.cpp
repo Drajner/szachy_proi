@@ -1,28 +1,9 @@
 #include "Game.h"
 #include <memory>
 
-//Game::Game(Chessboard chessboard, Player* firstPlayer, Player* secondPlayer)
-//{
-//	chessboard_ = chessboard;
-//	firstPlayer_ = std::unique_ptr<Player>(firstPlayer);
-//	secondPlayer_ = std::unique_ptr<Player>(secondPlayer);
-//}
 Game::Game()
 {
 	
-}
-
-void Game::rollOrder()
-{
-	int result = rand() % 2 + 1;
-	if (result == 1)
-	{
-		currentPlayer_ = firstPlayer_.get();
-	}
-	else if (result == 2)
-	{
-		currentPlayer_ = secondPlayer_.get();
-	}
 }
 
 void Game::swap()
@@ -54,8 +35,7 @@ void Game::playPvP()
 	secondPlayer_ = std::move(black_player);
 	firstPlayer_->setEnemy(secondPlayer_.get());
 	secondPlayer_->setEnemy(firstPlayer_.get());
-	this->rollOrder();
-	bool check = false;
+	currentPlayer_ = firstPlayer_.get();
 	do
 	{
 		std::cout << "-----------------------------------------------------------" << std::endl;
@@ -95,7 +75,7 @@ void Game::playPvB()
 	secondPlayer_ = std::move(bot);
 	firstPlayer_->setEnemy(secondPlayer_.get());
 	secondPlayer_->setEnemy(firstPlayer_.get());
-	this->rollOrder();
+	currentPlayer_ = firstPlayer_.get();
 	do
 	{
 		std::cout << "-----------------------------------------------------------" << std::endl;
@@ -110,14 +90,7 @@ void Game::playPvB()
 		}
 		std::cout << "It's " << currentPlayer_->getName() << " move. ";
 		currentPlayer_->makeMove(chessboard_);
-		if (chessboard_.checkUpgradePossibility(*currentPlayer_))
-		{
-			std::cout << currentPlayer_->getName() << " has to upgrade pawn. " << std::endl;
-			std::cout << "Choose your upgrade: 1 - queen, 2 - knight, 3 - bishop, 4 - rook" << std::endl;
-			int choice;
-			std::cin >> choice;
-			chessboard_.upgradePiece(chessboard_.getPieceToUpgrade(*currentPlayer_), choice);
-		}
+		currentPlayer_->doAvailableUpgrades(chessboard_);
 		this->swap();
 	} while (!chessboard_.checkWin(White) && !chessboard_.checkWin(Black));
 	if (chessboard_.checkWin(firstPlayer_->getColor()))
