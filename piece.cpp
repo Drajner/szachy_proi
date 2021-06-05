@@ -74,49 +74,27 @@ std::vector<Position> Pawn::possible_moves(const Chessboard& chessboard) const {
 	std::vector<Position> possible;
 	Position pos = position();
 
-	if (color() == White) {
-		Position forwardPos = pos + Position(0, 1);
-		if (!chessboard.pieceExists(forwardPos) && forwardPos.on_chessboard())
-		{
+	int forwardDirection = color() == White ? 1 : -1;
+
+	Position forwardPos = pos + Position(0, forwardDirection);
+	if (!chessboard.pieceExists(forwardPos) && forwardPos.on_chessboard())
+	{
+		try_add_movement_option(forwardPos, possible, chessboard);
+
+		forwardPos += Position(0, forwardDirection);
+		if (!moved_ && !chessboard.pieceExists(forwardPos) && forwardPos.on_chessboard()) {
 			try_add_movement_option(forwardPos, possible, chessboard);
-
-			forwardPos += Position(0, 1);
-			if (!moved_ && !chessboard.pieceExists(forwardPos) && forwardPos.on_chessboard()) {
-				try_add_movement_option(forwardPos, possible, chessboard);
-			}
-		}
-
-		auto tryPos = pos + Position(-1, 1);
-		if (chessboard.pieceExists(tryPos)) {
-			try_add_movement_option(tryPos, possible, chessboard);
-		}
-
-		tryPos = pos + Position(1, 1);
-		if (chessboard.pieceExists(tryPos)) {
-			try_add_movement_option(tryPos, possible, chessboard);
 		}
 	}
-	else {
-		Position forwardPos = pos + Position(0, -1);
-		if (!chessboard.pieceExists(forwardPos) && forwardPos.on_chessboard())
-		{
-			try_add_movement_option(forwardPos, possible, chessboard);
 
-			forwardPos += Position(0, -1);
-			if (!moved_ && !chessboard.pieceExists(forwardPos) && forwardPos.on_chessboard()) {
-				try_add_movement_option(forwardPos, possible, chessboard);
-			}
-		}
+	auto tryPos = pos + Position(-1, forwardDirection);
+	if (chessboard.pieceExists(tryPos)) {
+		try_add_movement_option(tryPos, possible, chessboard);
+	}
 
-		auto tryPos = pos + Position(-1, -1);
-		if (chessboard.pieceExists(tryPos)) {
-			try_add_movement_option(tryPos, possible, chessboard);
-		}
-
-		tryPos = pos + Position(1, -1);
-		if (chessboard.pieceExists(tryPos)) {
-			try_add_movement_option(tryPos, possible, chessboard);
-		}
+	tryPos = pos + Position(1, forwardDirection);
+	if (chessboard.pieceExists(tryPos)) {
+		try_add_movement_option(tryPos, possible, chessboard);
 	}
 
 	return possible;
