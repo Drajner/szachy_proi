@@ -61,11 +61,8 @@ Chessboard::Chessboard()
 
 Chessboard::Chessboard(std::vector<std::shared_ptr<Piece>> whitePieces, std::vector<std::shared_ptr<Piece>> blackPieces)
 {
-	//whitePieces_ = std::move(whitePieces);
-	//blackPieces_ = std::move(blackPieces);
-
-	whitePieces_ = whitePieces;
-	blackPieces_ = blackPieces;
+	whitePieces_ = std::move(whitePieces);
+	blackPieces_ = std::move(blackPieces);
 }
 
 std::vector<std::shared_ptr<Piece>> const& Chessboard::whitePieces() const
@@ -482,57 +479,28 @@ bool Chessboard::checkAttackPossibility(Player& player, const Position& position
 	return false;
 }
 
-//bool Chessboard::checkWin(Color color) const
-//{
-//	if (color == Black)
-//	{
-//		for (auto e : this->whitePieces())
-//		{
-//			if (e->chessboard_representation() == 'k')
-//			{
-//				return false;
-//			}
-//		}
-//		return true;
-//	}
-//	if (color == White)
-//	{
-//		for (auto e : this->blackPieces())
-//		{
-//			if (e->chessboard_representation() == 'K')
-//			{
-//				return false;
-//			}
-//		}
-//		return true;
-//	}
-//}
-
-bool Chessboard::checkWin(Player& player)
+bool Chessboard::checkWin(Color color) const
 {
-	int allowed_moves = 0;
-	for (auto e : player.getEnemy()->allPossibleMoves(*this))
+	if (color == Black)
 	{
-		if (this->validateMove(e, *player.getEnemy()))
+		for (auto e : this->whitePieces())
 		{
-			allowed_moves++;
+			if (e->chessboard_representation() == 'k')
+			{
+				return false;
+			}
 		}
+		return true;
 	}
-	return (allowed_moves == 0);
-}
-
-bool Chessboard::validateMove(std::pair<std::shared_ptr<Piece>, Position> move, Player& player)
-{
-	if (this->checkIfCheck(*player.getEnemy(), player.getColor()))
+	if (color == White)
 	{
-		Position piece_pos = move.first->position();
-		move.first->move_to(*this, move.second);
-		if (this->checkIfCheck(*player.getEnemy(), player.getColor()))
+		for (auto e : this->blackPieces())
 		{
-			move.first->move_to(*this, piece_pos);
-			return false;
+			if (e->chessboard_representation() == 'K')
+			{
+				return false;
+			}
 		}
-		move.first->move_to(*this, piece_pos);
+		return true;
 	}
-	return true;
 }

@@ -52,12 +52,12 @@ void Game::playPvP()
 		currentPlayer_->makeMove(chessboard_);
 		currentPlayer_->doAvailableUpgrades(chessboard_);
 		this->swap();
-	} 	while (!chessboard_.checkWin(*firstPlayer_) && !chessboard_.checkWin(*secondPlayer_));
-	if (chessboard_.checkWin(*firstPlayer_))
+	} 	while (!chessboard_.checkWin(White) && !chessboard_.checkWin(Black));
+	if (chessboard_.checkWin(firstPlayer_->getColor()))
 	{
 		std::cout << firstPlayer_->getName() <<  " wins!" << std::endl;
 	}
-	if (chessboard_.checkWin(*secondPlayer_))
+	if (chessboard_.checkWin(secondPlayer_->getColor()))
 	{
 		std::cout << secondPlayer_->getName() << " wins!" << std::endl;
 	}
@@ -92,12 +92,12 @@ void Game::playPvB()
 		currentPlayer_->makeMove(chessboard_);
 		currentPlayer_->doAvailableUpgrades(chessboard_);
 		this->swap();
-	} while (!chessboard_.checkWin(*firstPlayer_) && !chessboard_.checkWin(*secondPlayer_));
-	if (chessboard_.checkWin(*firstPlayer_))
+	} while (!chessboard_.checkWin(White) && !chessboard_.checkWin(Black));
+	if (chessboard_.checkWin(firstPlayer_->getColor()))
 	{
 		std::cout << firstPlayer_->getName() << " wins!" << std::endl;
 	}
-	if (chessboard_.checkWin(*secondPlayer_))
+	if (chessboard_.checkWin(secondPlayer_->getColor()))
 	{
 		std::cout << secondPlayer_->getName() << " wins!" << std::endl;
 	}

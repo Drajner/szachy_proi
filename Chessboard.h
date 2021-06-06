@@ -121,10 +121,7 @@ public:
 	 * Checks if there is a win
 	 * @param color Color of potential winner
 	 */
-	//bool checkWin(Color color) const;
-	bool checkWin(Player& player);
-
-	bool validateMove(std::pair<std::shared_ptr<Piece>, Position> move, Player& player);
+	bool checkWin(Color color) const;
 
 	friend std::ostream& operator<<(std::ostream& os, const Chessboard& chessboard);
 

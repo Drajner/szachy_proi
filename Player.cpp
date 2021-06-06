@@ -129,11 +129,6 @@ void Human::makeMove(Chessboard& chessboard)
 		{
 			std::cout << "Wrong input!" << std::endl;
 		}
-		if (!chessboard.validateMove(moveset[chosenMove - 1], *this))
-		{
-			chosenMove = -1;
-			std::cout << "You are under attack, you have to defend." << std::endl;
-		}
 	}
 	if (chosenMove == shortCastleNum)
 	{
@@ -197,10 +192,6 @@ void RandIntBot::makeMove(Chessboard& chessboard)
 	while (chosenMove < 1 || chosenMove > numberOfMoves)
 	{
 		chosenMove = (rand() % numberOfMoves) + 1;
-		if (!chessboard.validateMove(moveset[chosenMove - 1], *this))
-		{
-			chosenMove = -1;
-		}
 	}
 	if (chosenMove == shortCastleNum)
 	{
