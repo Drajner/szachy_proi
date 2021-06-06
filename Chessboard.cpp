@@ -5,13 +5,7 @@
 
 
 Chessboard::Chessboard()
-{	
-	for (int i = 1; i <= 8; ++i)
-	{
-		auto pawn = std::make_shared<Pawn>(Pawn(Position(i, 2), White));
-		whitePieces_.push_back(std::move(pawn));
-	}
-
+{
 	auto rook1b = std::make_shared<Rook>(Rook(Position(1, 1), White));
 	auto knight1b = std::make_shared<Knight>(Knight(Position(2, 1), White));
 	auto bishop1b = std::make_shared<Bishop>(Bishop(Position(3, 1), White));
@@ -30,11 +24,14 @@ Chessboard::Chessboard()
 	whitePieces_.push_back(std::move(knight2b));
 	whitePieces_.push_back(std::move(rook2b));
 
+	// Create pawns
 	for (int i = 1; i <= 8; ++i)
 	{
-		auto pawn = std::make_shared<Pawn>(Pawn(Position(i, 7), Black));
-		blackPieces_.push_back(std::move(pawn));
+		auto pawn = std::make_shared<Pawn>(Pawn(Position(i, 2), White));
+		whitePieces_.push_back(std::move(pawn));
 	}
+
+
 
 	auto rook1w = std::make_shared<Rook>(Rook(Position(1, 8), Black));
 	auto knight1w = std::make_shared<Knight>(Knight(Position(2, 8), Black));
@@ -53,6 +50,13 @@ Chessboard::Chessboard()
 	blackPieces_.push_back(std::move(bishop2w));
 	blackPieces_.push_back(std::move(knight2w));
 	blackPieces_.push_back(std::move(rook2w));
+
+	for (int i = 1; i <= 8; ++i)
+	{
+		auto pawn = std::make_shared<Pawn>(Pawn(Position(i, 7), Black));
+		blackPieces_.push_back(std::move(pawn));
+	}
+
 }
 
 Chessboard::Chessboard(std::vector<std::shared_ptr<Piece>> whitePieces, std::vector<std::shared_ptr<Piece>> blackPieces)
@@ -225,6 +229,9 @@ void Chessboard::removePiece(Piece& piece, Color color)
 {
 	if (color == White)
 	{
+		//auto it = std::find(whitePieces_.begin(), whitePieces_.end(), piece);
+		//whitePieces_.erase(it);
+		//return;
 		int i = 0;
 		for (auto& e : whitePieces_)
 		{
@@ -239,6 +246,9 @@ void Chessboard::removePiece(Piece& piece, Color color)
 	if (color == Black)
 	{
 		int i = 0;
+		//auto it = std::find(blackPieces_.begin(), blackPieces_.end(), piece);
+		//blackPieces_.erase(it);
+		//return;
 		for (auto& e : blackPieces_)
 		{
 			if (*e.get() == piece)
@@ -318,6 +328,8 @@ std::ostream& operator<<(std::ostream& os, const Chessboard& chessboard)
 	return os;
 }
 
+// player - player whos enemy king is under check
+//color - enemy color
 bool Chessboard::checkIfCheck(Player& player, Color color) const
 {
 	if (color == White)
@@ -361,6 +373,8 @@ bool Chessboard::checkIfCheck(Player& player, Color color) const
 	return false;
 }
 
+// player - color's enemy
+//color - color who can made castle
 bool Chessboard::checkShortCastlePossibility(Player& player, Color color) const
 {
 	if (color == White)
@@ -389,6 +403,8 @@ bool Chessboard::checkShortCastlePossibility(Player& player, Color color) const
 	}
 }
 
+// player - color's enemy
+//color - color who can made castle
 bool Chessboard::checkLongCastlePossibility(Player& player, Color color) const
 {
 	if (color == White)
