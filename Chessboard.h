@@ -5,7 +5,6 @@
 #include <iostream>
 
 #include "Player.h"
-#include "piece_types.h"
 #include "color.h"
 #include "piece.h"
 #include "position.h"
