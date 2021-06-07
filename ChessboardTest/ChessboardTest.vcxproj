@@ -165,6 +165,7 @@
     <ClCompile Include="..\position.cpp" />
     <ClCompile Include="ChessboardTest.cpp" />
     <ClCompile Include="PieceTest.cpp" />
+    <ClCompile Include="PlayerTest.cpp" />
     <ClCompile Include="PositionTest.cpp" />
   </ItemGroup>
   <ItemGroup>
