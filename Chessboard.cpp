@@ -59,12 +59,6 @@ Chessboard::Chessboard()
 
 }
 
-Chessboard::Chessboard(std::vector<std::shared_ptr<Piece>> whitePieces, std::vector<std::shared_ptr<Piece>> blackPieces)
-{
-	whitePieces_ = std::move(whitePieces);
-	blackPieces_ = std::move(blackPieces);
-}
-
 std::vector<std::shared_ptr<Piece>> const& Chessboard::whitePieces() const
 {
 	return whitePieces_;
