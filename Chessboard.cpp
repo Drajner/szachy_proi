@@ -220,9 +220,6 @@ void Chessboard::removePiece(Piece& piece, Color color)
 {
 	if (color == White)
 	{
-		//auto it = std::find(whitePieces_.begin(), whitePieces_.end(), piece);
-		//whitePieces_.erase(it);
-		//return;
 		int i = 0;
 		for (auto& e : whitePieces_)
 		{
@@ -237,9 +234,6 @@ void Chessboard::removePiece(Piece& piece, Color color)
 	if (color == Black)
 	{
 		int i = 0;
-		//auto it = std::find(blackPieces_.begin(), blackPieces_.end(), piece);
-		//blackPieces_.erase(it);
-		//return;
 		for (auto& e : blackPieces_)
 		{
 			if (*e.get() == piece)
@@ -319,8 +313,6 @@ std::ostream& operator<<(std::ostream& os, const Chessboard& chessboard)
 	return os;
 }
 
-// player - player whos enemy king is under check
-//color - enemy color
 bool Chessboard::checkIfCheck(Player& player, Color color) const
 {
 	if (color == White)
@@ -364,8 +356,6 @@ bool Chessboard::checkIfCheck(Player& player, Color color) const
 	return false;
 }
 
-// player - color's enemy
-//color - color who can made castle
 bool Chessboard::checkShortCastlePossibility(Player& player, Color color) const
 {
 	if (color == White)
@@ -394,8 +384,6 @@ bool Chessboard::checkShortCastlePossibility(Player& player, Color color) const
 	}
 }
 
-// player - color's enemy
-//color - color who can made castle
 bool Chessboard::checkLongCastlePossibility(Player& player, Color color) const
 {
 	if (color == White)
