@@ -24,14 +24,11 @@ Chessboard::Chessboard()
 	whitePieces_.push_back(std::move(knight2b));
 	whitePieces_.push_back(std::move(rook2b));
 
-	// Create pawns
 	for (int i = 1; i <= 8; ++i)
 	{
 		auto pawn = std::make_shared<Pawn>(Pawn(Position(i, 2), White));
 		whitePieces_.push_back(std::move(pawn));
 	}
-
-
 
 	auto rook1w = std::make_shared<Rook>(Rook(Position(1, 8), Black));
 	auto knight1w = std::make_shared<Knight>(Knight(Position(2, 8), Black));
