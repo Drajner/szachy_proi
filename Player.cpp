@@ -111,9 +111,17 @@ void Human::makeMove(Chessboard& chessboard)
 	while (chosenMove < 1 || chosenMove > numberOfMoves)
 	{
 		std::cin >> input;
-		chosenMove = stoi(input);
-		if (chosenMove < 1 || chosenMove > numberOfMoves)
+		try
 		{
+			chosenMove = stoi(input);
+			if (chosenMove < 1 || chosenMove > numberOfMoves)
+			{
+				std::cout << "Wrong input!" << std::endl;
+			}
+		}
+		catch (const std::invalid_argument& e)
+		{
+			chosenMove = -1;
 			std::cout << "Wrong input!" << std::endl;
 		}
 	}
