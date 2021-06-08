@@ -12,19 +12,6 @@
 Player::Player(Color color, std::string playerName, const Chessboard& chessboard): color_(color), 
 	name_(playerName),
 	enemy_(nullptr) {}
-/*{
-	color_ = color;
-	name_ = playerName;
-	enemy_ = nullptr;
-	if (color_ == Black)
-	{
-		pieces_ = chessboard.blackPieces();
-	}
-	else
-	{
-		pieces_ = chessboard.whitePieces();
-	}
-}*/
 
 std::vector<std::pair<std::shared_ptr<Piece>, Position>> Player::allPossibleMoves(const Chessboard& chessboard)
 {
