@@ -77,7 +77,7 @@ namespace ChessTest
 		TEST_METHOD(TestCheckIfWin)
 		{
 			Chessboard chess = Chessboard();
-			Piece& king = chess.getPiece(Position(5, 1));
+			Piece& king = chess.getPiece(Position(4, 1));
 			chess.removePiece(king, White);
 			Assert::IsTrue(chess.checkWin(Black));
 		}
@@ -85,8 +85,8 @@ namespace ChessTest
 		{
 			Chessboard chess = Chessboard();
 			std::unique_ptr<Player> pl1 = std::unique_ptr<Player>(new Human(Black, "pl1", chess));
-			Piece& piece1 = chess.getPiece(Position(6, 1));
-			Piece& piece2 = chess.getPiece(Position(7, 1));
+			Piece& piece1 = chess.getPiece(Position(2, 1));
+			Piece& piece2 = chess.getPiece(Position(3, 1));
 			chess.removePiece(piece1, White);
 			chess.removePiece(piece2, White);
 			Assert::IsTrue(chess.checkShortCastlePossibility(*pl1, White));
@@ -101,9 +101,9 @@ namespace ChessTest
 		{
 			Chessboard chess = Chessboard();
 			std::unique_ptr<Player> pl1 = std::unique_ptr<Player>(new Human(Black, "pl1", chess));
-			Piece& piece1 = chess.getPiece(Position(2, 1));
-			Piece& piece2 = chess.getPiece(Position(3, 1));
-			Piece& piece3 = chess.getPiece(Position(4, 1));
+			Piece& piece1 = chess.getPiece(Position(5, 1));
+			Piece& piece2 = chess.getPiece(Position(6, 1));
+			Piece& piece3 = chess.getPiece(Position(7, 1));
 			chess.removePiece(piece1, White);
 			chess.removePiece(piece2, White);
 			chess.removePiece(piece3, White);

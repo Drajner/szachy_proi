@@ -23,6 +23,11 @@ public:
 	Chessboard();
 	
 	/*
+	 * Creates a new chessboard with custom Pieces setup
+	 */
+	Chessboard(std::vector<std::shared_ptr<Piece>> firstPlayerPieces, std::vector<std::shared_ptr<Piece>> secondPlayerPieces);
+
+	/*
 	 * Getter to white pieces vector
 	 */
 	std::vector<std::shared_ptr<Piece>> const& whitePieces() const;
