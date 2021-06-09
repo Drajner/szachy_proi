@@ -5,7 +5,7 @@ Implementacja gry w szachy w interfejsie konsolowym. Umożliwia grę z drugim gr
 
 ## Objaśnienia gry
 
-Szachownica wyświetla się w konsoli. Gracz wybiera ruchy poprzez wprowadzanie numerów odpowiednich opcji. Białe pionki znajdują się na górze i oznaczone są małymi literami. Czarne - na dole, duże litery.
+Szachownica wyświetla się w konsoli. Gracz wybiera ruchy poprzez wprowadzanie numerów odpowiednich opcji. Białe figury znajdują się na górze i oznaczone są małymi literami. Czarne - na dole, duże litery.
 
 ## Podział odpowiedzialności
 
