@@ -199,8 +199,8 @@ char King::chessboard_representation() const {
 std::vector<Position> King::possible_moves(const Chessboard& chessboard) const {
 	std::vector<Position> possible;
 
-	for (int x = -1; x < 1; x++) {
-		for (int y = -1; y < 1; y++) {
+	for (int x = -1; x <= 1; x++) {
+		for (int y = -1; y <= 1; y++) {
 			Position pos(position_.x() + x, position_.y() + y);
 			try_add_movement_option(pos, possible, chessboard);
 		}
