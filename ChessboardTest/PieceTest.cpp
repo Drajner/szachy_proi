@@ -43,6 +43,44 @@ namespace ChessTest
 			Assert::IsTrue(ss.str() == "Pawn Pawn Knight Knight Rook Rook Bishop Bishop King King Queen Queen");
 		}
 
+		TEST_METHOD(TestPieceMove)
+		{
+			auto pawn = std::make_shared<Pawn>(Pawn(Position(1, 1), White));
+			auto enemyPawn = std::make_shared<Pawn>(Pawn(Position(3, 5), Black));
+			
+			Chessboard c = Chessboard(std::vector<std::shared_ptr<Piece>> { pawn }, std::vector<std::shared_ptr<Piece>> { enemyPawn });
+
+
+			Assert::IsTrue(!pawn->moved());
+
+			pawn->move_to(c, Position(2, 2));
+
+			Assert::IsTrue(pawn->moved());
+			Assert::IsTrue(c.blackPieces().size() == 1);
+
+			pawn->move_to(c, Position(3, 5));
+
+			Assert::IsTrue(c.blackPieces().empty());
+		}
+
+		TEST_METHOD(TestTryAddMove)
+		{
+			auto pawn = std::make_shared<Pawn>(Pawn(Position(1, 1), White));
+			auto friendly = std::make_shared<Pawn>(Pawn(Position(2, 1), White));
+			auto enemyPawn = std::make_shared<Pawn>(Pawn(Position(3, 5), Black));
+
+			Chessboard c = Chessboard(std::vector<std::shared_ptr<Piece>> { pawn, friendly }, std::vector<std::shared_ptr<Piece>> { enemyPawn });
+
+			std::vector<Position> possible;
+
+			Assert::IsTrue(!pawn->try_add_movement_option(Position(0, 0), possible, c));
+			Assert::IsTrue(!pawn->try_add_movement_option(Position(1, 1), possible, c));
+			Assert::IsTrue(!pawn->try_add_movement_option(Position(2, 1), possible, c));
+			Assert::IsTrue(pawn->try_add_movement_option(Position(2, 2), possible, c));
+			Assert::IsTrue(!pawn->try_add_movement_option(Position(3, 5), possible, c)); // false because placing shouldn't continue, but adds because it should either way
+			Assert::IsTrue(possible.size() == 2);
+		}
+
 		TEST_METHOD(TestPawnPossibleMovesBasic)
 		{
 			auto pawn = std::make_shared<Pawn>(Pawn(Position(1, 1), White));

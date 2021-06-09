@@ -160,7 +160,6 @@
     <ClCompile Include="..\Chessboard.cpp" />
     <ClCompile Include="..\Game.cpp" />
     <ClCompile Include="..\piece.cpp" />
-    <ClCompile Include="..\piece_types.cpp" />
     <ClCompile Include="..\Player.cpp" />
     <ClCompile Include="..\position.cpp" />
     <ClCompile Include="ChessboardTest.cpp" />
