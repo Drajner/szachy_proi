@@ -60,7 +60,7 @@ std::ostream& operator<<(std::ostream& out, const Piece& piece) {
 	return out;
 }
 
-Pawn::Pawn(Position startPosition, Color color) : Piece(startPosition, color) {}
+Pawn::Pawn(Position startPosition, Color color) : Piece(startPosition, color, "Pawn") {}
 
 std::string Pawn::full_name() const {
 	return "Pawn";

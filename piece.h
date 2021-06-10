@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <vector>
 #include <string>
@@ -10,6 +10,7 @@ class Chessboard;
 
 // Abstract representation of a chess piece
 class Piece {
+	const std::string fullName_;
 protected:
 	// Position on the chessboard
 	Position position_;
@@ -17,6 +18,8 @@ protected:
 	Color color_;
 	// Has this piece moved yet
 	bool moved_;
+
+	Piece(Position startPosition, Color color, std::string fullName);
 public:
 	/**
 	 * Creates a new chess piece
@@ -24,7 +27,6 @@ public:
 	 * @param startPosition Starting position
 	 * @param isWhite Is the piece part of the white team? 
 	 */
-	Piece(Position startPosition, Color color);
 
 	// Checks if this piece is part of the white team
 	Color color() const;
@@ -33,9 +35,11 @@ public:
 
 	bool moved() const;
 
+	// !! BŁĄD: bez sensu wirtualna metoda
 	// Full piece name, to be set in the constructor of an inheriting piece
 	virtual std::string full_name() const = 0;
 
+	// !! BŁĄD: bez sensu wirtualna metoda
 	// Short, 1 char representation (for display purposes in the << operator), to be set in the constructor of an inheriting piece
 	virtual char chessboard_representation() const = 0;
 
@@ -93,6 +97,7 @@ public:
 	std::vector<Position> possible_moves(const Chessboard& chessboard) const override;
 };
 
+// !! BŁĄD: final
 class Knight : public Piece {
 public:
 	Knight(Position startPosition, Color color) : Piece(startPosition, color) {}

@@ -1,9 +1,10 @@
-#pragma once
+﻿#pragma once
 #include <exception>
 
+// !! BŁĄD: te funkcje tak de facto są noexcept
 class OutsideBoardLoadException : public std::exception
 {
-    virtual const char* what() const throw()
+    virtual const char* what() const noexcept
     {
         return "Tried to load an invalid position";
     }

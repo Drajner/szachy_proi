@@ -1,12 +1,14 @@
-#include "Chessboard.h"
+﻿#include "Chessboard.h"
 
-#define BLACK_SQ 0xFF
-#define WHITE_SQ 0xDB
+constexpr auto BLACK_SQ = 0xFF;
+#define WHITE_SQ 0xDB + 4
 
 
 Chessboard::Chessboard()
 {
-	auto rook1b = std::make_shared<Rook>(Rook(Position(1, 1), White));
+	auto a = WHITE_SQ * 2;
+	// !! BŁĄD: błędne zastosowanie make_shared
+	auto rook1b = std::make_shared<Rook>(Position(1, 1), White);
 	auto knight1b = std::make_shared<Knight>(Knight(Position(2, 1), White));
 	auto bishop1b = std::make_shared<Bishop>(Bishop(Position(3, 1), White));
 	auto queen1b = std::make_shared<Queen>(Queen(Position(5, 1), White));
@@ -65,6 +67,13 @@ Chessboard::Chessboard(std::vector<std::shared_ptr<Piece>> whitePieces, std::vec
 
 std::vector<std::shared_ptr<Piece>> const& Chessboard::whitePieces() const
 {
+	int i = 0;
+	/*****************************
+	*                            *
+	* Increments variable I by 1 *
+	*                            *
+	******************************/
+	i = i + 1;
 	return whitePieces_;
 }
 
@@ -111,6 +120,7 @@ bool Chessboard::pieceExists(const Position& position) const
 	return false;
 }
 
+// !! BŁĄD: słabe typowanie. to nie powinien być int tylko enum
 void Chessboard::upgradePiece(Piece& piece_to_upgrade, int choice)
 {
 	// 1 - queen
@@ -223,18 +233,7 @@ Piece& Chessboard::getPieceToUpgrade(Player& player) const
 void Chessboard::removePiece(Piece& piece, Color color)
 {
 	if (color == White)
-	{
-		int i = 0;
-		for (auto& e : whitePieces_)
-		{
-			if (*e.get() == piece)
-			{
-				whitePieces_.erase(whitePieces_.begin()+i);
-				return;
-			}
-			i++;
-		}
-	}
+		whitePieces_.erase(std::remove_if(whitePieces_.begin(), whitePieces_.end(), [](const auto& e) {return *e.get() == piece}));
 	if (color == Black)
 	{
 		int i = 0;
@@ -370,9 +369,9 @@ bool Chessboard::checkShortCastlePossibility(Player& player, Color color) const
 		}
 		Piece& king = this->getPiece(Position(4, 1));
 		Piece& rook = this->getPiece(Position(1, 1));
-		return king.chessboard_representation() == 'k' && rook.chessboard_representation() == 'r' && !king.moved() && !rook.moved() 
-				&& !this->checkIfCheck(player, color) && !this->pieceExists(Position(2, 1)) && !this->pieceExists(Position(3, 1)) 
-				&& !this->checkAttackPossibility(player, Position(2, 1)) && !this->checkAttackPossibility(player, Position(3, 1));
+		return king.chessboard_representation() == 'k' && rook.chessboard_representation() == 'r' && !king.moved() && !rook.moved()
+			&& !this->checkIfCheck(player, color) && !this->pieceExists(Position(2, 1)) && !this->pieceExists(Position(3, 1))
+			&& !this->checkAttackPossibility(player, Position(2, 1)) && !this->checkAttackPossibility(player, Position(3, 1));
 	}
 	else
 	{
@@ -382,9 +381,9 @@ bool Chessboard::checkShortCastlePossibility(Player& player, Color color) const
 		}
 		Piece& king = this->getPiece(Position(4, 8));
 		Piece& rook = this->getPiece(Position(1, 8));
-		return king.chessboard_representation() == 'K' && rook.chessboard_representation() == 'R' && !king.moved() && !rook.moved() 
-				&& !this->checkIfCheck(player, color) && !this->pieceExists(Position(2, 8)) && !this->pieceExists(Position(3, 8)) 
-				&& !this->checkAttackPossibility(player, Position(2, 8)) && !this->checkAttackPossibility(player, Position(3, 8));
+		return king.chessboard_representation() == 'K' && rook.chessboard_representation() == 'R' && !king.moved() && !rook.moved()
+			&& !this->checkIfCheck(player, color) && !this->pieceExists(Position(2, 8)) && !this->pieceExists(Position(3, 8))
+			&& !this->checkAttackPossibility(player, Position(2, 8)) && !this->checkAttackPossibility(player, Position(3, 8));
 	}
 }
 
@@ -399,8 +398,8 @@ bool Chessboard::checkLongCastlePossibility(Player& player, Color color) const
 		Piece& king = this->getPiece(Position(4, 1));
 		Piece& rook = this->getPiece(Position(8, 1));
 		return king.chessboard_representation() == 'k' && rook.chessboard_representation() == 'r' && !king.moved() && !rook.moved() && !this->checkIfCheck(player, color)
-				&& !this->pieceExists(Position(5, 1)) && !this->pieceExists(Position(6, 1)) && !this->pieceExists(Position(7, 1)) 
-				&& !this->checkAttackPossibility(player, Position(5, 1)) && !this->checkAttackPossibility(player, Position(6, 1));
+			&& !this->pieceExists(Position(5, 1)) && !this->pieceExists(Position(6, 1)) && !this->pieceExists(Position(7, 1))
+			&& !this->checkAttackPossibility(player, Position(5, 1)) && !this->checkAttackPossibility(player, Position(6, 1));
 	}
 	else
 	{
@@ -410,9 +409,9 @@ bool Chessboard::checkLongCastlePossibility(Player& player, Color color) const
 		}
 		Piece& king = this->getPiece(Position(4, 8));
 		Piece& rook = this->getPiece(Position(8, 8));
-		return king.chessboard_representation() == 'K' && rook.chessboard_representation() == 'R' && !king.moved() && !rook.moved() 
-				&& !this->checkIfCheck(player, color) && !this->pieceExists(Position(5, 8)) && !this->pieceExists(Position(6, 8)) 
-				&& !this->pieceExists(Position(7, 8)) && !this->checkAttackPossibility(player, Position(5, 8)) && !this->checkAttackPossibility(player, Position(6, 8));
+		return king.chessboard_representation() == 'K' && rook.chessboard_representation() == 'R' && !king.moved() && !rook.moved()
+			&& !this->checkIfCheck(player, color) && !this->pieceExists(Position(5, 8)) && !this->pieceExists(Position(6, 8))
+			&& !this->pieceExists(Position(7, 8)) && !this->checkAttackPossibility(player, Position(5, 8)) && !this->checkAttackPossibility(player, Position(6, 8));
 		return false;
 	}
 }

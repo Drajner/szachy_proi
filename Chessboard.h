@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <vector>
 #include <memory>
@@ -12,7 +12,7 @@
 class Chessboard
 {
 private:
-	std::vector<std::shared_ptr<Piece>> whitePieces_;
+	std::vector<std::unique_ptr<Piece>> whitePieces_;
 	std::vector<std::shared_ptr<Piece>> blackPieces_;
 	void printLine(int lineNumber, int firstColor, int secondColor, std::ostream& os) const;
 public:
@@ -30,7 +30,7 @@ public:
 	/*
 	 * Getter to white pieces vector
 	 */
-	std::vector<std::shared_ptr<Piece>> const& whitePieces() const;
+	std::vector<Piece*> const& whitePieces() const;
 
 	/*
 	 * Getter to black pieces vector
@@ -124,6 +124,7 @@ public:
 
 	friend std::ostream& operator<<(std::ostream& os, const Chessboard& chessboard);
 
+	// !! BŁĄD: enkapsulacja
 	friend Player;
 
 	friend Human;

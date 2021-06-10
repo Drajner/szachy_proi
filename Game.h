@@ -19,7 +19,7 @@ private:
 	//Starts a player versus bot game
 	void playPvB();
 public:
-	Game();
+	Game() = default;
 
 	//Swaps current player
 	void swap();

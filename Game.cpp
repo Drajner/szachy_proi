@@ -1,6 +1,7 @@
-#include "Game.h"
+﻿#include "Game.h"
 #include <memory>
 
+// !! BŁĄD: zbędne
 Game::Game()
 {
 	

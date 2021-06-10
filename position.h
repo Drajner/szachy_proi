@@ -1,6 +1,7 @@
-#pragma once
+﻿#pragma once
 #include <iostream>
 
+// !! BŁĄD: dużo kodu który nic nie wnosi. Position równie dobrze może być stukturą i tutaj nic się nie zmieni
 // Stores a position on the chessboard. Accepts positions outside of chessboard, but will throw exceptions when trying to write them out
 struct Position {
 private:

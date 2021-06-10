@@ -73,7 +73,7 @@ bool Player::operator==(Player& player)
 
 void Human::makeMove(Chessboard& chessboard)
 {
-	std::vector<std::pair<std::shared_ptr<Piece>, Position>> moveset;
+	std::vector<std::pair<Piece*, Position>> moveset;
 	std::string input;
 	int chosenMove = -1, iterator = 1, shortCastleNum = -1, longCastleNum = -2;
 	std::shared_ptr<Piece> previousPiece;
